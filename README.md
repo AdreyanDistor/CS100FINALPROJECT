@@ -11,7 +11,7 @@
  >- With the mayhem of modern life, you need a way to keep track of your life. Time is limited, so it must be managed. Our project is an app that will help people, students in particular.
  > ### Technologies:
 >- C++, Git, CMake, Vim, VSCode, raylib, imgui
-> ### Inputs/Outputts:
+> ### Inputs/Outputs:
  >- Inputs: Tasks that contain text and dates, reminders
  >- Outputs: Visual time-table of all your tasks. 
  > ### Features:
