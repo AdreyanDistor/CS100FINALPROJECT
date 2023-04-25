@@ -7,7 +7,8 @@
  > Authors: \<[Adreyan Distor](https://github.com/adist003)\> \<[Isabelle Celo](https://github.com/scelo002)\> \<[Nolan Vernon](https://github.com/nvern003)\> \<[Ojasvi Godha](https://github.com/ogodh001)\>
 
 ## Project Description
- > - Why is it important or interesting to us?: With the mayhem of modern life, you need a way to keep track of your life. Time is limited, so it must be managed.
+ > ### Why is it important or interesting to us? 
+ >- With the mayhem of modern life, you need a way to keep track of your life. Time is limited, so it must be managed. Our project is an app that will help people, students in particular.
  > ### Technologies:
 >- C++, Git, CMake, Vim, VSCode, raylib, imgui
 > ### Inputs/Outputts:
