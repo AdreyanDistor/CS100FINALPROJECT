@@ -4,7 +4,7 @@
  > Replace anything between \<...\> with your project specifics and remove angle brackets. For example, you need to name your project and replace the header right below this line with that title (no angle brackets). 
 # Time Management App
  
- > Authors: \<[Adreyan Distor](https://github.com/adist003)\> \<[Isabelle Celo](https://github.com/scelo002)\> \<[Nolan Vernon](https://github.com/nvern003)\> \<[Ojasvi Godha](https://github.com/ogodh001)\>
+ > Authors: \<[Adreyan Distor](https://github.com/AdreyanDistor)\> \<[Isabelle Celo](https://github.com/isabellecelo)\> \<[Nolan Vernon](https://github.com/slow-poker)\> \<[Ojasvi Godha](https://github.com/ogod1)\>
 
 ## Project Description
  > ### Why is it important or interesting to us? 
