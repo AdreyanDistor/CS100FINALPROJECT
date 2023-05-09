@@ -10,7 +10,7 @@
  > ### Why is it important or interesting to us? 
  >- With the mayhem of modern life, you need a way to keep track of your life. Time is limited, so it must be managed. Our project is an app that will help people, students in particular.
  > ### Technologies:
->- C++, Git, CMake, Vim, VSCode, raylib, imgui
+>- C++, Git, CMake, Vim, VSCode, imgui
 > ### Inputs/Outputs:
  >- Inputs: Tasks that contain text and dates, reminders
  >- Outputs: Visual time-table of all your tasks. 
@@ -18,9 +18,10 @@
  >- Task creation
  >- Task lists
  >- Displaying, editing, and deleting tasks
- >- Priority tags (None, Low, Medium, Urgent)
- >- Limited customization (Change of button colors)
+ >- Classification tags 
  >- Time duration support
+ >- Awards (for motivation) 
+ 
  > ## Phase II
  > In addition to completing the "User Interface Specification" and "Class Diagram" sections below, you will need to:
  > * Create an "Epic" (note) for each feature. Place these epics in the `Product Backlog` column
@@ -39,8 +40,6 @@
 > Draw a diagram illustrating how the user can navigate from one screen to another. Here is an [example](https://creately.com/diagram/example/ikfqudv82/user-navigation-diagram-classic?r=v). It can be useful to label each symbol that represents a screen so that you can reference the screens in the next section or the rest of the document if necessary. Give a brief description of what the diagram represents.
 
 ### Screen Layouts
-> Include the layout of each of your screens. The layout should describe the screen’s major components such as menus and prompts for user inputs, expected output, and buttons (if applicable). Explain what is on the layout, and the purpose of each menu item, button, etc. If many screens share the same layout, start by describing the general layout and then list the screens that will be using that layout and the differences between each of them.
-
 <img width="835" alt="Screenshot 2023-05-08 at 6 33 36 PM" src="https://user-images.githubusercontent.com/117539128/236972337-1c39eed3-2959-4157-8156-009154182e8d.png">
 
 <img width="827" alt="Screenshot 2023-05-08 at 6 34 35 PM" src="https://user-images.githubusercontent.com/117539128/236972348-00f2e80c-ed56-4cc6-98d7-498a4813fd52.png">
@@ -60,17 +59,10 @@ The awards shop screen is accessed by clicking the shop icon in the bottom right
 Adding Awards Screen:
 This screen is accessed by clicking the "+" at the bottom of the awards list in the Awards Shop Screen. A pop-up opens with two textboxes: one for the awards name and another for the price of the awards. The user may exit this screen by either clicking the "X" in the left corner to cancel the formation of a new task or clicking the checkmark at the bottom right which will confirm the formation of a new task. 
 
-
-
-
-
-
-
-
-
 ## Class Diagram
- > Include a **class diagram(s)** for your project and a **description** of the diagram(s). Your class diagram(s) should include all the main classes you plan for the project. This should be in sufficient detail that another group could pick up the project this point and successfully complete it. Use proper UML notation (as discussed in the course slides).
- 
+![image](https://user-images.githubusercontent.com/126242225/236989408-898f94a7-32a7-4ed1-a28d-3a9fe1d267dc.png)
+There are two main classes in which one of them includes a node struct. The TaskList class is a linked list of all the tasks. Each node is its own task object which is why there is the TaskNode struct. Each TaskNode has 10 private variables: title, day, month, year, a description, the tag, two booleans to mark them overdue and/or complete, the time its due, and a TaskNode refernece to the next node. There is also a function in the struct so we can output a TaskNode in the required format. Then there is the Awards class which defines an award object. Each award object has 3 private variables: its name, cost, and how many a user has "bought." We are not using a linked list to store the awards because it can easily be stored in a vector of award objects which will be initialized in the main function. 
+
  > ## Phase III
  > You will need to schedule a check-in for the second scrum meeting with the same reader you had your first scrum meeting with (using Calendly). Your entire team must be present. This meeting will occur on week 8 during lab time.
  
