@@ -23,21 +23,9 @@
  >- Awards (for motivation) 
  
  > ## Phase II
- > In addition to completing the "User Interface Specification" and "Class Diagram" sections below, you will need to:
- > * Create an "Epic" (note) for each feature. Place these epics in the `Product Backlog` column
- > * Complete your first *sprint planning* meeting to plan out the next 7 days of work.
- >   * Break down the "Epics" into smaller actionable user stories (i.e. smaller development tasks). Convert them into issues and assign them to team members. Place these in the `TODO` column.
- >   * These cards should represent roughly 7 days worth of development time for your team. Then, once the sprint is over you should be repeating these steps to plan a new sprint, taking you until your second scrum meeting with the reader in phase III.
- > * Schedule two check-ins using Calendly. You need to pick both time slots during your lab on week 6. Your entire team must be present for both check-ins.
- >   * The first check-in needs to be scheduled with your lab TA. During that meeting, you will discuss your project design/class diagram from phase II.
- >   * The second check-in should be scheduled with a reader. During that meeting you will discuss:
- >     * The tasks you are planning for the first sprint
- >     * How work will be divided between the team members
 ## User Interface Specification
- > Include a navigation diagram for your screens and the layout of each of those screens as desribed below. For all the layouts/diagrams, you can use any tool such as PowerPoint or a drawing program. (Specification requirement is adapted from [this template](https://redirect.cs.umbc.edu/~mgrass2/cmsc345/Template_UI.doc))
-
 ### Navigation Diagram
-> Draw a diagram illustrating how the user can navigate from one screen to another. Here is an [example](https://creately.com/diagram/example/ikfqudv82/user-navigation-diagram-classic?r=v). It can be useful to label each symbol that represents a screen so that you can reference the screens in the next section or the rest of the document if necessary. Give a brief description of what the diagram represents.
+![Copy of Untitled Diagram drawio](https://user-images.githubusercontent.com/126242225/236991885-e1513c80-1619-4702-8411-f328d836b384.png)
 
 ### Screen Layouts
 <img width="835" alt="Screenshot 2023-05-08 at 6 33 36 PM" src="https://user-images.githubusercontent.com/117539128/236972337-1c39eed3-2959-4157-8156-009154182e8d.png">
@@ -60,7 +48,7 @@ Adding Awards Screen:
 This screen is accessed by clicking the "+" at the bottom of the awards list in the Awards Shop Screen. A pop-up opens with two textboxes: one for the awards name and another for the price of the awards. The user may exit this screen by either clicking the "X" in the left corner to cancel the formation of a new task or clicking the checkmark at the bottom right which will confirm the formation of a new task. 
 
 ## Class Diagram
-![image](https://user-images.githubusercontent.com/126242225/236989408-898f94a7-32a7-4ed1-a28d-3a9fe1d267dc.png)
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/126242225/236992127-ab74e805-058c-457c-8bf1-d2ea20014c07.png)
 There are two main classes in which one of them includes a node struct. The TaskList class is a linked list of all the tasks. Each node is its own task object which is why there is the TaskNode struct. Each TaskNode has 10 private variables: title, day, month, year, a description, the tag, two booleans to mark them overdue and/or complete, the time its due, and a TaskNode refernece to the next node. There is also a function in the struct so we can output a TaskNode in the required format. Then there is the Awards class which defines an award object. Each award object has 3 private variables: its name, cost, and how many a user has "bought." We are not using a linked list to store the awards because it can easily be stored in a vector of award objects which will be initialized in the main function. 
 
  > ## Phase III
