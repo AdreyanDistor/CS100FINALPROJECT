@@ -47,7 +47,7 @@ The awards shop screen is accessed by clicking the shop icon in the bottom right
 Adding Awards Screen:
 This screen is accessed by clicking the "+" at the bottom of the awards list in the Awards Shop Screen. A pop-up opens with two textboxes: one for the awards name and another for the price of the awards. The user may exit this screen by either clicking the "X" in the left corner to cancel the formation of a new task or clicking the checkmark at the bottom right which will confirm the formation of a new task. 
 
-## Class Diagram
+### Class Diagram
 ![Untitled Diagram drawio](https://user-images.githubusercontent.com/126242225/236992127-ab74e805-058c-457c-8bf1-d2ea20014c07.png)
 There are two main classes in which one of them includes a node struct. The TaskList class is a linked list of all the tasks. Each node is its own task object which is why there is the TaskNode struct. Each TaskNode has 10 private variables: title, day, month, year, a description, the tag, two booleans to mark them overdue and/or complete, the time its due, and a TaskNode refernece to the next node. There is also a function in the struct so we can output a TaskNode in the required format. Then there is the Awards class which defines an award object. Each award object has 3 private variables: its name, cost, and how many a user has "bought." We are not using a linked list to store the awards because it can easily be stored in a vector of award objects which will be initialized in the main function. 
 
