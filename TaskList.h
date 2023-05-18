@@ -7,6 +7,16 @@ using namespace std;
 
 struct TaskNode {
     enum tags
+    {
+        chore = 5,
+        essay = 10,
+        short_assign = 7,
+        long_assign = 12,
+        studying = 7,
+        project = 20,
+        other = 0,
+        lab = 7
+    };
     string title;
     int month; //00
     int day; //00
@@ -53,14 +63,16 @@ struct TaskNode {
 class TaskList {
     private:
         TaskNode* head;
+        TaskNode* tail;
         int totalPoints;
     public:
         TaskList();
         ~TaskList();
-        void addTask(string name);
+        void addTask(string name, int d, int m, int y, string des, string tag, int dueTime);
         void deleteTask(string name);
         void importTasks(ifstream& file);
         void exportTasks(ofstream& file);
+        
 
 };
 
