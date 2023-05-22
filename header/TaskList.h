@@ -16,7 +16,7 @@ struct TaskNode
 	string name;
     string tag; //chore = 5, essay = 10, short_assign = 7, long_assign = 12, studying = 7, project = 20, other = 0, lab = 7
 	bool overdue;
-    TaskNode():name(""), tag(""), description(""), day(0), month(0), time(0),overdue(false){}
+    TaskNode():name(""), tag(""), description(""), day(0), month(0), time(0),overdue(false),next(nullptr){}
     TaskNode(string name, string tag,string description, int day, int month, int time):
     name(name), tag(tag), description(description), day(day), month(month), time(time),overdue(false){}
 	TaskNode* next;
