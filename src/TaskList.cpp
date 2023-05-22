@@ -10,13 +10,21 @@ TaskList::TaskList()
 TaskList::~TaskList()
 {
     TaskNode* currNode = head;
-    while(currNode != nullptr)
+    if(head == tail)
     {
-        TaskNode* tempNode;
-        tempNode = currNode;
-        currNode = currNode->next;
-        delete tempNode;
+        delete head;
     }
+    else
+    {
+        while(currNode != nullptr)
+        {
+            TaskNode* tempNode;
+            tempNode = currNode;
+            currNode = currNode->next;
+            delete tempNode;
+        }
+    }
+    
 }
 
 void TaskList::addTask(string name, string tag,string description, int day, int month, int time)
@@ -25,8 +33,13 @@ void TaskList::addTask(string name, string tag,string description, int day, int 
     if(head == nullptr)
     {
         head = newNode;
-        tail = nullptr;
+        tail = newNode;
         head->next = tail;
+    }
+    if(tail == nullptr)
+    {
+        head->next = tail;
+        tail = newNode;
     }
     else
     {
@@ -41,7 +54,7 @@ void TaskList::addTask(string name, string tag,string description, int day, int 
 void TaskList::deleteTask(string name)
 {
     TaskNode* currNode = head;
-    TaskNode* prevNode = nullptr;
+    TaskNode* prevNode = head;
     while(currNode != nullptr)
     {
         if(currNode->name == name)
@@ -49,11 +62,13 @@ void TaskList::deleteTask(string name)
             if(currNode == head)
             {
                 head = head->next;
+                tail = nullptr;
                 
             }
             else if(currNode == tail)
             {
                 tail = prevNode;
+                head->next = tail;
             }
             else
             {
@@ -71,16 +86,24 @@ void TaskList::deleteTask(string name)
 void TaskList::sortByTag(string user_tag)
 {
     TaskNode* currNode = head;
-    cout << "showTag" << endl;
-    while(currNode != nullptr)
+    if(head == tail)
     {
         if(currNode->tag == user_tag)
         {
-            cout << "EXPORT TASK" << endl;
             cout << currNode->exportTask() << endl;
         }
-        currNode = currNode->next;
     }
-    cout << "END SHOW TAG" << endl;
+    else
+    {
+        while(currNode != nullptr)
+        {
+            if(currNode->tag == user_tag)
+            {
+                cout << currNode->exportTask() << endl;
+            }
+            currNode = currNode->next;
+        }
+    }
+   
     return;
 }
