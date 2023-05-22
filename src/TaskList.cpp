@@ -10,11 +10,18 @@ TaskList::TaskList()
 TaskList::~TaskList()
 {
     TaskNode* currNode = head;
-    while(currNode != nullptr)
+    if(head == tail)
     {
-        TaskNode* tempNode;
-        tempNode = currNode;
-        currNode = currNode->next;
-        delete tempNode;
+        delete head;
+    }
+    else
+    {
+        while(currNode != nullptr)
+        {
+            TaskNode* tempNode;
+            tempNode = currNode;
+            currNode = currNode->next;
+            delete tempNode;
+        }
     }
 }
