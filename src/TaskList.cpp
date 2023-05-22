@@ -28,6 +28,7 @@ void TaskList::printList()
     {
         cout << i << ". " << currNode->exportTask() << endl;
         currNode = currNode->next; 
+        i++;
     }
     
 }
