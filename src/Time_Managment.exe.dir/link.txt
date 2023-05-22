@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic CMakeFiles/../Time_Managment.exe.dir/main.cpp.o CMakeFiles/../Time_Managment.exe.dir/TaskList.cpp.o CMakeFiles/../Time_Managment.exe.dir/AwardList.cpp.o -o ../Time_Managment.exe 
