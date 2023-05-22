@@ -10,36 +10,27 @@ TaskList::TaskList()
 TaskList::~TaskList()
 {
     TaskNode* currNode = head;
-    if(head == tail)
+    while(currNode != nullptr)
     {
-        delete head;
-    }
-    else
-    {
-        while(currNode != nullptr)
-        {
-            TaskNode* tempNode;
-            tempNode = currNode;
-            currNode = currNode->next;
-            delete tempNode;
-        }
+        TaskNode* tempNode = nullptr;
+        tempNode = currNode;
+        currNode = currNode->next;
+        delete tempNode;
     }
     
 }
 
 void TaskList::addTask(string name, string tag,string description, int day, int month, int time)
 {
-    TaskNode* newNode = new TaskNode(name, tag,description,day, month,time);
+    TaskNode* newNode = new TaskNode(name, tag,description, day, month,time);
     if(head == nullptr)
     {
         head = newNode;
-        tail = newNode;
-        head->next = tail;
     }
-    if(tail == nullptr)
+    else if(tail == nullptr)
     {
-        head->next = tail;
         tail = newNode;
+        head->next = tail;
     }
     else
     {
@@ -47,7 +38,6 @@ void TaskList::addTask(string name, string tag,string description, int day, int 
         tail = newNode;
         tempNode->next = tail;
     }
-    return;
 }
 
 //this needs to be debugged
@@ -55,27 +45,29 @@ void TaskList::deleteTask(string name)
 {
     TaskNode* currNode = head;
     TaskNode* prevNode = head;
-    while(currNode != nullptr)
-    {
+    while(currNode !=nullptr)
+    {   
         if(currNode->name == name)
         {
             if(currNode == head)
             {
+                TaskNode* tempNode = head;
                 head = head->next;
-                tail = nullptr;
-                
+                if(head == tail)
+                {
+                    tail == nullptr;
+                }
             }
             else if(currNode == tail)
             {
                 tail = prevNode;
-                head->next = tail;
+                tail->next = nullptr;
             }
             else
             {
                 prevNode->next = currNode->next;
             }
             delete currNode;
-            currNode = nullptr;
             return;
         }
         prevNode = currNode;
@@ -86,24 +78,28 @@ void TaskList::deleteTask(string name)
 void TaskList::sortByTag(string user_tag)
 {
     TaskNode* currNode = head;
-    if(head == tail)
+    if(currNode != nullptr)
     {
-        if(currNode->tag == user_tag)
-        {
-            cout << currNode->exportTask() << endl;
-        }
-    }
-    else
-    {
-        while(currNode != nullptr)
+        if(head == tail)
         {
             if(currNode->tag == user_tag)
             {
                 cout << currNode->exportTask() << endl;
             }
-            currNode = currNode->next;
+        }
+        else
+        {
+            while(currNode != nullptr)
+            {
+                if(currNode->tag == user_tag)
+                {
+                    cout << currNode->exportTask() << endl;
+                }
+                currNode = currNode->next;
+            }
         }
     }
+    
    
     return;
 }
