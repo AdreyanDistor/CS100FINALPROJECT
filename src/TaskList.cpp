@@ -103,3 +103,17 @@ void TaskList::sortByTag(string user_tag)
    
     return;
 }
+
+
+// COULD ADD TO GUI CLASS
+void TaskList::printList()
+{
+    int i = 1;
+    TaskNode* currNode = head;
+    while (currNode !=nullptr)
+    {
+        cout << i << ". " << currNode->exportTask() << endl;
+        currNode = currNode->next; 
+    }
+    
+}
