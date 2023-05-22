@@ -10,6 +10,6 @@ int main()
     list.addTask("BB",5,2,2004,"wowowo","chore",7);
     list.addTask("BOsadasdasdasdsa",5,2,2004,"wowowo","chore",7);
 
-    list.showTag("chore");
+    list.sortByTag("chore");
     return 0;
 }

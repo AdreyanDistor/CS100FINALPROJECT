@@ -61,7 +61,7 @@ class TaskList {
         void deleteTask(string name);
         void importTasks(ifstream& file);
         void exportTasks(ofstream& file);
-        void showTag(string user_tag);
+        void sortByTag(string user_tag);
         
 
 };

@@ -71,7 +71,7 @@ void TaskList::deleteTask(string name)
     }
 }
 
-void TaskList::showTag(string user_tag)
+void TaskList::sortByTag(string user_tag)
 {
     TaskNode* currNode = head;
     cout << "showTag" << endl;
