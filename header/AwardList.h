@@ -6,7 +6,7 @@
 #include<fstream>
 #include<vector>
 #include<string>
-
+using namespace std;
 struct Award
 {
 	int cost;
