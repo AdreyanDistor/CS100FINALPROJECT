@@ -20,7 +20,7 @@ struct TaskNode
     TaskNode(string name, string tag,string description, int day, int month, int time):
     name(name), tag(tag), description(description), day(day), month(month), time(time),overdue(false){}
 	TaskNode* next;
-	string exportedTask()
+	string exportTask()
     {
         string isOverdue;
         if(overdue == true)
