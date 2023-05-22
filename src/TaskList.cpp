@@ -19,7 +19,7 @@ TaskList::~TaskList()
     }
 }
 
-void TaskList::addTask(string name, string tag,string description, int day, int month, int time, bool overdue = false)
+void TaskList::addTask(string name, string tag,string description, int day, int month, int time)
 {
     TaskNode* newNode = new TaskNode(name, tag,description,day, month,time);
     if(head == nullptr)

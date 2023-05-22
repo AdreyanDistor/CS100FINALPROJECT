@@ -47,7 +47,7 @@ class TaskList
     public:
         TaskList();
         ~TaskList();
-        void addTask(string name, string tag,string description, int day, int month, int time, bool overdue = false);  //Make sure no duplicates
+        void addTask(string name, string tag,string description, int day, int month, int time);  //Make sure no duplicates
         void deleteTask(string name); // removes task from list, 
         void update(); // updates time and overdue tasks, updates every hour? (I don’t remember exactly)
         void undoDeleteTask(); //adds task back into list, if unsorted, just at the end of the list. If recent_deleted_task is = “” then nothin happens
