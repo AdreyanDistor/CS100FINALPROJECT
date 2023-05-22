@@ -15,9 +15,10 @@ struct TaskNode
 	string description;
 	string name;
     string tag; //chore = 5, essay = 10, short_assign = 7, long_assign = 12, studying = 7, project = 20, other = 0, lab = 7
-	bool overdue = false;
+	bool overdue;
+    TaskNode():name(""), tag(""), description(""), day(0), month(0), time(0),overdue(false){}
     TaskNode(string name, string tag,string description, int day, int month, int time):
-    name(name), tag(tag), description(description), day(day), month(month), time(time){}
+    name(name), tag(tag), description(description), day(day), month(month), time(time),overdue(false){}
 	TaskNode* next;
 	string exportedTask()
     {
@@ -44,6 +45,8 @@ class TaskList
         TaskNode* tail;
         TaskNode* recent_deleted_Task;
     public:
+        TaskList();
+        ~TaskList();
         void addTask(string name, string tag,string description, int day, int month, int time, bool overdue = false);  //Make sure no duplicates
         void deleteTask(string name); // removes task from list, 
         void update(); // updates time and overdue tasks, updates every hour? (I don’t remember exactly)
