@@ -31,7 +31,7 @@ struct TaskNode
         {
             isOverdue = "false";
         }
-        string output = name + '`' + description + '`' + tag +  '`' + to_string(month) + '`' + to_string(day) + '`' + to_string(year) + '`' + isOverdue + '`' + to_string(time);
+        string output = name + '`' + description + '`' + tag +  '`' + to_string(month) + '`' + to_string(day) + '`' + to_string(year)  + '`' + to_string(time) + '`' + isOverdue;
         return output;
     }; //this will be used in exportTasks of the Tasklist file
 	
