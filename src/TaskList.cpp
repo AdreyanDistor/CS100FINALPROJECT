@@ -18,3 +18,16 @@ TaskList::~TaskList()
         delete tempNode;
     }
 }
+
+// COULD ADD TO GUI CLASS
+void TaskList::printList()
+{
+    int i = 1;
+    TaskNode* currNode = head;
+    while (currNode !=nullptr)
+    {
+        cout << i << ". " << currNode->exportTask() << endl;
+        currNode = currNode->next; 
+    }
+    
+}

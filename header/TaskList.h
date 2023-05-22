@@ -58,7 +58,8 @@ class TaskList
         void importTasks(ifstream& file); //import tasks from “TaskList.txt”, look at TaskList to see how to import
         void exportTasks(); //will write the file within the function named “TaskList.txt”
         void sortByTag(string user_tag); //displays tasks of a specific tag
-        int markTaskCompleted(string name); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points, 
+        int markTaskCompleted(string name); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points,
+        void printList(); //prints entire list, could be added to a class called gui, or user input 
 
 };
 
