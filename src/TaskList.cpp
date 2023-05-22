@@ -1,30 +1,27 @@
-#include "TaskList.h"
-#include <iostream>
-using namespace std;
+#include "../header/TaskList.h"
 
 TaskList::TaskList()
 {
     head = nullptr;
     tail = nullptr;
+    recent_deleted_Task = nullptr;
 }
 
 TaskList::~TaskList()
 {
     TaskNode* currNode = head;
-    TaskNode* prevNode = head;
     while(currNode != nullptr)
     {
-        prevNode = currNode;
+        TaskNode* tempNode;
+        tempNode = currNode;
         currNode = currNode->next;
-        delete prevNode;
+        delete tempNode;
     }
 }
 
-void TaskList::addTask(string name, int d, int m, int y, string des, string tag, int dueTime)
+void TaskList::addTask(string name, string tag,string description, int day, int month, int time, bool overdue = false)
 {
-        cout << "addTag" << endl;
-
-    TaskNode* newNode = new TaskNode(name,d,m,y,des,tag,dueTime);
+    TaskNode* newNode = new TaskNode(name, tag,description,day, month,time);
     if(head == nullptr)
     {
         head = newNode;
@@ -47,7 +44,7 @@ void TaskList::deleteTask(string name)
     TaskNode* prevNode = nullptr;
     while(currNode != nullptr)
     {
-        if(currNode->title == name)
+        if(currNode->name == name)
         {
             if(currNode == head)
             {
@@ -86,14 +83,4 @@ void TaskList::sortByTag(string user_tag)
     }
     cout << "END SHOW TAG" << endl;
     return;
-}
-
-void TaskList::importTasks(ifstream& file)
-{
-
-}
-
-void TaskList::exportTasks(ofstream& file)
-{
-
 }
