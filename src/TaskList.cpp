@@ -110,10 +110,15 @@ void TaskList::printList()
 {
     int i = 1;
     TaskNode* currNode = head;
+    if(head == nullptr)
+    {
+        cout << "THERE AINT NOTHING TO SEE" << endl;
+    }
     while (currNode !=nullptr)
     {
         cout << i << ". " << currNode->exportTask() << endl;
         currNode = currNode->next; 
+        i++;
     }
     
 }

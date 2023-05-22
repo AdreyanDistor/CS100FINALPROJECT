@@ -16,14 +16,16 @@ int main()
     vector<int> day = {1,2,3,4,5,};
     vector<int> year = {1,2,3,4,5,};
     TaskList list;
-    for(int i = 0; i < 1; i++)
+    for(int i = 0; i < 3; i++)
     {
-        int num = rand() % 4 + 0;
-        list.addTask(names.at(num),tag.at(num),desc.at(num),month.at(num),day.at(num),year.at(num));
+        list.addTask(names.at(i),tag.at(i),desc.at(i),month.at(i),day.at(i),year.at(i));
     }
     cout << "BEFORE DELETE" << endl;
     list.printList();
+    list.deleteTask("1");
     cout << "AFTER DELETE" << endl;
+    list.printList();
+
 
     return 0;
 }
