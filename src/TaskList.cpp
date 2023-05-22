@@ -25,7 +25,7 @@ void TaskList::addTask(string name, string tag,string description, int day, int 
     if(head == nullptr)
     {
         head = newNode;
-        tail = newNode;
+        tail = nullptr;
         head->next = tail;
     }
     else
