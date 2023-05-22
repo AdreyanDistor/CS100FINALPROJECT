@@ -22,11 +22,13 @@ TaskList::~TaskList()
 
 void TaskList::addTask(string name, int d, int m, int y, string des, string tag, int dueTime)
 {
+        cout << "addTag" << endl;
+
     TaskNode* newNode = new TaskNode(name,d,m,y,des,tag,dueTime);
     if(head == nullptr)
     {
         head = newNode;
-        tail = nullptr;
+        tail = newNode;
         head->next = tail;
     }
     else
@@ -35,8 +37,10 @@ void TaskList::addTask(string name, int d, int m, int y, string des, string tag,
         tail = newNode;
         tempNode->next = tail;
     }
+    return;
 }
 
+//this needs to be debugged
 void TaskList::deleteTask(string name)
 {
     TaskNode* currNode = head;
@@ -60,10 +64,28 @@ void TaskList::deleteTask(string name)
             }
             delete currNode;
             currNode = nullptr;
+            return;
         }
         prevNode = currNode;
         currNode = currNode->next;
     }
+}
+
+void TaskList::showTag(string user_tag)
+{
+    TaskNode* currNode = head;
+    cout << "showTag" << endl;
+    while(currNode != nullptr)
+    {
+        if(currNode->tag == user_tag)
+        {
+            cout << "EXPORT TASK" << endl;
+            cout << currNode->exportTask() << endl;
+        }
+        currNode = currNode->next;
+    }
+    cout << "END SHOW TAG" << endl;
+    return;
 }
 
 void TaskList::importTasks(ifstream& file)

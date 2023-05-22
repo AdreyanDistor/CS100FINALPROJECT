@@ -4,19 +4,7 @@
 #include <iostream>
 #include<string>
 using namespace std;
-
 struct TaskNode {
-    enum tags
-    {
-        chore = 5,
-        essay = 10,
-        short_assign = 7,
-        long_assign = 12,
-        studying = 7,
-        project = 20,
-        other = 0,
-        lab = 7
-    };
     string title;
     int month; //00
     int day; //00
@@ -47,7 +35,8 @@ struct TaskNode {
         {
             isOverdue = "false";
         }
-        string ouput = title + '`' + description + '`' + tag + '`' + isDone + '`' + to_string(month) + '`' + to_string(day) + '`' + to_string(year) + '`' + isOverdue + '`' + to_string(time);
+        string output = title + '`' + description + '`' + tag + '`' + isDone + '`' + to_string(month) + '`' + to_string(day) + '`' + to_string(year) + '`' + isOverdue + '`' + to_string(time);
+        return output;
     };
     int markCompleted()
     {
@@ -72,6 +61,7 @@ class TaskList {
         void deleteTask(string name);
         void importTasks(ifstream& file);
         void exportTasks(ofstream& file);
+        void showTag(string user_tag);
         
 
 };
