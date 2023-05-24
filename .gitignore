@@ -5,3 +5,4 @@ src/cmake_install.cmake
 src/CMakeCache.txt
 Time_Management.exe
 src/Time_Managment.exe.dir
+make
