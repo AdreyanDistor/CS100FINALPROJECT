@@ -28,10 +28,10 @@ class AwardList
 	public:
 		AwardList();
 		void importAwards(ifstream& file); //import tasks from “AwardsList.txt”
-		void exportAwards(); //will write the file within the function named “AwardsList.txt”
-		int buyAward();//returns cost of ward, this is subtracted from total_points
-		void  useAward(); //idk what this would be, as of now it just prints a message I think, or the name, also remove it from the list
-		void createAward(); //add award to award list, if it’s already in, user_count++, cost can't be <  1
+		ofstream exportAwards(); //will write the file within the function named “AwardsList.txt”
+		int buyAward(string name);//returns cost of ward, this is subtracted from total_points
+		void  useAward(string name); //idk what this would be, as of now it just prints a message I think, or the name, also remove it from the list
+		void createAward(string name, int cost); //add award to award list, if it’s already in, user_count++, cost can't be <  1
 		void deleteAward(string name); //delete award from list, if it’s already in the list, user_count–
 		bool inList(string name); //return true if the award is in already in the list, false otherwise
 };
