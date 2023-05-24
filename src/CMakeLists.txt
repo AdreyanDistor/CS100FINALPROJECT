@@ -1,7 +1,9 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-ADD_EXECUTABLE(test.exe
-	../test.cpp
-	TaskList.cpp
-    AwardList.cpp
+add_library(simpleLibrary
+TaskList.cpp
+AwardList.cpp
 )
+
+find_library(M_LIB m)
+target_link_libraries(simpleLibrary ${M_LIB})
+
