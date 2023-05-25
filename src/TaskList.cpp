@@ -19,28 +19,38 @@ TaskList::~TaskList()
     }
 }
 
-
-int TaskList::markTaskCompleted(string name) {
+TaskNode* TaskList::search(string name) {
     TaskNode* curr = head;
-    while (curr->name != name) { //finding the task in question 
+    while (curr->name != name) {
         curr = curr->next;
     }
+    return curr;
+}
+
+int TaskList::markTaskCompleted(string name) {
+    TaskNode* curr = search(name);
+    int point = 0;
     if (curr->tag == "chore") {
-        return 5;
+        point = 5;
     } else if (curr->tag == "essay") {
-        return 10;
+        point = 10;
     } else if (curr->tag == "short_assign") {
-        return 7;
+        point = 7;
     } else if (curr->tag == "long_assign") {
-        return 12;
+        point = 12;
     } else if (curr->tag == "studying") {
-        return 7;
+        point = 7;
     } else if (curr->tag == "project") {
-        return 20;
+        point = 20;
     } else if (curr->tag == "other") {
-        return 0;
+        point = 0;
     } else if (curr->tag == "lab") {
-        return 7;
+        point = 7;
+    }
+    if (curr->overdue == false) {
+        return point; 
+    } else {
+        return point/2;
     }
     deleteTask(name);
     return -1;
