@@ -191,7 +191,7 @@ void TaskList::printList()
     }
     while (currNode !=nullptr)
     {
-        cout << i << ". " << "Month: " << currNode->month << " /Day: " << currNode->day << " /Year: " << currNode->year << endl;
+        cout << i << ". " << currNode->exportTask() << endl;
         currNode = currNode->next; 
         i++;
     }
