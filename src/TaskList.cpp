@@ -27,9 +27,9 @@ void TaskList::showOverdue() {
     while (curr != nullptr) {
         if (curr->year > currYear) {
             curr->overdue = true;
-        } else (curr->month > currMon) {
+        } else if (curr->month > currMon) {
             curr->overdue = true;
-        } else (curr->day > currDay) {
+        } else if (curr->day > currDay) {
             curr->overdue = true;
         }
         curr = curr->next;
