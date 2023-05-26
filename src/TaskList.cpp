@@ -19,6 +19,24 @@ TaskList::~TaskList()
     }
 }
 
+void TaskList::showOverdue() {
+    TaskNode* curr = head;
+    int currDay = 0;
+    int currMon = 0;
+    int currYear = 0;
+    while (curr != nullptr) {
+        if (curr->year > currYear) {
+            curr->overdue = true;
+        } else (curr->month > currMon) {
+            curr->overdue = true;
+        } else (curr->day > currDay) {
+            curr->overdue = true;
+        }
+        curr = curr->next;
+    }
+    //GUI stuff to show tasks as red 
+}
+
 // COULD ADD TO GUI CLASS
 void TaskList::printList()
 {
