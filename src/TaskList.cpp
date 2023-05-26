@@ -145,6 +145,7 @@ void TaskList::deleteTask(string name)
             delete currNode;
             return;
         }
+                    recent_deleted_Task = new TaskNode(currNode->name, currNode->tag,currNode->description, currNode->day, currNode->month, currNode->year);
         prevNode = currNode;
         currNode = currNode->next;
     }
