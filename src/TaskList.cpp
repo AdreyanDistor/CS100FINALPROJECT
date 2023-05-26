@@ -187,7 +187,7 @@ void TaskList::printList()
     TaskNode* currNode = head;
     if(head == nullptr)
     {
-        cout << "THERE AINT NOTHING TO SEE" << endl;
+        cout << "" << endl;
     }
     while (currNode !=nullptr)
     {
