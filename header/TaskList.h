@@ -50,7 +50,6 @@ class TaskList
         void deleteTask(string name); // removes task from list, 
         void update(); // updates time and overdue tasks, updates every hour? (I don’t remember exactly)
         void undoDeleteTask(); //adds task back into list, if unsorted, just at the end of the list. If recent_deleted_task is = “” then nothin happens
-        void orderByDate(); //displays tasks by date
         void showOverdue();//displays tasks that are overdue
         void showTodayOnly(); // displays today’s tasks
         TaskNode* search(string); //searches list until task with same name is found, returns nullptr otherwise	
