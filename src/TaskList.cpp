@@ -20,9 +20,9 @@ TaskList::~TaskList()
     
 }
 
-void TaskList::addTask(string name, string tag,string description, int day, int month, int time)
+void TaskList::addTask(string name, string tag,string description, int day, int month, int year)
 {
-    TaskNode* newNode = new TaskNode(name, tag,description, day, month,time);
+    TaskNode* newNode = new TaskNode(name, tag,description, day, month,year);
     if(head == nullptr)
     {
         head = newNode;
@@ -31,12 +31,25 @@ void TaskList::addTask(string name, string tag,string description, int day, int 
     {
         tail = newNode;
         head->next = tail;
+        if(tail->year < head->year)
+        {
+            TaskNode* tempNode = head;
+            head = tail;
+            tail = tempNode;
+            tail->next = nullptr;
+            head->next = tail;
+        }
     }
     else
     {
-        TaskNode* tempNode = tail;
-        tail = newNode;
-        tempNode->next = tail;
+        TaskNode* currNode = head;
+        while(currNode != nullptr)
+        {
+            if()
+            {
+                
+            }
+        }
     }
 }
 

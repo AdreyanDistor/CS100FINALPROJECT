@@ -11,14 +11,13 @@ struct TaskNode
 	int day;
 	int month;
     int year;
-    int time; // in hours (1-24)IDK IF WE SAID WE WERE KEEPING THIS
 	string description;
 	string name;
     string tag; //chore = 5, essay = 10, short_assign = 7, long_assign = 12, studying = 7, project = 20, other = 0, lab = 7
 	bool overdue;
-    TaskNode():name(""), tag(""), description(""), day(0), month(0), time(0),overdue(false),next(nullptr){}
-    TaskNode(string name, string tag,string description, int day, int month, int time):
-    name(name), tag(tag), description(description), day(day), month(month), time(time),overdue(false){}
+    TaskNode():name(""), tag(""), description(""), day(0), month(0),overdue(false),next(nullptr), year(0){}
+    TaskNode(string name, string tag,string description, int day, int month, int year):
+    name(name), tag(tag), description(description), day(day), month(month), year(year),overdue(false){}
 	TaskNode* next;
 	string exportTask()
     {
@@ -31,7 +30,7 @@ struct TaskNode
         {
             isOverdue = "false";
         }
-        string output = name + '`' + description + '`' + tag +  '`' + to_string(month) + '`' + to_string(day) + '`' + to_string(year) + '`' + to_string(time) + '`' + isOverdue;
+        string output = name + '`' + description + '`' + tag +  '`' + to_string(month) + '`' + to_string(day) + '`' + to_string(year) + '`' + isOverdue;
         return output;
     }; //this will be used in exportTasks of the Tasklist file
 	
@@ -47,7 +46,7 @@ class TaskList
     public:
         TaskList();
         ~TaskList();
-        void addTask(string name, string tag,string description, int day, int month, int time);  //Make sure no duplicates
+        void addTask(string name, string tag,string description, int day, int month, int year);  //Make sure no duplicates
         void deleteTask(string name); // removes task from list, 
         void update(); // updates time and overdue tasks, updates every hour? (I don’t remember exactly)
         void undoDeleteTask(); //adds task back into list, if unsorted, just at the end of the list. If recent_deleted_task is = “” then nothin happens
