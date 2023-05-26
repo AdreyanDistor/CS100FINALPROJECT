@@ -15,9 +15,8 @@ using namespace std;
 
 int main() {
     /*Imports total_points*/
-    ifstream total_points_file("../saved_files/Total_Points.txt");
-    int total_points = 0;
-    total_points_file >> total_points;
-    cout << total_points;
+    AwardList myAwardList;
+    myAwardList.importTotalPoints();
+    
     return 0;
 }
