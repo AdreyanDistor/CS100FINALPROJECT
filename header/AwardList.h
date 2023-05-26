@@ -37,6 +37,7 @@ class AwardList
 		bool inList(string name); //return true if the award is in already in the list, false otherwise
 		int getTotalPoints(); //return totalPoints
 		void setTotalPoints(); //set totalPoints
+		void importTotalPoints(); //imports totalPoints
 };
 	
 	
