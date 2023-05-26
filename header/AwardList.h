@@ -24,11 +24,12 @@ struct Award
 class AwardList
 {
 	private:
-		vector<Award> awardlist;
+		vector<Award*> awardlist;
+		int awardlistSize;
 	public:
 		AwardList();
-		void importAwards(ifstream& file); //import tasks from “AwardsList.txt”
-		ofstream exportAwards(); //will write the file within the function named “AwardsList.txt”
+		void importAwards(); //import tasks from “AwardsList.txt”
+		void exportAwards(); //will write the file within the function named “AwardsList.txt”
 		int buyAward(string name);//returns cost of ward, this is subtracted from total_points
 		void  useAward(string name); //idk what this would be, as of now it just prints a message I think, or the name, also remove it from the list
 		void createAward(string name, int cost); //add award to award list, if it’s already in, user_count++, cost can't be <  1
