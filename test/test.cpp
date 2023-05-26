@@ -14,11 +14,11 @@ int main()
     vector<string> desc = {"1","2","3","4","5"};
     vector<int> month = {1,2,3,4,5,};
     vector<int> day = {1,2,3,4,5,};
-    vector<int> year = {1,2,3,4,5,};
+    vector<int> year = {2001,2002,2003,2004,2005,};
     TaskList list;
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < 10; i++)
     {
-        list.addTask(names.at(i),tag.at(i),desc.at(i),month.at(i),day.at(i),year.at(i));
+        list.addTask(names.at(rand() % 4 + 0),tag.at(rand() % 4 + 0),desc.at(rand() % 4 + 0),rand() % 30 + 1,rand() % 12 + 1,year.at(rand() % 4 + 0));
     }
     cout << "BEFORE DELETE" << endl;
     list.printList();
