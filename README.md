@@ -28,9 +28,11 @@
 ![Copy of Untitled Diagram drawio](https://user-images.githubusercontent.com/126242225/236991885-e1513c80-1619-4702-8411-f328d836b384.png)
 
 ### Screen Layouts
-<img width="835" alt="Screenshot 2023-05-08 at 6 33 36 PM" src="https://user-images.githubusercontent.com/117539128/236972337-1c39eed3-2959-4157-8156-009154182e8d.png">
 
-<img width="827" alt="Screenshot 2023-05-08 at 6 34 35 PM" src="https://user-images.githubusercontent.com/117539128/236972348-00f2e80c-ed56-4cc6-98d7-498a4813fd52.png">
+<img width="851" alt="Screenshot 2023-05-25 at 5 11 21 PM" src="https://github.com/cs100/final-project-scelo002-nvern003-adist003-ogodh001/assets/117539128/84d730f2-5277-401a-8cc8-5103632c7655">
+
+
+<img width="851" alt="Screenshot 2023-05-25 at 5 10 47 PM" src="https://github.com/cs100/final-project-scelo002-nvern003-adist003-ogodh001/assets/117539128/a54b0c42-94e8-4add-89e8-3e56e4f9a1b1">
 
 Basic Homescreen:
 On the main screen, you are able to see the main functionalities of the application. The homescreen presents the (master) To-Do-List with each task listed with a due date and its tag, the filtering buttons, the undo button, the points the user has collected, and the shop icon. Clicking the circle to the left of a task will delete the task from the To-Do-List, add the designated number of points to the points count, and bring the user to the Completed Task Message Screen. Pressing the plus sign at the bottom of the To-Do-List would bring the user to the Editing Task Screen that will allow them to add a new task. The undo button will allow for a previously deleted task to be restored. Each filter button (date, today, overdue, and ALL) will allow the user to order the task list by date (ascending), only display tasks due that day, highlight the overdue tasks in red, and choose which tasks of a certain tag to display. The filters are shown as enabled if they are circled in red. The user may also click on any task to open up the Editing Task Screen to either edit or read the description of the task. Clicking on the icon in the bottom right will bring the user to the shop. 
