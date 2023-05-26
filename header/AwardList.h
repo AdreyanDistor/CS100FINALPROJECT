@@ -25,7 +25,7 @@ class AwardList
 {
 	private:
 		vector<Award*> awardlist;
-		int awardlistSize;
+		int totalPoints;
 	public:
 		AwardList();
 		void importAwards(); //import tasks from “AwardsList.txt”
@@ -35,6 +35,8 @@ class AwardList
 		void createAward(string name, int cost); //add award to award list, if it’s already in, user_count++, cost can't be <  1
 		void deleteAward(string name); //delete award from list, if it’s already in the list, user_count–
 		bool inList(string name); //return true if the award is in already in the list, false otherwise
+		int getTotalPoints(); //return totalPoints
+		void setTotalPoints(); //set totalPoints
 };
 	
 	
