@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../lib/libsimpleLibrary.a CMakeFiles/simpleLibrary.dir/TaskList.cpp.o CMakeFiles/simpleLibrary.dir/AwardList.cpp.o
-/usr/bin/ranlib ../lib/libsimpleLibrary.a
