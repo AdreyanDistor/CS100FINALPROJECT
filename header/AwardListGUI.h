@@ -6,11 +6,12 @@
 #include<fstream>
 #include<vector>
 #include<string>
+#include "AwardList.h"
 using namespace std;
 
-class AwardListGUI : public AwardList {
+class AwardListGUI{
     public:
-        void displayAwards(); //showing the awards on GUI
+        string displayAwards(AwardList list); //showing the awards on GUI
 };
 
 #endif 

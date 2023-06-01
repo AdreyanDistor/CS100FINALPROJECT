@@ -9,9 +9,9 @@ using namespace std;
 
 class TaskListGUI : public TaskList {
     public:
-        void showOverdue();//displays tasks that are overdue
-        void showTodayOnly(); // displays today’s tasks
-        void sortByTag(string user_tag); //displays tasks of a specific tag
+        string showOverdue(TaskList list);//displays tasks that are overdue
+        string showTodayOnly(TaskList list,int day, int month, int year); // displays today’s tasks
+        string sortByTag(TaskList list, string user_tag); //displays tasks of a specific tag
 };
 
 #endif

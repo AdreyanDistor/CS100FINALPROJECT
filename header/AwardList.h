@@ -6,6 +6,7 @@
 #include<fstream>
 #include<vector>
 #include<string>
+#include"TaskListGUI.h"
 using namespace std;
 struct Award
 {
@@ -24,16 +25,21 @@ struct Award
 class AwardList
 {
 	private:
-		vector<Award> awardlist;
+		vector<Award*> awardlist;
+		int totalPoints;
 	public:
 		AwardList();
-		void importAwards(ifstream& file); //import tasks from “AwardsList.txt”
+		void importAwards(); //import tasks from “AwardsList.txt”
 		void exportAwards(); //will write the file within the function named “AwardsList.txt”
-		int buyAward();//returns cost of ward, this is subtracted from total_points
-		void  useAward(); //idk what this would be, as of now it just prints a message I think, or the name, also remove it from the list
-		void createAward(); //add award to award list, if it’s already in, user_count++, cost can't be <  1
+		int buyAward(string name);//returns cost of ward, this is subtracted from total_points
+		void  useAward(string name); //idk what this would be, as of now it just prints a message I think, or the name, also remove it from the list
+		void createAward(string name, int cost); //add award to award list, if it’s already in, user_count++, cost can't be <  1
 		void deleteAward(string name); //delete award from list, if it’s already in the list, user_count–
 		bool inList(string name); //return true if the award is in already in the list, false otherwise
+		int getTotalPoints(); //return totalPoints
+		void setTotalPoints(); //set totalPoints
+		void importTotalPoints(); //imports totalPoints
+		friend class AwardListGUI;
 };
 	
 	

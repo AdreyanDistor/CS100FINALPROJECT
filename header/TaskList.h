@@ -5,6 +5,7 @@
 #include<ostream>
 #include <ctime>
 #include<string>
+#include "TaskListGUI.h"
 using namespace std;
 
 struct TaskNode
@@ -40,7 +41,7 @@ struct TaskNode
 
 class TaskList
 {
-    protected:
+    private:
         TaskNode* head;
         TaskNode* tail;
         TaskNode* recent_deleted_Task;
@@ -51,14 +52,12 @@ class TaskList
         void deleteTask(string name); // removes task from list, 
         void update(); // updates time and overdue tasks, updates every hour? (I don’t remember exactly)
         void undoDeleteTask(); //adds task back into list, if unsorted, just at the end of the list. If recent_deleted_task is = “” then nothin happens
-        void orderByDate(); //displays tasks by date
-        void showOverdue();//displays tasks that are overdue
-        void showTodayOnly(); // displays today’s tasks
         TaskNode* search(string); //searches list until task with same name is found, returns nullptr otherwise	
-        void importTasks(ifstream& file); //import tasks from “TaskList.txt”, look at TaskList to see how to import
-        void exportTasks(); //will write the file within the function named “TaskList.txt”
+        void importTasks(); //import tasks from “TaskList.txt”, look at TaskList to see how to import, makes the linked list 
+        void exportTasks(); //will ouput and write the file the function named “TaskList.txt”
         int markTaskCompleted(string name); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points,
-        void printList(); 
+        void printList(); //prints entire list, could be added to a class called gui, or user input 
+        friend class TaskListGUI;
 
 };
 
