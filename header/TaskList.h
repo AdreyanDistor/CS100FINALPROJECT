@@ -4,6 +4,8 @@
 #include <fstream>
 #include<ostream>
 #include <ctime>
+#include<string>
+#include "TaskListGUI.h"
 using namespace std;
 
 struct TaskNode
@@ -55,6 +57,7 @@ class TaskList
         void exportTasks(); //will ouput and write the file the function named “TaskList.txt”
         int markTaskCompleted(string name); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points,
         void printList(); //prints entire list, could be added to a class called gui, or user input 
+        friend class TaskListGUI;
 
 };
 

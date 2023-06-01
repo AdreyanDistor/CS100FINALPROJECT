@@ -6,6 +6,7 @@
 #include<fstream>
 #include<vector>
 #include<string>
+#include"TaskListGUI.h"
 using namespace std;
 struct Award
 {
@@ -38,6 +39,7 @@ class AwardList
 		int getTotalPoints(); //return totalPoints
 		void setTotalPoints(); //set totalPoints
 		void importTotalPoints(); //imports totalPoints
+		friend class AwardListGUI;
 };
 	
 	

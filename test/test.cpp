@@ -1,5 +1,7 @@
 #include "../header/AwardList.h"
 #include "../header/TaskList.h"
+#include "../header/TaskListGUI.h"
+#include "../header/AwardListGUI.h"
 #include<iostream>
 #include<fstream>
 #include <ostream>
@@ -11,5 +13,6 @@
 using namespace std;
 int main() {
 
+    
     return 0;
 }
