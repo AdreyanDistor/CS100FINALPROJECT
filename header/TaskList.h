@@ -4,6 +4,7 @@
 #include <fstream>
 #include<ostream>
 #include <ctime>
+#include<string>
 using namespace std;
 
 struct TaskNode
