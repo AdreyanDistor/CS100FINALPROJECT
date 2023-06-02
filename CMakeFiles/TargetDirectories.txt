@@ -1,0 +1,9 @@
+/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles/rebuild_cache.dir
+/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles/edit_cache.dir
+/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/src/CMakeFiles/rebuild_cache.dir
+/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/src/CMakeFiles/edit_cache.dir
+/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/src/CMakeFiles/simpleLibrary.dir
+/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/src/CMakeFiles/Time_Management.exe.dir
+/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/test/CMakeFiles/rebuild_cache.dir
+/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/test/CMakeFiles/tests.exe.dir
+/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/test/CMakeFiles/edit_cache.dir
