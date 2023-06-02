@@ -8,10 +8,14 @@
 #include<string>
 #include<iomanip>
 #include<vector>
-#include<time.h>
 #include<ctime>
+#include "time.h"
+#include <stdio.h>      /* printf, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 using namespace std;
 
 TEST(showOverdue, oneNode) {
     TaskListGUI list; 
 }
+
