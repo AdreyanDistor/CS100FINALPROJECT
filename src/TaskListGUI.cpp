@@ -3,8 +3,8 @@
 #include <iostream>
 using namespace std;
 
-void TaskListGUI::showOverdue(char* tm) {
-    TaskNode* curr = head;
+void TaskListGUI::showOverdue(TaskList list, char* tm) {
+    TaskNode* curr = list->head;
     string time = tm;
     string monthStr = time.substr(4, 3);
     int currDay = stoi(time.substr(8, 2));
