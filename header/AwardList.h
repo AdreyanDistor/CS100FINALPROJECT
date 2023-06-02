@@ -8,6 +8,7 @@
 #include<string>
 #include"TaskListGUI.h"
 using namespace std;
+
 struct Award
 {
 	int cost;
@@ -24,9 +25,12 @@ struct Award
 
 class AwardList
 {
+		
 	protected:
 		vector<Award*> awardlist;
 		int totalPoints;
+    int awardlistSize;
+  
 	public:
 		AwardList();
 		void importAwards(); //import tasks from “AwardsList.txt”
@@ -48,6 +52,4 @@ class AwardList
 };
 	
 	
-
-
 #endif

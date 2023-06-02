@@ -5,7 +5,6 @@ Time_Management.exe
         src/Time_Management.exe.dir/
         src/Time_Managment.exe.dir/
         src/cmake_install.cmake
-.gitignore
 src/Makefile
 src/CMakeFiles
 src/cmake_install.cmake
@@ -20,4 +19,5 @@ cmake_install.cmake
 test/CMakeFiles
 test/Makefile
 test/cmake_install.cmake
-
+AwardList.o
+TaskList.o
