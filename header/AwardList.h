@@ -24,7 +24,7 @@ struct Award
 
 class AwardList
 {
-	private:
+	protected:
 		vector<Award*> awardlist;
 		int totalPoints;
 	public:
@@ -39,7 +39,6 @@ class AwardList
 		int getTotalPoints(); //return totalPoints
 		void setTotalPoints(); //set totalPoints
 		void importTotalPoints(); //imports totalPoints
-		friend class AwardListGUI;
 };
 	
 	

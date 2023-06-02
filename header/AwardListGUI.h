@@ -9,9 +9,9 @@
 #include "AwardList.h"
 using namespace std;
 
-class AwardListGUI{
+class AwardListGUI: public AwardList{
     public:
-        string displayAwards(AwardList list); //showing the awards on GUI
+        string displayAwards(); //showing the awards on GUI
 };
 
 #endif 

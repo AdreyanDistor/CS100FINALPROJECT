@@ -1,11 +1,11 @@
 #include "../header/AwardListGUI.h"
 
-string AwardListGUI::displayAwards(AwardList list)
+string AwardListGUI::displayAwards()
 {
     string AWARDS;
-    for(int i = 0; i < list.awardlist.size(); i++)
+    for(int i = 0; i <awardlist.size(); i++)
     {
-        AWARDS+=list.awardlist.at(i)->exportAward();
+        AWARDS+=awardlist.at(i)->exportAward();
     }
     return AWARDS;
 }
