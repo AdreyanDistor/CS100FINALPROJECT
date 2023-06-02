@@ -17,7 +17,6 @@ TaskList::~TaskList()
         currNode = currNode->next;
         delete tempNode;
     }
-<<<<<<< HEAD
     
 }
 
@@ -154,22 +153,15 @@ void TaskList::deleteTask(string name)
 
 
 
-=======
-}
-
->>>>>>> adist003/GUICLASSFUNCTIONS
 // COULD ADD TO GUI CLASS
 void TaskList::printList()
 {
     int i = 1;
     TaskNode* currNode = head;
-<<<<<<< HEAD
     if(head == nullptr)
     {
         cout << "" << endl;
     }
-=======
->>>>>>> adist003/GUICLASSFUNCTIONS
     while (currNode !=nullptr)
     {
         cout << i << ". " << currNode->exportTask() << endl;

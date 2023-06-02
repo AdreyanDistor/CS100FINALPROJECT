@@ -1,15 +1,16 @@
 #include "../header/TaskListGUI.h"
 
-string TaskListGUI::sortByTag(TaskList list, string user_tag)
+string TaskListGUI::sortByTag(string user_tag)
 {
-    TaskNode* currNode = list.head;
+    TaskNode* currNode = head;
+    string sortedTags;
     if(currNode != nullptr)
     {
-        if(list.head == list.tail)
+        if(head == tail)
         {
             if(currNode->tag == user_tag)
             {
-                cout << currNode->exportTask() << endl;
+                sortedTags+= currNode->exportTask() + "\n";
             }
         }
         else
@@ -18,7 +19,7 @@ string TaskListGUI::sortByTag(TaskList list, string user_tag)
             {
                 if(currNode->tag == user_tag)
                 {
-                    cout << currNode->exportTask() << endl;
+                    sortedTags+= currNode->exportTask() + "\n";
                 }
                 currNode = currNode->next;
             }
@@ -26,12 +27,12 @@ string TaskListGUI::sortByTag(TaskList list, string user_tag)
     }
     
    
-    return;
+    return sortedTags;
 }
-string TaskListGUI::showOverdue(TaskList list)
+string TaskListGUI::showOverdue()
 {
     string overdueList = "";
-    TaskNode* currNode = list.head;
+    TaskNode* currNode = head;
     while(currNode != nullptr)
     {
         if(currNode->overdue)
@@ -42,10 +43,10 @@ string TaskListGUI::showOverdue(TaskList list)
     }
     return overdueList;
 }
-string TaskListGUI::showTodayOnly(TaskList list,int day, int month, int year)
+string TaskListGUI::showTodayOnly(int day, int month, int year)
 {
     string todayList = "";
-    TaskNode* currNode = list.head;
+    TaskNode* currNode = head;
     while(currNode != nullptr)
     {
         if(currNode->day == day && currNode->month == month && currNode->year == year)
