@@ -11,3 +11,4 @@ test/test.exe.dir
 test/cmake_install.cmake
 test/Makefile
 test/CMakeCache.txt
+CMakeFiles
