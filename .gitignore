@@ -1,4 +1,10 @@
-.gitignore
+Time_Management.exe
+        src/CMakeCache.txt
+        src/CMakeFiles/
+        src/Makefile
+        src/Time_Management.exe.dir/
+        src/Time_Managment.exe.dir/
+        src/cmake_install.cmake
 src/Makefile
 src/CMakeFiles
 src/cmake_install.cmake
@@ -6,5 +12,12 @@ src/CMakeCache.txt
 Time_Management.exe
 src/Time_Managment.exe.dir
 make
+CMakeFiles
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+test/CMakeFiles
+test/Makefile
+test/cmake_install.cmake
 AwardList.o
 TaskList.o

@@ -4,20 +4,21 @@
 #include <fstream>
 #include<ostream>
 #include <ctime>
+#include<string>
 using namespace std;
 
 struct TaskNode
 {
 	int day;
 	int month;
-    int year;
+  int year;
 	string description;
 	string name;
-    string tag; //chore = 5, essay = 10, short_assign = 7, long_assign = 12, studying = 7, project = 20, other = 0, lab = 7
+  string tag; //chore = 5, essay = 10, short_assign = 7, long_assign = 12, studying = 7, project = 20, other = 0, lab = 7
 	bool overdue;
-    TaskNode():name(""), tag(""), description(""), day(0), month(0),overdue(false),next(nullptr){}
-    TaskNode(string name, string tag,string description, int day, int month, int year):
-    name(name), tag(tag), description(description), day(day), month(month), year(year), overdue(false){}
+  TaskNode():name(""), tag(""), description(""), day(0), month(0),overdue(false),next(nullptr){}
+  TaskNode(string name, string tag,string description, int day, int month, int year):
+  name(name), tag(tag), description(description), day(day), month(month), year(year), overdue(false){}
 	TaskNode* next;
 	string exportTask()
     {
@@ -36,10 +37,9 @@ struct TaskNode
 	
 };
 
-
 class TaskList
 {
-    private:
+    protected:
         TaskNode* head;
         TaskNode* tail;
         TaskNode* recent_deleted_Task;
@@ -56,7 +56,6 @@ class TaskList
         TaskNode* search(string); //searches list until task with same name is found, returns nullptr otherwise	
         void importTasks(); //import tasks from “TaskList.txt”, look at TaskList to see how to import, makes the linked list 
         void exportTasks(); //will ouput and write the file the function named “TaskList.txt”
-        void sortByTag(string user_tag); //displays tasks of a specific tag
         int markTaskCompleted(string name); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points,
         void printList(); //prints entire list, could be added to a class called gui, or user input 
 
