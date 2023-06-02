@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++1y -rdynamic CMakeFiles/tests.exe.dir/test.cpp.o CMakeFiles/tests.exe.dir/__/src/TaskList.cpp.o CMakeFiles/tests.exe.dir/__/src/AwardList.cpp.o CMakeFiles/tests.exe.dir/__/src/AwardListGUI.cpp.o CMakeFiles/tests.exe.dir/__/src/TaskListGUI.cpp.o -o ../bin/tests.exe 
