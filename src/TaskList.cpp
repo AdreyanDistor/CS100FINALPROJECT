@@ -1,5 +1,6 @@
 #include "../header/TaskList.h"
 
+
 TaskList::TaskList()
 {
     head = nullptr;
@@ -42,6 +43,7 @@ void TaskList::importTasks() {
     }
 
     TaskNode* temp = head;
+    TaskNode* prev = head;
     string name;
     string tag;
     string description;
@@ -51,7 +53,8 @@ void TaskList::importTasks() {
     string overdue; 
 
     // iterates through file to find each parameter in each TaskNode
-    while (getline(input, name, '`')) {
+    while (!input.eof()) {
+        getline(input, name, '`');
         getline(input, tag, '`');
         getline(input, description, '`');
         getline(input, day, '`');
@@ -67,9 +70,11 @@ void TaskList::importTasks() {
         else
             temp->overdue = false;
 
+        prev = temp;
         temp = temp->next;
-    } // tail is currently nullptr ????
-
+    }
+    cout << "3" << endl;
+    tail = prev;
     delete temp;
     input.close();
 
