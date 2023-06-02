@@ -1,4 +1,7 @@
 #include "../header/TaskList.h"
+#include <iostream>
+#include <string>
+using namespace std;
 
 TaskList::TaskList()
 {
@@ -17,7 +20,6 @@ TaskList::~TaskList()
         currNode = currNode->next;
         delete tempNode;
     }
-    
 }
 
 void TaskList::addTask(string name, string tag,string description, int day, int month, int year)
@@ -151,8 +153,6 @@ void TaskList::deleteTask(string name)
     }
 }
 
-
-
 // COULD ADD TO GUI CLASS
 void TaskList::printList()
 {
@@ -168,5 +168,4 @@ void TaskList::printList()
         currNode = currNode->next; 
         i++;
     }
-    
 }
