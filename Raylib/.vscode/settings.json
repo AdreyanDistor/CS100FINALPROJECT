@@ -8,5 +8,10 @@
 		"**/*.o": true,
 		"**/*.exe": true,
 	},
-	"cmake.sourceDirectory": "C:/Users/adrey/Desktop/RAYLIB TRY/raylib/raylib"
+	"cmake.sourceDirectory": "C:/Users/adrey/Desktop/RAYLIB TRY/raylib/raylib",
+	"files.associations": {
+		"deque": "cpp",
+		"string": "cpp",
+		"vector": "cpp"
+	}
 }
