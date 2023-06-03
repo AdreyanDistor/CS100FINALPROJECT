@@ -81,7 +81,8 @@ clean: test/clean
 # Directory level rules for directory src
 
 # Recursive "all" directory target.
-src/all: src/CMakeFiles/../Time_Management.exe.dir/all
+src/all: src/CMakeFiles/simpleLibrary.dir/all
+src/all: src/CMakeFiles/Time_Management.exe.dir/all
 .PHONY : src/all
 
 # Recursive "preinstall" directory target.
@@ -89,14 +90,15 @@ src/preinstall:
 .PHONY : src/preinstall
 
 # Recursive "clean" directory target.
-src/clean: src/CMakeFiles/../Time_Management.exe.dir/clean
+src/clean: src/CMakeFiles/simpleLibrary.dir/clean
+src/clean: src/CMakeFiles/Time_Management.exe.dir/clean
 .PHONY : src/clean
 
 #=============================================================================
 # Directory level rules for directory test
 
 # Recursive "all" directory target.
-test/all: test/CMakeFiles/../test.exe.dir/all
+test/all: test/CMakeFiles/tests.exe.dir/all
 .PHONY : test/all
 
 # Recursive "preinstall" directory target.
@@ -104,60 +106,86 @@ test/preinstall:
 .PHONY : test/preinstall
 
 # Recursive "clean" directory target.
-test/clean: test/CMakeFiles/../test.exe.dir/clean
+test/clean: test/CMakeFiles/tests.exe.dir/clean
 .PHONY : test/clean
 
 #=============================================================================
-# Target rules for target src/CMakeFiles/../Time_Management.exe.dir
+# Target rules for target src/CMakeFiles/simpleLibrary.dir
 
 # All Build rule for target.
-src/CMakeFiles/../Time_Management.exe.dir/all:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/../Time_Management.exe.dir/build.make src/CMakeFiles/../Time_Management.exe.dir/depend
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/../Time_Management.exe.dir/build.make src/CMakeFiles/../Time_Management.exe.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles --progress-num=1,2,3,4 "Built target ../Time_Management.exe"
-.PHONY : src/CMakeFiles/../Time_Management.exe.dir/all
+src/CMakeFiles/simpleLibrary.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/simpleLibrary.dir/build.make src/CMakeFiles/simpleLibrary.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/simpleLibrary.dir/build.make src/CMakeFiles/simpleLibrary.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles --progress-num=6,7,8 "Built target simpleLibrary"
+.PHONY : src/CMakeFiles/simpleLibrary.dir/all
 
 # Build rule for subdir invocation for target.
-src/CMakeFiles/../Time_Management.exe.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles 4
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/../Time_Management.exe.dir/all
+src/CMakeFiles/simpleLibrary.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/simpleLibrary.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles 0
-.PHONY : src/CMakeFiles/../Time_Management.exe.dir/rule
+.PHONY : src/CMakeFiles/simpleLibrary.dir/rule
 
 # Convenience name for target.
-../Time_Management.exe: src/CMakeFiles/../Time_Management.exe.dir/rule
-.PHONY : ../Time_Management.exe
+simpleLibrary: src/CMakeFiles/simpleLibrary.dir/rule
+.PHONY : simpleLibrary
 
 # clean rule for target.
-src/CMakeFiles/../Time_Management.exe.dir/clean:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/../Time_Management.exe.dir/build.make src/CMakeFiles/../Time_Management.exe.dir/clean
-.PHONY : src/CMakeFiles/../Time_Management.exe.dir/clean
+src/CMakeFiles/simpleLibrary.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/simpleLibrary.dir/build.make src/CMakeFiles/simpleLibrary.dir/clean
+.PHONY : src/CMakeFiles/simpleLibrary.dir/clean
 
 #=============================================================================
-# Target rules for target test/CMakeFiles/../test.exe.dir
+# Target rules for target src/CMakeFiles/Time_Management.exe.dir
 
 # All Build rule for target.
-test/CMakeFiles/../test.exe.dir/all:
-	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/depend
-	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles --progress-num=5,6,7,8 "Built target ../test.exe"
-.PHONY : test/CMakeFiles/../test.exe.dir/all
+src/CMakeFiles/Time_Management.exe.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/Time_Management.exe.dir/build.make src/CMakeFiles/Time_Management.exe.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/Time_Management.exe.dir/build.make src/CMakeFiles/Time_Management.exe.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles --progress-num=1,2,3,4,5 "Built target Time_Management.exe"
+.PHONY : src/CMakeFiles/Time_Management.exe.dir/all
 
 # Build rule for subdir invocation for target.
-test/CMakeFiles/../test.exe.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles 4
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/../test.exe.dir/all
+src/CMakeFiles/Time_Management.exe.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles 5
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/Time_Management.exe.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles 0
-.PHONY : test/CMakeFiles/../test.exe.dir/rule
+.PHONY : src/CMakeFiles/Time_Management.exe.dir/rule
 
 # Convenience name for target.
-../test.exe: test/CMakeFiles/../test.exe.dir/rule
-.PHONY : ../test.exe
+Time_Management.exe: src/CMakeFiles/Time_Management.exe.dir/rule
+.PHONY : Time_Management.exe
 
 # clean rule for target.
-test/CMakeFiles/../test.exe.dir/clean:
-	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/clean
-.PHONY : test/CMakeFiles/../test.exe.dir/clean
+src/CMakeFiles/Time_Management.exe.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/Time_Management.exe.dir/build.make src/CMakeFiles/Time_Management.exe.dir/clean
+.PHONY : src/CMakeFiles/Time_Management.exe.dir/clean
+
+#=============================================================================
+# Target rules for target test/CMakeFiles/tests.exe.dir
+
+# All Build rule for target.
+test/CMakeFiles/tests.exe.dir/all:
+	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/depend
+	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles --progress-num=9,10,11,12,13,14 "Built target tests.exe"
+.PHONY : test/CMakeFiles/tests.exe.dir/all
+
+# Build rule for subdir invocation for target.
+test/CMakeFiles/tests.exe.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/tests.exe.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles 0
+.PHONY : test/CMakeFiles/tests.exe.dir/rule
+
+# Convenience name for target.
+tests.exe: test/CMakeFiles/tests.exe.dir/rule
+.PHONY : tests.exe
+
+# clean rule for target.
+test/CMakeFiles/tests.exe.dir/clean:
+	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/clean
+.PHONY : test/CMakeFiles/tests.exe.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

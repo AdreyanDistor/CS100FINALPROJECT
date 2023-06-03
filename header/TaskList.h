@@ -4,20 +4,21 @@
 #include <fstream>
 #include<ostream>
 #include <ctime>
+#include<string>
 using namespace std;
 
 struct TaskNode
 {
 	int day;
 	int month;
-    int year;
+  int year;
 	string description;
 	string name;
-    string tag; //chore = 5, essay = 10, short_assign = 7, long_assign = 12, studying = 7, project = 20, other = 0, lab = 7
+  string tag; //chore = 5, essay = 10, short_assign = 7, long_assign = 12, studying = 7, project = 20, other = 0, lab = 7
 	bool overdue;
-    TaskNode():name(""), tag(""), description(""), day(0), month(0),overdue(false),next(nullptr){}
-    TaskNode(string name, string tag,string description, int day, int month, int year):
-    name(name), tag(tag), description(description), day(day), month(month), year(year), overdue(false){}
+  TaskNode():name(""), tag(""), description(""), day(0), month(0),overdue(false),next(nullptr){}
+  TaskNode(string name, string tag,string description, int day, int month, int year):
+  name(name), tag(tag), description(description), day(day), month(month), year(year), overdue(false){}
 	TaskNode* next;
 	string exportTask()
     {
@@ -36,10 +37,9 @@ struct TaskNode
 	
 };
 
-
 class TaskList
 {
-    private:
+    protected:
         TaskNode* head;
         TaskNode* tail;
         TaskNode* recent_deleted_Task;

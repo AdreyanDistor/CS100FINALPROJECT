@@ -151,8 +151,32 @@ __/src/AwardList.s: __/src/AwardList.cpp.s
 
 # target to generate assembly for a file
 __/src/AwardList.cpp.s:
-	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/__/src/AwardList.cpp.s
+	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/__/src/AwardList.cpp.s
 .PHONY : __/src/AwardList.cpp.s
+
+__/src/AwardListGUI.o: __/src/AwardListGUI.cpp.o
+.PHONY : __/src/AwardListGUI.o
+
+# target to build an object file
+__/src/AwardListGUI.cpp.o:
+	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/__/src/AwardListGUI.cpp.o
+.PHONY : __/src/AwardListGUI.cpp.o
+
+__/src/AwardListGUI.i: __/src/AwardListGUI.cpp.i
+.PHONY : __/src/AwardListGUI.i
+
+# target to preprocess a source file
+__/src/AwardListGUI.cpp.i:
+	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/__/src/AwardListGUI.cpp.i
+.PHONY : __/src/AwardListGUI.cpp.i
+
+__/src/AwardListGUI.s: __/src/AwardListGUI.cpp.s
+.PHONY : __/src/AwardListGUI.s
+
+# target to generate assembly for a file
+__/src/AwardListGUI.cpp.s:
+	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/__/src/AwardListGUI.cpp.s
+.PHONY : __/src/AwardListGUI.cpp.s
 
 __/src/TaskList.o: __/src/TaskList.cpp.o
 .PHONY : __/src/TaskList.o
@@ -175,8 +199,32 @@ __/src/TaskList.s: __/src/TaskList.cpp.s
 
 # target to generate assembly for a file
 __/src/TaskList.cpp.s:
-	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/__/src/TaskList.cpp.s
+	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/__/src/TaskList.cpp.s
 .PHONY : __/src/TaskList.cpp.s
+
+__/src/TaskListGUI.o: __/src/TaskListGUI.cpp.o
+.PHONY : __/src/TaskListGUI.o
+
+# target to build an object file
+__/src/TaskListGUI.cpp.o:
+	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/__/src/TaskListGUI.cpp.o
+.PHONY : __/src/TaskListGUI.cpp.o
+
+__/src/TaskListGUI.i: __/src/TaskListGUI.cpp.i
+.PHONY : __/src/TaskListGUI.i
+
+# target to preprocess a source file
+__/src/TaskListGUI.cpp.i:
+	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/__/src/TaskListGUI.cpp.i
+.PHONY : __/src/TaskListGUI.cpp.i
+
+__/src/TaskListGUI.s: __/src/TaskListGUI.cpp.s
+.PHONY : __/src/TaskListGUI.s
+
+# target to generate assembly for a file
+__/src/TaskListGUI.cpp.s:
+	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/__/src/TaskListGUI.cpp.s
+.PHONY : __/src/TaskListGUI.cpp.s
 
 test.o: test.cpp.o
 .PHONY : test.o
@@ -210,13 +258,19 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... ../test.exe"
+	@echo "... tests.exe"
 	@echo "... __/src/AwardList.o"
 	@echo "... __/src/AwardList.i"
 	@echo "... __/src/AwardList.s"
+	@echo "... __/src/AwardListGUI.o"
+	@echo "... __/src/AwardListGUI.i"
+	@echo "... __/src/AwardListGUI.s"
 	@echo "... __/src/TaskList.o"
 	@echo "... __/src/TaskList.i"
 	@echo "... __/src/TaskList.s"
+	@echo "... __/src/TaskListGUI.o"
+	@echo "... __/src/TaskListGUI.i"
+	@echo "... __/src/TaskListGUI.s"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"
