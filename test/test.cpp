@@ -1,6 +1,6 @@
 #include "../header/AwardList.h"
 #include "../header/TaskList.h"
-// include google test stuff
+#include "../googletest/googletest/include/gtest/gtest.h"
 #include<iostream>
 #include<fstream>
 #include <ostream>
