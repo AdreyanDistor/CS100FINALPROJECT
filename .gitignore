@@ -6,3 +6,10 @@ src/CMakeCache.txt
 Time_Management.exe
 src/Time_Managment.exe.dir
 make
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+test/CMakeFiles/CMakeDirectoryInformation.cmake
+test/CMakeFiles/progress.marks
+test/Makefile
+test/cmake_install.cmake
