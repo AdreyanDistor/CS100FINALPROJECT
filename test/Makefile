@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001
+CMAKE_SOURCE_DIR = /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001
+CMAKE_BINARY_DIR = /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/test//CMakeFiles/progress.marks
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles 0
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001/test//CMakeFiles/progress.marks
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/clean
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,39 +103,39 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/preinstall
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/preinstall
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-test/CMakeFiles/tests.exe.dir/rule:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/tests.exe.dir/rule
-.PHONY : test/CMakeFiles/tests.exe.dir/rule
+test/CMakeFiles/../test.exe.dir/rule:
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/../test.exe.dir/rule
+.PHONY : test/CMakeFiles/../test.exe.dir/rule
 
 # Convenience name for target.
-tests.exe: test/CMakeFiles/tests.exe.dir/rule
-.PHONY : tests.exe
+../test.exe: test/CMakeFiles/../test.exe.dir/rule
+.PHONY : ../test.exe
 
 # fast build rule for target.
-tests.exe/fast:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/build
-.PHONY : tests.exe/fast
+../test.exe/fast:
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/build
+.PHONY : ../test.exe/fast
 
 __/src/AwardList.o: __/src/AwardList.cpp.o
 .PHONY : __/src/AwardList.o
 
 # target to build an object file
 __/src/AwardList.cpp.o:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/__/src/AwardList.cpp.o
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/__/src/AwardList.cpp.o
 .PHONY : __/src/AwardList.cpp.o
 
 __/src/AwardList.i: __/src/AwardList.cpp.i
@@ -143,7 +143,7 @@ __/src/AwardList.i: __/src/AwardList.cpp.i
 
 # target to preprocess a source file
 __/src/AwardList.cpp.i:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/__/src/AwardList.cpp.i
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/__/src/AwardList.cpp.i
 .PHONY : __/src/AwardList.cpp.i
 
 __/src/AwardList.s: __/src/AwardList.cpp.s
@@ -183,7 +183,7 @@ __/src/TaskList.o: __/src/TaskList.cpp.o
 
 # target to build an object file
 __/src/TaskList.cpp.o:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/__/src/TaskList.cpp.o
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/__/src/TaskList.cpp.o
 .PHONY : __/src/TaskList.cpp.o
 
 __/src/TaskList.i: __/src/TaskList.cpp.i
@@ -191,7 +191,7 @@ __/src/TaskList.i: __/src/TaskList.cpp.i
 
 # target to preprocess a source file
 __/src/TaskList.cpp.i:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/__/src/TaskList.cpp.i
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/__/src/TaskList.cpp.i
 .PHONY : __/src/TaskList.cpp.i
 
 __/src/TaskList.s: __/src/TaskList.cpp.s
@@ -231,7 +231,7 @@ test.o: test.cpp.o
 
 # target to build an object file
 test.cpp.o:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/test.cpp.o
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/test.cpp.o
 .PHONY : test.cpp.o
 
 test.i: test.cpp.i
@@ -239,7 +239,7 @@ test.i: test.cpp.i
 
 # target to preprocess a source file
 test.cpp.i:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/test.cpp.i
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/test.cpp.i
 .PHONY : test.cpp.i
 
 test.s: test.cpp.s
@@ -247,7 +247,7 @@ test.s: test.cpp.s
 
 # target to generate assembly for a file
 test.cpp.s:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.exe.dir/build.make test/CMakeFiles/tests.exe.dir/test.cpp.s
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/../test.exe.dir/build.make test/CMakeFiles/../test.exe.dir/test.cpp.s
 .PHONY : test.cpp.s
 
 # Help Target
@@ -285,6 +285,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001 && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001 && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

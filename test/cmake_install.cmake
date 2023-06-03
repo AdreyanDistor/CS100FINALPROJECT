@@ -1,4 +1,4 @@
-# Install script for directory: /home/csmajs/adist003/final-project-scelo002-nvern003-adist003-ogodh001/test
+# Install script for directory: /home/csmajs/ogodh001/final-project-scelo002-nvern003-adist003-ogodh001/test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

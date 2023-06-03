@@ -15,6 +15,24 @@
 #include <time.h>       /* time */
 using namespace std;
 
+TEST(markTaskComplete, test) {
+    TaskList list;
+    int points = 0;
+    list.addTask("one", "chore", "random", 5, 4, 2023);
+    list.markTaskCompleted("one", points);
+    EXPECT_EQ(points, 5);
+}
+
+TEST(markTaskComplete, testtaskOverdue) {
+    TaskList list;
+    int points = 0;
+    list.addTask("one", "essay", "random", 5, 4, 2023);
+    char* tm = "Fri Jul 3 00:00:00 2023";
+    list.showOverdue(tm);
+    list.markTaskCompleted("one", points);
+    EXPECT_EQ(points, 5); 
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
