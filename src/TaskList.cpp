@@ -153,20 +153,3 @@ void TaskList::deleteTask(string name)
 
 
 
-// COULD ADD TO GUI CLASS
-void TaskList::printList()
-{
-    int i = 1;
-    TaskNode* currNode = head;
-    if(head == nullptr)
-    {
-        cout << "" << endl;
-    }
-    while (currNode !=nullptr)
-    {
-        cout << i << ". " << currNode->exportTask() << endl;
-        currNode = currNode->next; 
-        i++;
-    }
-    
-}

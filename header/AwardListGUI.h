@@ -11,7 +11,7 @@ using namespace std;
 
 class AwardListGUI: public AwardList{
     public:
-        string displayAwards(); //showing the awards on GUI
+        void displayAwards(); //showing the awards on GUI
 };
 
 #endif 

@@ -1,11 +1,12 @@
 #include "../header/AwardListGUI.h"
 
-string AwardListGUI::displayAwards()
+void AwardListGUI::displayAwards()
 {
-    string AWARDS;
+    cout << "      Count-Price-Name" << endl;
     for(int i = 0; i <awardlist.size(); i++)
     {
-        AWARDS+=awardlist.at(i)->exportAward();
+        cout << i + 1 << ".     ";
+        awardlist.at(i)->displayAward();
+        cout << endl;
     }
-    return AWARDS;
 }
