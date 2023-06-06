@@ -2,20 +2,59 @@
 
 AwardList::AwardList()
 {
-    
+    totalPoints = 0;
 }
 
-AwardList::buyAward(string buyingAward, int totalPoints) {
-    unsigned i = 0;
-    while(awardlist.at(i).award_name != buyingAward && i < awardlist.size()) { //find specified award in the vector
-        ++i;
+AwardList::~AwardList() {
+    for(int i = awardVector.size() - 1; i >= 0; ++i) {
+        delete awardVector.at(i);
     }
+}
 
-    if(totalPoints >= awardlist.at(i).cost) { 
-        totalPoints -= awardlist.at(i).cost;
-        awardlist.at(i).user_count++;
+// Redundant 
+void AwardList::createAward(string name, int cost) {
+    if(this->inList(name)) {
+        cout << "Award already exists!" << endl;
+        return;
     }
-    return;
+    Award* newAward = new Award(name, cost, 0);
+    awardVector.push_back(newAward);
+}
+
+void AwardList::deleteAward(string name){
+    for(int i = 0; i < awardVector.size(); ++i ) {
+        if(awardVector.at(i)->award_name == name)
+        delete awardVector.at(i);
+    }
+}
+
+void AwardList::buyAward(string buyingAward, int quantity) {
+    for(int i = 0; i < awardVector.size(); ++i) {
+        if(awardVector.at(i)->award_name == buyingAward) {
+            if(totalPoints >= (awardVector.at(i)->cost * quantity) ) {
+                totalPoints -= awardVector.at(i)->cost * quantity;
+                awardVector.at(i)->user_count += quantity;
+            }
+            else
+            cout << "Error: not enough points!" << endl;
+            
+            return;
+        }
+    }
+    cout << "Error: Award not found!" << endl;
 }
 
 
+void AwardList::useAward(string name) {
+    for(int i = 0; i < awardVector.size(); ++i) {
+        if(name == awardVector.at(i)->award_name)
+            awardVector.at(i)->user_count--;
+        else 
+        cout << "Error: Award not present" << endl;         
+    }
+}
+
+//stub
+bool AwardList::inList(string name) {
+    return false;
+}
