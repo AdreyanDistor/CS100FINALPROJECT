@@ -5,6 +5,7 @@
 #include<ostream>
 #include <ctime>
 #include<string>
+#include <iomanip>
 using namespace std;
 
 struct TaskNode
@@ -34,7 +35,9 @@ struct TaskNode
         string output = name + '`' + description + '`' + tag +  '`' + to_string(month) + '`' + to_string(day) + '`' + to_string(year) + '`' + isOverdue;
         return output;
     }; //this will be used in exportTasks of the Tasklist file
-	
+	void printDate() {
+    cout << setfill('0') << setw(2) << month << "/" << setw(2) << day << "/" << year;
+  }
 };
 
 class TaskList
@@ -57,7 +60,8 @@ class TaskList
         void sortByTag(string user_tag); //displays tasks of a specific tag
         void markTaskCompleted(string name, int& totalPoints); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points,
         void printList(); //prints entire list, could be added to a class called gui, or user input 
-
+        void editTask(string title); //edits a task
+        void printEditMenu(); //helper func used in editTask();
 };
 
 	
