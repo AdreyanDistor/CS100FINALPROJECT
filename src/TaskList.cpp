@@ -271,3 +271,84 @@ void TaskList::exportTasks() {
 
 }
 
+void TaskList::printEditMenu() {
+    cout << "EDIT A TASK" << endl << endl;
+    
+    cout << "What would you like to edit?" << endl;
+    cout << "1 - Name" << endl;
+    cout << "2 - Tag" << endl;
+    cout << "3 - Description" << endl;
+    cout << "4 - Date" << endl;
+    cout << "5 - Exit editor" << endl << endl;
+
+    cout << "Enter option: " << endl;
+}
+void TaskList::editTask(string title) {
+    TaskNode* curr = search(title);
+    int option;
+    printEditMenu();
+    cin >> option;
+    while (option != 5) {
+        if (option == 1) { //name 
+            string _name;
+            cout << "Enter new name: " << endl;
+            getline(cin, _name);
+            cin.ignore();
+            curr->name = _name;
+            cout << "Name is now:" << _name << end;
+        } else if (option == 2) { //tag
+            int _tag;
+            cout << "1- chore, 2- essay, 3- short assignment, 4- long assigment" << endl;
+            cout << "5- studying, 6- project, 7- lab, 8- other " << endl;
+            cout << "Enter the coresponding number for the new tag: " << endl;
+            cin >> _tag;
+            if (_tag == 1) {
+                curr->tag = "chore";
+            } else if (_tag == 2) {
+                curr->tag = "essay";
+            } else if (_tag == 3) {
+                curr->tag = "short";
+            } else if (_tag == 4) {
+                curr->tag = "long";
+            } else if (_tag == 5) {
+                curr->tag = "study";
+            } else if (_tag == 6) {
+                curr->tag = "proj";
+            } else if (_tag == 7) {
+                curr->tag = "lab";
+            } else if (_tag == 8) {
+                curr->tag = "other";
+            } else {
+                cout << "Error: invalid input. Please try again." << endl;
+                break;
+            }
+        } else if(option == 3) { //description 
+            string _des;
+            cout << "Enter new description: " << endl;
+            getline(cin, _des);
+            cin.ignore();
+            curr->description = _des;
+        } else if (option == 4) { //date
+            int _option = 1;
+            while (_option != 4) {
+                cout << "Current due date: " << curr->printDate() << endl << endl;
+                cout << "What do you want to change? Enter a number from the following options: " << endl;
+                cout << "1- month, 2- day, 3-year, 4- done: " << endl;
+                cin >> _option;
+                if (_option == 1) { //month
+                    int _month;
+                    count << "Enter new month number: " << endl;
+                    curr->month = _month;
+                } else if (_option == 2) { //day
+                    int _day; 
+                    count << "Enter new day: " << endl;
+                    curr->day = _day;
+                } else if (_option == 3) { //year
+                    int _year;
+                    count << "Enter new year (YYYY): " << endl;
+                    curr->year = _year;
+                }
+            }
+        }
+    }
+}
