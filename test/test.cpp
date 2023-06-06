@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "googletest/googletest/include/gtest/gtest.h"
 #include "../header/AwardList.h"
 #include "../header/TaskList.h"
@@ -86,7 +85,6 @@ TEST(showOverDue, test) {
     EXPECT_EQ(curr2->overdue, true);
     EXPECT_EQ(curr3->overdue, false);
 }
-=======
 #include "../header/TaskList.h"
 #include "../header/TaskListGUI.h"
 #include "../header/AwardList.h"
@@ -184,4 +182,3 @@ int main()
     return 0;
 }
 
->>>>>>> 5312af2 (AwardListFunctions)

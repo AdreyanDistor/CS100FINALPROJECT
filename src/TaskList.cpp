@@ -1,6 +1,8 @@
 #include "../header/TaskList.h"
 #include <iostream>
 #include <string>
+#include <fstream>
+#include<cstdlib>
 using namespace std;
 
 TaskList::TaskList()
@@ -187,8 +189,20 @@ void TaskList::markTaskCompleted(string name, int& totalPoints) {
         totalPoints += point/2;
     }
     this->deleteTask(name);
+    string congratsMsg;
+    string randomMsgs[4] = {"That's a job well done.","Good Job!","Congrats!","Cheers on finishing the task!"};
+    srand(time(NULL));
+    congratsMsg = randomMsgs[(rand() % 3 + 0)] + " You just completed: " + name + " and got " + to_string(point) + " points";
+    cout << congratsMsg << endl;
+    ofstream pointLog;
+    pointLog.open("../saved_files/Point_Log.txt",ios::app);
 
-    return point;
+    if(pointLog.is_open())
+    {
+        pointLog << congratsMsg << endl;
+    }
+    
+    
 }
 
 
