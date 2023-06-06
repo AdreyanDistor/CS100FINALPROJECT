@@ -294,7 +294,7 @@ void TaskList::editTask(string title) {
             string _name;
             cout << "Enter new task name: " << endl;
             getline(cin, _name);
-            cin.ignore;
+            //cin.ignore;
             curr->name = _name;
         } else if (option == 2) { //tag
             int _option;
@@ -326,11 +326,11 @@ void TaskList::editTask(string title) {
             string _des;
             cout << "Enter new description: " << endl;
             getline(cin, _des);
-            cin.ignore;
+            //cin.ignore;
             curr->description = _des;
         } else if (option == 4) { //date 
             int _option;
-            cout << "Current Date: " << curr->printDate << endl;
+            cout << "Current Date: " << curr->printDate() << endl;
             cout << "What would you like to change?" << endl;
             cout << "1- Month | 2- Day | 3- Year | 4- Exit" << endl;
             cout << "Enter option: " << endl;
@@ -353,7 +353,7 @@ void TaskList::editTask(string title) {
                     cin >> _year;
                     curr->year = _year;
                 }
-                cout << "Current Date: " << curr->printDate << endl;
+                cout << "Current Date: " << curr->printDate() << endl;
                 cout << "What would you like to change?" << endl;
                 cout << "1- Month | 2- Day | 3- Year | 4- Exit" << endl;
                 cout << "Enter option: " << endl;

@@ -85,3 +85,8 @@ TEST(showOverDue, test) {
     EXPECT_EQ(curr2->overdue, true);
     EXPECT_EQ(curr3->overdue, false);
 }
+
+TEST(editingATask, printDateFunc) {
+    TaskNode* curr("one", "chore", "first one", 1, 1, 2022);
+    EXPECT_EQ(curr->printDate(), "01/01/2022");
+} 

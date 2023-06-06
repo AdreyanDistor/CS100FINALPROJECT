@@ -14,6 +14,7 @@ ADD_EXECUTABLE(Time_Management.exe
 	TaskList.cpp
     AwardList.cpp
 	AwardListGUI.cpp
+	TaskListGUI.cpp
 )
 
 

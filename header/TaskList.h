@@ -2,10 +2,11 @@
 #define TASKLIST_H
 #include <iostream>
 #include <fstream>
-#include<ostream>
+#include <ostream>
 #include <ctime>
 #include<string>
 #include <iomanip>
+#include <sstream>
 using namespace std;
 
 struct TaskNode
@@ -35,8 +36,10 @@ struct TaskNode
         string output = name + '`' + description + '`' + tag +  '`' + to_string(month) + '`' + to_string(day) + '`' + to_string(year) + '`' + isOverdue;
         return output;
     }; //this will be used in exportTasks of the Tasklist file
-	void printDate() {
-    cout << setfill('0') << setw(2) << month << "/" << setw(2) << day << "/" << year;
+	string printDate() {
+    ostringstream osS; 
+    osS << setfill('0') << setw(2) << month << "/" << setw(2) << day << "/" << year;
+    return osS.str(); 
   }
 };
 
