@@ -58,7 +58,6 @@ string TaskListGUI::showTodayOnly(int day, int month, int year)
     return todayList;
 }
 
-// COULD ADD TO GUI CLASS
 void TaskListGUI::printList()
 {
     int i = 1;
@@ -74,4 +73,17 @@ void TaskListGUI::printList()
         i++;
     }
     
+}
+
+void TaskListGUI::printOverdueMessage()
+{
+    TaskNode* currNode = head;
+    while(currNode != nullptr)
+    {
+        if(currNode->overdue == true)
+        {
+            cout << "YOU HAVE OVERDUE TASKS!!!!" << endl;
+            return;
+        }
+    }
 }
