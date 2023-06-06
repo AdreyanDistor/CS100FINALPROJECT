@@ -6,6 +6,7 @@
 #include<fstream>
 #include<vector>
 #include<string>
+#include"TaskListGUI.h"
 using namespace std;
 struct Award
 {
@@ -23,9 +24,9 @@ struct Award
 
 class AwardList
 {
-	private:
+	protected:
 		vector<Award*> awardlist;
-		int awardlistSize;
+		int totalPoints;
 	public:
 		AwardList();
 		void importAwards(); //import tasks from “AwardsList.txt”
@@ -35,7 +36,11 @@ class AwardList
 		void createAward(string name, int cost); //add award to award list at the end
 		void deleteAward(string name); //delete award from list, shift the rest of the awards down the list
 		bool inList(string name); //return true if the award is in already in the list, false otherwise
-
+  
+		int getTotalPoints(); //return totalPoints
+		void setTotalPoints(); //set totalPoints
+		void importTotalPoints(); //imports totalPoints
+  
 		// for testing
 		int getAwardListSize();
 		vector<Award*> getAwardList();

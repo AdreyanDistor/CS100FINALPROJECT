@@ -15,11 +15,16 @@ using namespace std;
 
 int main() {
     /*Imports total_points*/
+<<<<<<< HEAD
     ifstream total_points_file("../saved_files/Total_Points.txt");
     int total_points = 0;
     total_points_file >> total_points;
     cout << total_points;
 
 
+=======
+    AwardList myAwardList;
+    
+>>>>>>> cbe581a141d1c90b2be8e5fceb16d4e6df964a05
     return 0;
 }
