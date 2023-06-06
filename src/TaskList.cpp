@@ -161,7 +161,7 @@ TaskNode* TaskList::search(string name) {
     return curr;
 }
 
-int TaskList::markTaskCompleted(string name, int& totalPoints) {
+void TaskList::markTaskCompleted(string name, int& totalPoints) {
     TaskNode* curr = search(name);
     int point = 0;
     if (curr->tag == "chore") {
@@ -191,19 +191,7 @@ int TaskList::markTaskCompleted(string name, int& totalPoints) {
     return point;
 }
 
-// COULD ADD TO GUI CLASS
-void TaskList::printList()
-{
-    int i = 1;
-    TaskNode* currNode = head;
-    while (currNode !=nullptr)
-    {
-        cout << i << ". " << currNode->exportTask() << endl;
-        currNode = currNode->next; 
-        i++;
-    }
-    
-}
+
 
 void TaskList::importTasks() {
     ifstream input;
