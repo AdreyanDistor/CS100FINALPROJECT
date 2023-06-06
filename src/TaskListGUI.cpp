@@ -97,7 +97,7 @@ string TaskListGUI::sortByTag(string user_tag)
     
     return sortedTags;
 }
-void TaskListGUI::printList()
+string TaskListGUI::printList()
 {
     int i = 1;
     TaskNode* currNode = head;
