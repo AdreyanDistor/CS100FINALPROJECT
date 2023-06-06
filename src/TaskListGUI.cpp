@@ -1,7 +1,12 @@
 #include "../header/TaskListGUI.h"
-#include <string>
-#include <iostream>
 using namespace std;
+
+TaskListGUI::TaskListGUI()
+{
+    head = nullptr;
+    recent_deleted_Task = nullptr;
+    tail = nullptr;
+}
 
 void TaskListGUI::showOverdue(char* tm) {
     TaskNode* curr = head;

@@ -6,7 +6,6 @@
 #include<fstream>
 #include<vector>
 #include<string>
-#include"TaskListGUI.h"
 using namespace std;
 
 struct Award
