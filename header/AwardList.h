@@ -20,6 +20,10 @@ struct Award
 	{
 		return award_name + '`' + to_string(cost) + '`' + to_string(user_count);
 	};
+	void displayAward()
+	{
+		cout << user_count << "     " << cost << "     " << award_name;
+	};
 
 };
 

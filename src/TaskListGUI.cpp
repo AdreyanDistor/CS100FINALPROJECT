@@ -3,8 +3,8 @@
 #include <iostream>
 using namespace std;
 
-void TaskListGUI::showOverdue(TaskList list, char* tm) {
-    TaskNode* curr = list->head;
+void TaskListGUI::showOverdue(char* tm) {
+    TaskNode* curr = head;
     string time = tm;
     string monthStr = time.substr(4, 3);
     int currDay = stoi(time.substr(8, 2));
@@ -40,7 +40,7 @@ void TaskListGUI::showOverdue(TaskList list, char* tm) {
     while (curr != nullptr) {
         if (curr->year > currYear) {
             curr->overdue = true;
-        } else if (curr->month > currMon) {
+        } else if (curr->month > currMonth) {
             curr->overdue = true;
         } else if (curr->day > currDay) {
             curr->overdue = true;
@@ -59,7 +59,7 @@ string TaskListGUI::showTodayOnly(int day, int month, int year)
         {
             todayList+=currNode->exportTask() + "\n";
         }
-        curr = curr->next;
+        currNode = currNode->next;
     }
     return todayList;
 }
@@ -91,4 +91,20 @@ string TaskListGUI::sortByTag(string user_tag)
     }
     
     return sortedTags;
+}
+void TaskListGUI::printList()
+{
+    int i = 1;
+    TaskNode* currNode = head;
+    if(head == nullptr)
+    {
+        cout << "" << endl;
+    }
+    while (currNode !=nullptr)
+    {
+        cout << i << ". " << currNode->exportTask() << endl;
+        currNode = currNode->next; 
+        i++;
+    }
+    
 }

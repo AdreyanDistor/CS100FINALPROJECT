@@ -6,13 +6,16 @@
 #include<ostream>
 #include <ctime>
 #include "TaskList.h"
+#include <string>
 using namespace std;
 
 class TaskListGUI : public TaskList {
     public:
-        string showOverdue();//displays tasks that are overdue
+        void showOverdue(char* tm);//displays tasks that are overdue
         string showTodayOnly(int day, int month, int year); // displays today’s tasks
         string sortByTag(string user_tag); //displays tasks of a specific tag
+        void printList(); //prints entire list, could be added to a class called gui, or user input 
+
 };
 
 #endif
