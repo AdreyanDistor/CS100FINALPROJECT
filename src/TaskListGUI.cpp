@@ -92,19 +92,19 @@ string TaskListGUI::sortByTag(string user_tag)
     
     return sortedTags;
 }
+
+// TEST THIS
 void TaskListGUI::printList()
 {
-    int i = 1;
+    cout << "       Date      -       Tag       -       Name" << endl;
     TaskNode* currNode = head;
-    if(head == nullptr)
-    {
-        cout << "" << endl;
-    }
-    while (currNode !=nullptr)
-    {
-        cout << i << ". " << currNode->exportTask() << endl;
-        currNode = currNode->next; 
-        i++;
+    if(head != nullptr) {
+        while (currNode != nullptr) {
+            cout << currNode->displayTask() << endl;
+            currNode = currNode->next; 
+        }
     }
     
 }
+
+

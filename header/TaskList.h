@@ -34,6 +34,43 @@ struct TaskNode
         string output = name + '`' + description + '`' + tag +  '`' + to_string(month) + '`' + to_string(day) + '`' + to_string(year) + '`' + isOverdue;
         return output;
     }; //this will be used in exportTasks of the Tasklist file
+
+    // TEST THIS
+    string displayTask() {
+
+        string x;
+        string shortTag;
+        string date;
+
+        if (overdue) {
+            x = "x    ";
+        } else {
+            x = "      ";
+        }
+
+        // abbreviates the tag
+        if (tag == "chore") {
+            shortTag = "CHORE";
+        } else if (tag == "essay") {
+            shortTag = "ESSAY";
+        } else if (tag == "short_assign") {
+            shortTag = "SHORT";
+        } else if (tag == "long_assign") {
+            shortTag = "LONG_";
+        } else if (tag == "studying") {
+            shortTag = "STUDY";
+        } else if (tag == "project") {
+            shortTag = "PROJT";
+        } else if (tag == "lab") {
+            shortTag = "LAB__";
+        } else {
+            shortTag = "OTHER";
+        }
+
+        date = to_string(day) + "." + to_string(month) + "." + to_string(year%2000);
+        
+        return x + "      " + date + "      " + shortTag + "      " + name;
+    }
 	
 };
 
