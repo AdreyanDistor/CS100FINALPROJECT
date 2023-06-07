@@ -1,10 +1,25 @@
 #include "../header/TaskListGUI.h"
 #include <string>
 #include <iostream>
+#include <string>
+#include <sstream>
 using namespace std;
 
-void TaskListGUI::showOverdue(char* tm) {
-    //display 
+string TaskListGUI::showOverdue() {
+    TaskNode* curr = head;
+    ostringstream osS; 
+    osS << "       Date      -       Tag       -       Name" << endl;
+    if (curr == nullptr) {
+        return osS.str();
+    }
+    while (curr != nullptr) {
+        if (curr->overdue == true) {
+            osS << curr->displayTask << endl;
+        }
+        curr = curr->next;
+    }
+
+    return osS.str();
 }
 
 string TaskListGUI::showTodayOnly(int day, int month, int year)

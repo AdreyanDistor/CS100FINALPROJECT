@@ -261,7 +261,7 @@ void TaskList::exportTasks() {
 
 }
 
-void TaskList::markOverdue() {
+void TaskList::markOverdue(char* tm) {
     TaskNode* curr = head;
     string time = tm;
     string monthStr = time.substr(4, 3);

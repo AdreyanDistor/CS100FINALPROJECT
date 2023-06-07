@@ -6,7 +6,8 @@
 #include<iostream>
 #include<fstream>
 #include <ostream>
-#include<string>
+#include <string>
+#include <sstream>
 #include<iomanip>
 #include<vector>
 #include<ctime>
@@ -78,7 +79,7 @@ TEST(markOverDue, test) {
     list.addTask("two", "chore", "second one", 3, 6, 2023);
     list.addTask("three", "chore", "third one", 22, 11, 2023);
     char* tm = "Fri Aug 15 00:00:00 2023";
-    list.showOverdue(tm);
+    list.markOverdue(tm);
     TaskNode* curr1 = list.search("one");
     TaskNode* curr2 = list.search("two");
     TaskNode* curr3 = list.search("three");
@@ -174,3 +175,14 @@ int main()
     return 0;
 }
 
+TEST(showOverdue, test) {
+    TaskListGUI list;
+    ostringstream osS;
+    osS << "       Date      -       Tag       -       Name" << endl;
+    list.addTask("one", "chore", "first one", 1, 1, 2022);
+    list.addTask("two", "essay", "second one", 3, 4, 2022);
+    osS << search("one")->displayTask() << endl << search("two")->displayTask() << endl;
+    char* time = char* tm = "Fri Aug 15 00:00:00 2021";
+    list.markOverdue(time);
+    EXPECT_EQ(list.showOverdue(), osS.str());
+}
