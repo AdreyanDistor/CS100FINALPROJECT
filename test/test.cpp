@@ -1,4 +1,3 @@
-#include "googletest/googletest/include/gtest/gtest.h"
 #include "../header/AwardListGUI.h"
 #include "../header/TaskListGUI.h"
 #include<iostream>
@@ -11,7 +10,8 @@
 #include "time.h"
 #include <stdio.h>      /* printf, NULL */
 #include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
+#include <time.h>   
+#include "googletest/googletest/include/gtest/gtest.h"    /* time */
 using namespace std;
 
 int main(int argc, char **argv) {
@@ -175,5 +175,14 @@ TEST(markComplete, pointLog)
 
 }
 
+TEST(buyAward, pointLog)
+{
+    AwardListGUI list;
+    list.createAward("WOWOWOW",5);
+    list.setTotalPoints(10);
+    list.buyAward("WOWOWOW",1);
+    list.useAward("WOWOWOW");
+    EXPECT_EQ(5, list.getTotalPoints());
+}
 
 

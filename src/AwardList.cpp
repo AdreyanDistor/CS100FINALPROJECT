@@ -57,9 +57,29 @@ void AwardList::buyAward(string buyingAward, int quantity) {
             if(totalPoints >= (awardVector.at(i)->cost * quantity) ) {
                 totalPoints -= awardVector.at(i)->cost * quantity;
                 awardVector.at(i)->user_count += quantity;
+                //pointLog and congrats message
+                string congratsMsg;
+                string randomMsgs[4] = {"Nice catch there bob!","Good eye their chief","Congrats!","That's a nice treat!"};
+                srand(time(NULL));
+                congratsMsg = randomMsgs[(rand() % 4)] + " You just bought: " + awardVector.at(i)->award_name + " and spent " +  to_string(awardVector.at(i)->cost*quantity) + " points";
+                cout << congratsMsg << endl;
+                ofstream pointLog;
+                pointLog.open("saved_files/Point_Log.txt",ios::app);
+
+                if(pointLog.is_open())
+                {
+                    pointLog << congratsMsg << endl;
+                }
+                else
+                {
+                    cout << "WOW THAT DID NOT WORK" << endl;
+                }
+                pointLog.close();
             }
             else
-            cout << "Error: not enough points!" << endl;
+            {
+                cout << "Error: not enough points!" << endl;
+            }
             
             return;
         }
@@ -70,15 +90,20 @@ void AwardList::buyAward(string buyingAward, int quantity) {
 void AwardList::useAward(string name) {
     for(int i = 0; i < awardVector.size(); ++i) {
         if(name == awardVector.at(i)->award_name)
+        {
             awardVector.at(i)->user_count--;
-        else 
-        cout << "Error: Award not present" << endl;         
+        }
+            
+        else
+        {
+            cout << "Error: Award not present" << endl;       
+        }  
     }
 }
 
 void AwardList::createAward(string name, int cost) {
     // add an award to the end of the list with a count of zero
-    for(int i = 0; i < awardVector.size(); ++i) {
+    for(int i = 0; i < awardVector.size(); i++) {
         if(awardVector.at(i)->award_name == name) {
             cout << "Award Already exists!" << endl;
             return;

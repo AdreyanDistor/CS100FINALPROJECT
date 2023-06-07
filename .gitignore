@@ -15,4 +15,9 @@ src/CMakeFiles/
 src/Makefile
 src/CMakeCache.txt
 src/cmake_install.cmake
-lib
+lib/
+
+lib/libgmock.a
+lib/libgmock_main.a
+lib/libgtest.a
+lib/libgtest_main.a
