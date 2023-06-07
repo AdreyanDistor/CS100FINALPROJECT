@@ -1,7 +1,12 @@
 #include "../header/TaskListGUI.h"
-#include <string>
-#include <iostream>
 using namespace std;
+
+TaskListGUI::TaskListGUI()
+{
+    head = nullptr;
+    recent_deleted_Task = nullptr;
+    tail = nullptr;
+}
 
 void TaskListGUI::showOverdue(char* tm) {
     //display 
@@ -51,18 +56,36 @@ string TaskListGUI::sortByTag(string user_tag)
     return sortedTags;
 }
 
-// TEST THIS
-void TaskListGUI::printList()
+string TaskListGUI::printList()
 {
     cout << "       Date      -       Tag       -       Name" << endl;
     TaskNode* currNode = head;
-    if(head != nullptr) {
-        while (currNode != nullptr) {
-            cout << currNode->displayTask() << endl;
-            currNode = currNode->next; 
+    string list = "";
+    if(head == nullptr)
+    {
+        return list;
+    }
+    while (currNode !=nullptr)
+    {
+        list+= i + ". " + currNode->exportTask() + "\n";
+        currNode = currNode->next; 
+        i++;
+    }
+    return list;
+}
+
+
+void TaskListGUI::printOverdueMessage()
+{
+    TaskNode* currNode = head;
+    while(currNode != nullptr)
+    {
+        if(currNode->overdue == true)
+        {
+            cout << "YOU HAVE OVERDUE TASKS!!!!" << endl;
+            return;
         }
     }
-    
 }
 
 

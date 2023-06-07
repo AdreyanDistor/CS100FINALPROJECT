@@ -1,6 +1,8 @@
 #include "../header/TaskList.h"
 #include <iostream>
 #include <string>
+#include <fstream>
+#include<cstdlib>
 using namespace std;
 
 TaskList::TaskList()
@@ -155,7 +157,7 @@ void TaskList::deleteTask(string name)
 
 TaskNode* TaskList::search(string name) {
     TaskNode* curr = head;
-    while (curr->name != name) {
+    while (curr->name != name && curr != nullptr) {
         curr = curr->next;
     }
     return curr;
@@ -188,10 +190,24 @@ void TaskList::markTaskCompleted(string name, int& totalPoints) {
         totalPoints += point/2;
     }
     this->deleteTask(name);
+    string congratsMsg;
+    string randomMsgs[4] = {"That's a job well done.","Good Job!","Congrats!","Cheers on finishing the task!"};
+    srand(time(NULL));
+    congratsMsg = randomMsgs[(rand() % 4)] + " You just completed: " + name + " and got " + to_string(point) + " points";
+    cout << congratsMsg << endl;
+    ofstream pointLog;
+    pointLog.open("saved_files/Point_Log.txt",ios::app);
 
+    if(pointLog.is_open())
+    {
+        pointLog << congratsMsg << endl;
+    }
+    else
+    {
+        cout << "WOW THAT DID NOT WORK" << endl;
+    }
+    pointLog.close();
 }
-
-
 
 void TaskList::importTasks() {
     ifstream input;
@@ -261,7 +277,7 @@ void TaskList::exportTasks() {
 
 }
 
-void TaskList::markOverdue() {
+void TaskList::markOverdue(char* tm) {
     TaskNode* curr = head;
     string time = tm;
     string monthStr = time.substr(4, 3);
@@ -307,4 +323,97 @@ void TaskList::markOverdue() {
     }
 }
 
+void TaskList::printEditMenu() {
+    cout << "What would you like to edit?" << endl;
+    cout << "1 - Name" << endl;
+    cout << "2 - Tag" << endl;
+    cout << "3 - Description" << endl;
+    cout << "4 - Date" << endl;
+    cout << "5 - Exit Page" << endl << endl;
 
+    cout << "Enter choice: " << endl;
+}
+
+void TaskList::editTask(string title) {
+    TaskNode* curr = search(title);
+    cout << "EditTask Page" << endl << endl;
+    int option;
+    printEditMenu();
+    cin >> option;
+
+    while (option != 5) {
+        if (option == 1) { //name
+            string _name;
+            cout << "Enter new task name: " << endl;
+            getline(cin, _name);
+            //cin.ignore;
+            curr->name = _name;
+        } else if (option == 2) { //tag
+            int _option;
+            cout << "Tag options" << endl;
+            cout << "1- chore | 2- essay | 3- short assignment | 4- long assignment" << endl;
+            cout << "5- studying | 6- project | 7- lab | 8- other" << endl << endl;
+            cout << "Enter option: " << endl;
+            cin >> _option;
+
+            if (_option == 1) {
+                curr->tag = "chore";
+            } else if (_option == 2) {
+                curr->tag = "essay";
+            } else if (_option == 3) {
+                curr->tag = "short";
+            } else if (_option == 4) {
+                curr->tag = "long";
+            } else if (_option == 5) {
+                curr->tag = "study";
+            } else if (_option == 6) {
+                curr->tag = "proj";
+            } else if (_option == 7) {
+                curr->tag = "lab";
+            } else if (_option == 8) {
+                curr->tag = "other";
+            }
+
+        } else if (option == 3) { //description
+            string _des;
+            cout << "Enter new description: " << endl;
+            getline(cin, _des);
+            //cin.ignore;
+            curr->description = _des;
+        } else if (option == 4) { //date 
+            int _option;
+            cout << "Current Date: " << curr->printDate() << endl;
+            cout << "What would you like to change?" << endl;
+            cout << "1- Month | 2- Day | 3- Year | 4- Exit" << endl;
+            cout << "Enter option: " << endl;
+            cin >> _option;
+
+            while (_option != 4) {
+                if (_option == 1) {
+                    int _month;
+                    cout << "Enter new month (MM): " << endl;
+                    cin >> _month;
+                    curr->month = _month;
+                } else if (_option == 2) {
+                    int _day;
+                    cout << "Enter new day (DD): " << endl;
+                    cin >> _day;
+                    curr->day = _day;
+                } else if (_option == 3) {
+                    int _year;
+                    cout << "Enter new year (YYYY): " << endl;
+                    cin >> _year;
+                    curr->year = _year;
+                }
+                cout << "Current Date: " << curr->printDate() << endl;
+                cout << "What would you like to change?" << endl;
+                cout << "1- Month | 2- Day | 3- Year | 4- Exit" << endl;
+                cout << "Enter option: " << endl;
+                cin >> _option;
+            }
+        }
+
+        printEditMenu();
+        cin >> option;
+    }
+}
