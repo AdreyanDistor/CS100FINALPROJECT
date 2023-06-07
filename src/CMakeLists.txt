@@ -1,4 +1,3 @@
-
 add_library(simpleLibrary
   TaskList.cpp
   AwardList.cpp
@@ -16,3 +15,4 @@ add_executable(Time_Management.exe
   TaskListGUI.cpp
   AwardListGUI.cpp
 )
+

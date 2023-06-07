@@ -164,6 +164,19 @@ TEST(showOverDue, test) {
     EXPECT_EQ(curr3->overdue, false);
 }
 
+TEST(editingATask, printDateFunc) {
+    TaskNode* curr("one", "chore", "first one", 1, 1, 2022);
+    EXPECT_EQ(curr->printDate(), "01/01/2022");
+} 
+
+TEST(editingATask, editTask) {
+    TaskList list;
+    list.addTask("one", "chore", "first one", 1, 2, 2022);
+    list.addTask("two", "essay", "second one", 2, 3, 2023);
+    string newDes = "changed";
+    list.editTask("two");
+    EXPECT_EQ(list.search("two")->description, "changed");
+}
 
 TEST(markComplete, pointLog)
 {
@@ -184,5 +197,3 @@ TEST(buyAward, pointLog)
     list.useAward("WOWOWOW");
     EXPECT_EQ(5, list.getTotalPoints());
 }
-
-

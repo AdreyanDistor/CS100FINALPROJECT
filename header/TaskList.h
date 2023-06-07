@@ -2,9 +2,11 @@
 #define TASKLIST_H
 #include <iostream>
 #include <fstream>
-#include<ostream>
+#include <ostream>
 #include <ctime>
 #include<string>
+#include <iomanip>
+#include <sstream>
 using namespace std;
 
 struct TaskNode
@@ -34,7 +36,11 @@ struct TaskNode
         string output = name + '`' + description + '`' + tag +  '`' + to_string(month) + '`' + to_string(day) + '`' + to_string(year) + '`' + isOverdue;
         return output;
     }; //this will be used in exportTasks of the Tasklist file
-	
+	string printDate() {
+    ostringstream osS; 
+    osS << setfill('0') << setw(2) << month << "/" << setw(2) << day << "/" << year;
+    return osS.str(); 
+  }
 };
 
 
@@ -54,8 +60,11 @@ class TaskList
         TaskNode* search(string); //searches list until task with same name is found, returns nullptr otherwise	
         void importTasks(); //import tasks from “TaskList.txt”, look at TaskList to see how to import, makes the linked list 
         void exportTasks(); //will ouput and write the file the function named “TaskList.txt”
-        void markTaskCompleted(string name,int& totalPoints); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points,
-
+        void sortByTag(string user_tag); //displays tasks of a specific tag
+        void markTaskCompleted(string name, int& totalPoints); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points,
+        void printList(); //prints entire list, could be added to a class called gui, or user input 
+        void editTask(string title); //edits a task
+        void printEditMenu(); //helper func used in editTask();
 };
 
 	
