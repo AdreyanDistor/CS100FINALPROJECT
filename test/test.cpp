@@ -1,8 +1,8 @@
-<<<<<<< HEAD
 #include "googletest/googletest/include/gtest/gtest.h"
 #include "../header/AwardList.h"
 #include "../header/TaskList.h"
 #include "../header/TaskListGUI.h"
+#include "../header/AwardListGUI.h"
 #include<iostream>
 #include<fstream>
 #include <ostream>
@@ -72,7 +72,7 @@ TEST(deleteAwardTest, testCorrectAwardDeleted) {
     EXPECT_EQ(t1.getAwardList.at(0)->award_name, "test award 2");
 }
 
-TEST(showOverDue, test) {
+TEST(markOverDue, test) {
     TaskListGUI list;
     list.addTask("one", "chore", "first one", 1, 1, 2022);
     list.addTask("two", "chore", "second one", 3, 6, 2023);
@@ -86,17 +86,7 @@ TEST(showOverDue, test) {
     EXPECT_EQ(curr2->overdue, true);
     EXPECT_EQ(curr3->overdue, false);
 }
-=======
-#include "../header/TaskList.h"
-#include "../header/TaskListGUI.h"
-#include "../header/AwardList.h"
-#include "../header/AwardListGUI.h"
-#include "time.h"
-#include <stdio.h>      /* printf, NULL */
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
-#include <vector>
-using namespace std;
+
 int main()
 {
     // srand(time(NULL));
@@ -184,4 +174,3 @@ int main()
     return 0;
 }
 
->>>>>>> 5312af2 (AwardListFunctions)

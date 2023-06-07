@@ -92,7 +92,7 @@ class TaskList
         void importTasks(); //import tasks from “TaskList.txt”, look at TaskList to see how to import, makes the linked list 
         void exportTasks(); //will ouput and write the file the function named “TaskList.txt”
         void markTaskCompleted(string name,int& totalPoints); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points,
-
+        void markOverdue(); //marks tasks overdue by turning the isOverdue bool true 
 };
 
 	
