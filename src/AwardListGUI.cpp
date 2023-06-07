@@ -1,5 +1,10 @@
 #include "../header/AwardListGUI.h"
 
+ AwardListGUI::AwardListGUI()
+ {
+        awardlistSize = 0;
+ }
+
 void AwardListGUI::displayAwards()
 {
     cout << "      Count-Price-Name" << endl;

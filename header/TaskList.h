@@ -54,7 +54,7 @@ class TaskList
         TaskNode* search(string); //searches list until task with same name is found, returns nullptr otherwise	
         void importTasks(); //import tasks from “TaskList.txt”, look at TaskList to see how to import, makes the linked list 
         void exportTasks(); //will ouput and write the file the function named “TaskList.txt”
-        int markTaskCompleted(string name); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points,
+        void markTaskCompleted(string name,int& totalPoints); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points,
 
 };
 

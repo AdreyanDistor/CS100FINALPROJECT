@@ -1,15 +1,18 @@
 Time_Management.exe
-        src/CMakeCache.txt
-        src/CMakeFiles/
-        src/Makefile
-        src/Time_Management.exe.dir/
-        src/Time_Managment.exe.dir/
-        src/cmake_install.cmake
-.gitignore
-src/Makefile
-src/CMakeFiles
-src/cmake_install.cmake
 src/CMakeCache.txt
-Time_Management.exe
-src/Time_Managment.exe.dir
+src/Makefile
+src/Time_Management.exe.dir/
+src/cmake_install.cmake
+src/CMakeFiles
 make
+test/CMakeFiles
+test/test.exe.dir
+test/cmake_install.cmake
+test/Makefile
+test/CMakeCache.txt
+CMakeFiles
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+AwardList.o
+TaskList.o
