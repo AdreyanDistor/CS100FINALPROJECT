@@ -6,8 +6,11 @@ AwardList::AwardList()
 }
 
 AwardList::~AwardList() {
-    for(int i = awardVector.size() - 1; i >= 0; ++i) {
-        delete awardVector.at(i);
+    while(!awardVector.empty())
+    {
+        Award* tempNode = awardVector.back();
+        awardVector.pop_back();
+        delete tempNode;
     }
 }
 
@@ -110,6 +113,7 @@ void AwardList::createAward(string name, int cost) {
         }
     }
     awardVector.push_back(new Award(name, cost, 0));
+
 } 
 
 void AwardList::deleteAward(string name) {
