@@ -21,7 +21,7 @@ string TaskListGUI::showOverdue() {
     }
     while (curr != nullptr) {
         if (curr->overdue == true) {
-            osS << curr->displayTask << endl;
+            osS << curr->displayTask() << endl;
         }
         curr = curr->next;
     }
@@ -84,9 +84,8 @@ string TaskListGUI::printList()
     }
     while (currNode !=nullptr)
     {
-        list+= i + ". " + currNode->exportTask() + "\n";
+        list+= currNode->exportTask() + "\n";
         currNode = currNode->next; 
-        i++;
     }
     return list;
 }
