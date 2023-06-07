@@ -81,7 +81,7 @@ struct TaskNode
             newMonth = "0" + newMonth;
         }
 
-        date = to_string(day) + "." + to_string(month) + "." + to_string(year%2000);
+        date = to_string(day) + "/" + to_string(month) + "/" + to_string(year%2000);
         
         return x + "      " + date + "      " + shortTag + "      " + name;
     }

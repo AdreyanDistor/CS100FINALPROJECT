@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "googletest/googletest/include/gtest/gtest.h"
 #include "../header/AwardList.h"
 #include "../header/TaskList.h"
@@ -86,17 +85,28 @@ TEST(showOverDue, test) {
     EXPECT_EQ(curr2->overdue, true);
     EXPECT_EQ(curr3->overdue, false);
 }
-=======
-#include "../header/TaskList.h"
-#include "../header/TaskListGUI.h"
-#include "../header/AwardList.h"
-#include "../header/AwardListGUI.h"
-#include "time.h"
-#include <stdio.h>      /* printf, NULL */
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
-#include <vector>
-using namespace std;
+
+TEST(PrintList, noOverDue) {
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 23, 11, 2023);
+    list.addTask("two", "studying", "second one", 14, 11, 2023);
+    list.addTask("three", "other", "third one", 22, 11, 2023);
+    char* tm = "Fri Aug 15 00:00:00 2023";
+    list.showOverdue(tm);
+    TaskNode* curr1 = list.search("one");
+    TaskNode* curr2 = list.search("two");
+    TaskNode* curr3 = list.search("three");
+    bool curr1Bool;
+    bool curr2Bool;
+    bool curr3Bool;
+    curr1Bool = (curr1.displayTask() == "      11/23/2023      CHORE      one");
+    curr2Bool = (curr2.displayTask() == "      11/14/2023      STUDY      two");
+    curr3Bool = (curr2.displayTask() == "      11/22/2023      OTHER      three");
+    EXPECT_EQ(curr1Bool, true);
+    EXPECT_EQ(curr2Bool, true);
+    EXPECT_EQ(curr3Bool, true);
+}
+
 int main()
 {
     // srand(time(NULL));
@@ -184,4 +194,3 @@ int main()
     return 0;
 }
 
->>>>>>> 5312af2 (AwardListFunctions)
