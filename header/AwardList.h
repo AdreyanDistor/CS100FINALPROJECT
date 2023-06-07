@@ -29,31 +29,24 @@ struct Award
 
 class AwardList
 {
-		
 	protected:
-		vector<Award*> awardlist;
+		vector<Award*> awardVector;
 		int totalPoints;
-    int awardlistSize;
-  
 	public:
 		AwardList();
+		~AwardList();
 		void importAwards(); //import tasks from “AwardsList.txt”
 		void exportAwards(); //will write the file within the function named “AwardsList.txt”
-		int buyAward(string name);//returns cost of ward, this is subtracted from total_points
-		void  useAward(string name); //decrement the count of a specific award
-		void createAward(string name, int cost); //add award to award list at the end
-		void deleteAward(string name); //delete award from list, shift the rest of the awards down the list
-		bool inList(string name); //return true if the award is in already in the list, false otherwise
-  
+		void buyAward(string buyingAward, int quantity); //increases user_count by 1, subtracts from totalPoints, error message if not enough points
+		void useAward(string name); //lower user_count by 1, erorr message if 0
+		void createAward(string name, int cost); //add award to award list
+		void deleteAward(string name); //delete award from list, if it’s already in the list, user_count–
 		int getTotalPoints(); //return totalPoints
-		void setTotalPoints(); //set totalPoints
+		void setTotalPoints(int newTotalPoints); //set totalPoints
 		void importTotalPoints(); //imports totalPoints
   
-		// for testing
-		int getAwardListSize();
-		vector<Award*> getAwardList();
-
+	  //for testing
+		vector<Award*> getAwardvector();
 };
-	
 	
 #endif

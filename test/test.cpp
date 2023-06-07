@@ -1,3 +1,4 @@
+
 #include "googletest/googletest/include/gtest/gtest.h"
 #include "../header/AwardList.h"
 #include "../header/TaskList.h"
@@ -9,12 +10,22 @@
 #include<string>
 #include<iomanip>
 #include<vector>
+#include<time.h>
 #include<ctime>
-#include "time.h"
 #include <stdio.h>      /* printf, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 using namespace std;
+
+TEST(buyAwardTest, testAwardSuccessfullyBought) {
+    AwardList testAwardList;
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.setTotalPoints(10);
+
+    testAwardList.buyAward("cupcake"); //error in buyAward
+    EXPECT_EQ(testAwardList.getTotalPoints(), 0);
+    EXPECT_EQ(testAwardList.getUserCount(0), 1);
+}
 
 TEST(markTaskComplete, test) {
     TaskList list;
@@ -34,42 +45,37 @@ TEST(markTaskComplete, testtaskOverdue) {
     EXPECT_EQ(points, 5); 
 }
 
-int main(int argc, char **argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
-
 TEST(createAwardTest, testAwardSucessfullyCreated) {
-    TaskList t1;
+    AwardList t1;
     t1.createAward("test award", 50);
-    EXPECT_EQ(awardlistSize, 1);
-    EXPECT_EQ(t1.getAwardList.at(0)->award_name, "test award");
+    EXPECT_EQ(t1.getAwardvector().size(), 1);
+    EXPECT_EQ(t1.getAwardvector.at(0)->award_name, "test award");
 }
 
 TEST(createAwardTest, testAwardPushBack) {
-    TaskList t1;
+    AwardList t1;
     t1.createAward("test award", 50);
     t1.createAward("test award 2", 75);
-    EXPECT_EQ(awardlistSize, 2);
-    EXPECT_EQ(t1.getAwardList().at(1)->award_name, "test award 2" );
+    EXPECT_EQ(t1.getAwardvector().size(), 2);
+    EXPECT_EQ(t1.getAwardvector().at(1)->award_name, "test award 2" );
 }
 
 TEST(deleteAwardTest, testAwardDeleted) {
-    TaskList t1;
+    AwardList t1;
     t1.createAward("test award", 50);
-    EXPECT_EQ(awardlistSize, 1);
+    EXPECT_EQ(t1.getAwardvector().size(), 1);
     t1.deleteAward("test award");
-    EXPECT_EQ(awardlistSize, 0);
+    EXPECT_EQ(t1.getAwardvector().size(), 0);
 }
 
 TEST(deleteAwardTest, testCorrectAwardDeleted) {
-    TaskList t1;
+    AwardList t1;
     t1.createAward("test award", 50);
     t1.createAward("test award 2", 75);
     t1.createAward("test award 3", 100);
     t1.deleteAward("test award");
-    EXPECT_EQ(awardlistSize, 2);
-    EXPECT_EQ(t1.getAwardList.at(0)->award_name, "test award 2");
+    EXPECT_EQ(t1.getAwardvector().size(), 2);
+    EXPECT_EQ(t1.getAwardvector().at(0)->award_name, "test award 2");
 }
 
 TEST(showOverDue, test) {
@@ -87,7 +93,7 @@ TEST(showOverDue, test) {
     EXPECT_EQ(curr3->overdue, false);
 }
 
-int main()
+int main(int argc, char **argv)
 {
     // srand(time(NULL));
     vector<string> names = {"Task 1","Task 2","Task 3","Task 4","Task5"};
@@ -169,7 +175,6 @@ int main()
     list10.deleteTask(names.at(0));
     list10.printList();
     
-
-
-    return 0;
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
