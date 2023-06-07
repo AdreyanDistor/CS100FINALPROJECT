@@ -1,5 +1,8 @@
-#include "../header/AwardListGUI.h"
+#include "googletest/googletest/include/gtest/gtest.h"
+#include "../header/AwardList.h"
+#include "../header/TaskList.h"
 #include "../header/TaskListGUI.h"
+#include "../header/AwardListGUI.h"
 #include<iostream>
 #include<fstream>
 #include <ostream>
@@ -10,8 +13,7 @@
 #include "time.h"
 #include <stdio.h>      /* printf, NULL */
 #include <stdlib.h>     /* srand, rand */
-#include <time.h>   
-#include "googletest/googletest/include/gtest/gtest.h"    /* time */
+#include <time.h>       /* time */
 using namespace std;
 
 int main(int argc, char **argv) {
@@ -149,13 +151,13 @@ TEST(deleteAwardTest, testCorrectAwardDeleted) {
     EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award 2");
 }
 
-TEST(showOverDue, test) {
+TEST(markOverDue, test) {
     TaskListGUI list;
     list.addTask("one", "chore", "first one", 1, 1, 2022);
     list.addTask("two", "chore", "second one", 3, 6, 2023);
     list.addTask("three", "chore", "third one", 22, 11, 2023);
     char* tm = "Fri Aug 15 00:00:00 2023";
-    list.showOverdue(tm);
+    list.markOverdue(tm);
     TaskNode* curr1 = list.search("one");
     TaskNode* curr2 = list.search("two");
     TaskNode* curr3 = list.search("three");
