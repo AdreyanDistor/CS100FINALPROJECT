@@ -46,7 +46,7 @@ class AwardList
 		void importTotalPoints(); //imports totalPoints
   
 	  //for testing
-		vector<Award*> getAwardvector();
+		vector<Award*> getAwardVector();
 };
 	
 #endif
