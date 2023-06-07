@@ -69,6 +69,20 @@ struct TaskNode
             shortTag = "OTHER";
         }
 
+        string newYear = to_string(year%2000);
+        string newDay = to_string(day);
+        string newMonth = to_string(month);
+
+        if (day < 10) {
+            newDay = "0" + newDay;
+        }
+        if (month < 10) {
+            newMonth = "0" + newMonth;
+        }
+        if (day < 10) {
+            newMonth = "0" + newMonth;
+        }
+
         date = to_string(day) + "." + to_string(month) + "." + to_string(year%2000);
         
         return x + "      " + date + "      " + shortTag + "      " + name;

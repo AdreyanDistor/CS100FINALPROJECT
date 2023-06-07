@@ -6,7 +6,8 @@
 #include<iostream>
 #include<fstream>
 #include <ostream>
-#include<string>
+#include <string>
+#include <sstream>
 #include<iomanip>
 #include<vector>
 #include<ctime>
@@ -17,7 +18,6 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-     // srand(time(NULL));
     vector<string> names = {"Task 1","Task 2","Task 3","Task 4","Task5"};
     vector<string> tag = {"Tag 1","Tag 2","Tag 3","Tag 4","Tag 5"};
     vector<string> desc = {"Description 1","Description 2","Description 3","Description 4","Description 5"};
@@ -100,55 +100,37 @@ int main(int argc, char **argv) {
   return RUN_ALL_TESTS();
 }
 
-TEST(markTaskComplete, test) {
-    TaskList list;
-    int points = 0;
-    list.addTask("one", "chore", "random", 5, 4, 2023);
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 5);
-}
-
-TEST(markTaskComplete, testtaskOverdue) {
-    TaskListGUI list;
-    int points = 0;
-    list.addTask("one", "essay", "random", 5, 4, 2023);
-    char* tm = "Fri Jul 3 00:00:00 2023";
-    list.showOverdue(tm);
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 5); 
-}
-
 TEST(createAwardTest, testAwardSucessfullyCreated) {
-    AwardList t1;
+    TaskList t1;
     t1.createAward("test award", 50);
-    EXPECT_EQ(t1.getAwardVector().size(), 1);
-    EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award");
+    EXPECT_EQ(awardlistSize, 1);
+    EXPECT_EQ(t1.getAwardList.at(0)->award_name, "test award");
 }
 
 TEST(createAwardTest, testAwardPushBack) {
-    AwardList t1;
+    TaskList t1;
     t1.createAward("test award", 50);
     t1.createAward("test award 2", 75);
-    EXPECT_EQ(t1.getAwardVector().size(), 2);
-    EXPECT_EQ(t1.getAwardVector().at(1)->award_name, "test award 2" );
+    EXPECT_EQ(awardlistSize, 2);
+    EXPECT_EQ(t1.getAwardList().at(1)->award_name, "test award 2" );
 }
 
 TEST(deleteAwardTest, testAwardDeleted) {
-    AwardList t1;
+    TaskList t1;
     t1.createAward("test award", 50);
-    EXPECT_EQ(t1.getAwardVector().size(), 1);
+    EXPECT_EQ(awardlistSize, 1);
     t1.deleteAward("test award");
-    EXPECT_EQ(t1.getAwardVector().size(), 0);
+    EXPECT_EQ(awardlistSize, 0);
 }
 
 TEST(deleteAwardTest, testCorrectAwardDeleted) {
-    AwardList t1;
+    TaskList t1;
     t1.createAward("test award", 50);
     t1.createAward("test award 2", 75);
     t1.createAward("test award 3", 100);
     t1.deleteAward("test award");
-    EXPECT_EQ(t1.getAwardVector().size(), 2);
-    EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award 2");
+    EXPECT_EQ(awardlistSize, 2);
+    EXPECT_EQ(t1.getAwardList.at(0)->award_name, "test award 2");
 }
 
 TEST(markOverDue, test) {
@@ -164,6 +146,36 @@ TEST(markOverDue, test) {
     EXPECT_EQ(curr1->overdue, true);
     EXPECT_EQ(curr2->overdue, true);
     EXPECT_EQ(curr3->overdue, false);
+} 
+
+TEST(markTaskComplete, test) {
+    TaskList list;
+    int points = 0;
+    list.addTask("one", "chore", "random", 5, 4, 2023);
+    list.markTaskCompleted("one", points);
+    EXPECT_EQ(points, 5);
+}
+
+TEST(markTaskComplete, testTaskOverdue) {
+    TaskListGUI list;
+    int points = 0;
+    list.addTask("one", "essay", "random", 5, 4, 2023);
+    char* tm = "Fri Jul 3 00:00:00 2023";
+    list.showOverdue(tm);
+    list.markTaskCompleted("one", points);
+    EXPECT_EQ(points, 5); 
+}
+
+TEST(showOverdue, test) {
+    TaskListGUI list;
+    ostringstream osS;
+    osS << "       Date      -       Tag       -       Name" << endl;
+    list.addTask("one", "chore", "first one", 1, 1, 2022);
+    list.addTask("two", "essay", "second one", 3, 4, 2022);
+    osS << search("one")->displayTask() << endl << search("two")->displayTask() << endl;
+    char* time = char* tm = "Fri Aug 15 00:00:00 2021";
+    list.markOverdue(time);
+    EXPECT_EQ(list.showOverdue(), osS.str());
 }
 
 TEST(editingATask, printDateFunc) {
