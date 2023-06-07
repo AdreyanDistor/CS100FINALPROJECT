@@ -2,9 +2,11 @@
 #define TASKLIST_H
 #include <iostream>
 #include <fstream>
-#include<ostream>
+#include <ostream>
 #include <ctime>
 #include<string>
+#include <iomanip>
+#include <sstream>
 using namespace std;
 
 struct TaskNode
@@ -85,7 +87,12 @@ struct TaskNode
         
         return x + "      " + date + "      " + shortTag + "      " + name;
     }
-	
+
+	string printDate() {
+    ostringstream osS; 
+    osS << setfill('0') << setw(2) << month << "/" << setw(2) << day << "/" << year;
+    return osS.str(); 
+  }
 };
 
 
@@ -105,8 +112,10 @@ class TaskList
         TaskNode* search(string); //searches list until task with same name is found, returns nullptr otherwise	
         void importTasks(); //import tasks from “TaskList.txt”, look at TaskList to see how to import, makes the linked list 
         void exportTasks(); //will ouput and write the file the function named “TaskList.txt”
-        void markTaskCompleted(string name,int& totalPoints); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points,
         void markOverdue(char* tm); //marks tasks overdue by turning the isOverdue bool true 
+        void markTaskCompleted(string name, int& totalPoints); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points, 
+        void editTask(string title); //edits a task
+        void printEditMenu(); //helper func used in editTask();
 };
 
 	
