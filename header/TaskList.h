@@ -93,6 +93,34 @@ struct TaskNode
     osS << setfill('0') << setw(2) << month << "/" << setw(2) << day << "/" << year;
     return osS.str(); 
   }
+
+  bool thisNodeEarlier(TaskNode* otherNode)
+  {
+    bool thisNodeEarly = false;
+    if(year < otherNode->year)
+    {
+       return true;
+    }
+    else if(year == otherNode->year)
+    {
+        if(month < otherNode->month)
+        {
+            return true;
+        }
+        else if(month == otherNode->month)
+        {
+            if(day < otherNode->day)
+            {
+                return true;
+            }
+            else if(day == otherNode->day)
+            {
+                return false;
+            }
+        }
+    }
+    return false;
+  }
 };
 
 

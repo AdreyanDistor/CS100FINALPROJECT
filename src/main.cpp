@@ -1,5 +1,5 @@
-#include "../header/AwardList.h"
-#include "../header/TaskList.h"
+#include "../header/AwardListGUI.h"
+#include "../header/TaskListGUI.h"
 #include<iostream>
 #include<fstream>
 #include <ostream>
@@ -15,7 +15,10 @@ using namespace std;
 
 int main() {
     /*Imports total_points*/
-    AwardList myAwardList;
-    
+       TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 4, 2012);
+    list.addTask("two", "chore", "second one", 2, 2, 2022);
+    list.addTask("three", "chore", "third one", 3, 3, 2012);
+    cout << list.printList(); 
     return 0;
 }

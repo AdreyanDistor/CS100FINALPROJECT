@@ -5,24 +5,6 @@
 #include <sstream>
 using namespace std;
 
-TaskListGUI::TaskListGUI()
-{
-    head = nullptr;
-    recent_deleted_Task = nullptr;
-    tail = nullptr;
-}
-
-TaskListGUI::~TaskListGUI()
-{
-    TaskNode* currNode = head;
-    while(currNode != nullptr)
-    {
-        TaskNode* tempNode = nullptr;
-        tempNode = currNode;
-        currNode = currNode->next;
-        delete tempNode;
-    }
-}
 
 string TaskListGUI::showOverdue() {
     TaskNode* curr = head;
