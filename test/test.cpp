@@ -105,18 +105,6 @@ TEST(markTaskComplete, test) {
     EXPECT_EQ(points, 5);
 }
 
-TEST(markTaskComplete, testtaskOverdue) {
-    TaskListGUI list;
-    int points = 0;
-    list.addTask("one", "essay", "random", 5, 4, 2023);
-    char* tm = "Fri Jul 3 00:00:00 2023";
-    list.markOverdue(tm);
-    list.showOverdue();
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 5); 
->>>>>>> master
-}
-
 TEST(createAwardTest, testAwardSucessfullyCreated) {
     AwardList t1;
     t1.createAward("test award", 50);
