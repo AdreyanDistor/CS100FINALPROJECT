@@ -135,7 +135,6 @@ class TaskList
         ~TaskList();
         void addTask(string name, string tag,string description, int day, int month, int year);  //Make sure no duplicates
         void deleteTask(string name); // removes task from list, 
-        void update(); // updates time and overdue tasks, updates every hour? (I don’t remember exactly)
         void undoDeleteTask(); //adds task back into list, if unsorted, just at the end of the list. If recent_deleted_task is = “” then nothin happens
         TaskNode* search(string); //searches list until task with same name is found, returns nullptr otherwise	
         void importTasks(); //import tasks from “TaskList.txt”, look at TaskList to see how to import, makes the linked list 
