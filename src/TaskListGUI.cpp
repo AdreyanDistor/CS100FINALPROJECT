@@ -78,7 +78,7 @@ string TaskListGUI::printList()
     }
     while (currNode !=nullptr)
     {
-        list+= currNode->exportTask() + "\n";
+        list+= currNode->displayTask() + "\n";
         currNode = currNode->next; 
     }
     return list;

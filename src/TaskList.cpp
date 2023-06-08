@@ -177,7 +177,7 @@ void TaskList::markTaskCompleted(string name, int& totalPoints) {
 
 void TaskList::importTasks() {
     ifstream input;
-    input.open("TaskList.txt");
+    input.open("saved_files/TaskList.txt");
     if (!input.is_open()) {
         cout << "Failed to open TaskList.txt" << endl;
         return;
@@ -214,7 +214,6 @@ void TaskList::importTasks() {
         prev = temp;
         temp = temp->next;
     }
-    cout << "3" << endl;
     tail = prev;
     delete temp;
     input.close();
@@ -382,4 +381,10 @@ void TaskList::editTask(string title) {
         printEditMenu();
         cin >> option;
     }
+}
+
+void TaskList::undoDeleteTask()
+{
+    addTask(recent_deleted_Task->name,recent_deleted_Task->tag,recent_deleted_Task->description,recent_deleted_Task->day,recent_deleted_Task->month,recent_deleted_Task->year);
+    recent_deleted_Task = nullptr;
 }
