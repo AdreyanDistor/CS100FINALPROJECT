@@ -15,6 +15,9 @@
 using namespace std;
 
 int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+
      // srand(time(NULL));
     vector<string> names = {"Task 1","Task 2","Task 3","Task 4","Task5"};
     vector<string> tag = {"Tag 1","Tag 2","Tag 3","Tag 4","Tag 5"};
@@ -94,8 +97,7 @@ int main(int argc, char **argv) {
     list10.printList();
     list10.deleteTask(names.at(0));
     list10.printList();
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+  
 }
 
 TEST(markTaskComplete, test) {
@@ -165,7 +167,7 @@ TEST(showOverDue, test) {
 }
 
 TEST(editingATask, printDateFunc) {
-    TaskNode* curr("one", "chore", "first one", 1, 1, 2022);
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
     EXPECT_EQ(curr->printDate(), "01/01/2022");
 } 
 

@@ -8,7 +8,7 @@ add_library(simpleLibrary
 find_library(M_LIB m)
 target_link_libraries(simpleLibrary ${M_LIB})
 
-add_executable(Time_Management.exe
+add_executable(Time_Management
   main.cpp
   TaskList.cpp
   AwardList.cpp

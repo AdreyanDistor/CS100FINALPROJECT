@@ -1,7 +1,8 @@
 #include "../header/AwardListGUI.h"
 
- AwardListGUI::AwardListGUI()
- {}
+AwardListGUI::AwardListGUI() {
+    totalPoints = 0;
+}
 
 void AwardListGUI::displayAwards()
 {
