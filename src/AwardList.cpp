@@ -60,22 +60,17 @@ void AwardList::buyAward(string buyingAward, int quantity) {
             if(totalPoints >= (awardVector.at(i)->cost * quantity) ) {
                 totalPoints -= awardVector.at(i)->cost * quantity;
                 awardVector.at(i)->user_count += quantity;
-                //pointLog and congrats message
-                string congratsMsg;
-                string randomMsgs[4] = {"Nice catch there bob!","Good eye their chief","Congrats!","That's a nice treat!"};
-                srand(time(NULL));
-                congratsMsg = randomMsgs[(rand() % 4)] + " You just bought: " + awardVector.at(i)->award_name + " and spent " +  to_string(awardVector.at(i)->cost*quantity) + " points";
-                cout << congratsMsg << endl;
+                //pointLog
                 ofstream pointLog;
                 pointLog.open("saved_files/Point_Log.txt",ios::app);
 
                 if(pointLog.is_open())
                 {
-                    pointLog << congratsMsg << endl;
+                    pointLog << congratsMessage(awardVector.at(i), quantity) << endl;
                 }
                 else
                 {
-                    cout << "WOW THAT DID NOT WORK" << endl;
+                    cout << "Error: cannot open Point_Log.txt" << endl;
                 }
                 pointLog.close();
             }
@@ -83,11 +78,18 @@ void AwardList::buyAward(string buyingAward, int quantity) {
             {
                 cout << "Error: not enough points!" << endl;
             }
-            
             return;
         }
     }
     cout << "Error: Award not found!" << endl;
+}
+
+string& AwardList::congratsMessage(Award* boughtAward, int quantity) { 
+    string congratsMsg;
+    string randomMsgs[4] = {"Nice catch there bob!","Good eye their chief","Congrats!","That's a nice treat!"};
+    srand(time(NULL));
+    congratsMsg = randomMsgs[(rand() % 4)] + " You just bought: " + to_string(quantity) + " " + boughtAward->award_name + " and spent " +  to_string(boughtAward->cost*quantity) + " points";
+    cout << congratsMsg << endl;
 }
 
 void AwardList::useAward(string name) {
