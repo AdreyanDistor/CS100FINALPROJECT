@@ -7,6 +7,8 @@
 #include<string>
 #include <iomanip>
 #include <sstream>
+#include <stdio.h>
+#include <assert.h>
 using namespace std;
 
 struct TaskNode
@@ -22,6 +24,48 @@ struct TaskNode
     TaskNode(string name, string tag,string description, int day, int month, int year):
     name(name), tag(tag), description(description), day(day), month(month), year(year),overdue(false){}
 	TaskNode* next;
+    void setName(string newName) {
+        name = newName;
+    }
+
+    void setDescription(string newDes) {
+        description = newDes;
+    }
+    
+    void setTag(string newTag) {
+        if (newTag == " " || newTag == "") {
+            tag = "other";
+        } else {
+            tag = newTag;
+        }
+    }
+
+    void setMonth(int newMon) {
+        if (newMon < 1) {
+            month = 1;
+        } else if (newMon > 12) {
+            month = newMon % 12;
+        } else {
+            month = newMon;
+        }
+    }
+
+    void setDay(int newDay) {
+        if (newDay < 1) {
+            day = 1;
+        } else if (month == 2 && newDay > 28) {
+            day = 28;
+        } else if (newDay > 31) {
+            day = 31;
+        } else {
+            day = newDay;
+        }
+    }
+    
+    void setYear(int newYear) {
+        year = newYear;
+    }
+
 	string exportTask()
     {
         string isOverdue;
@@ -89,10 +133,10 @@ struct TaskNode
     }
 
 	string printDate() {
-    ostringstream osS; 
-    osS << setfill('0') << setw(2) << month << "/" << setw(2) << day << "/" << year;
-    return osS.str(); 
-  }
+        ostringstream osS; 
+        osS << setfill('0') << setw(2) << month << "/" << setw(2) << day << "/" << year;
+        return osS.str(); 
+    }
 };
 
 

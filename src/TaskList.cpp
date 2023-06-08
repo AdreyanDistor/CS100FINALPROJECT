@@ -312,11 +312,11 @@ void TaskList::markOverdue(char* tm) {
     }
 
     while (curr != nullptr) {
-        if (curr->year > currYear) {
+        if (curr->year < currYear) {
             curr->overdue = true;
-        } else if (curr->month > currMonth) {
+        } else if (curr->month < currMonth) {
             curr->overdue = true;
-        } else if (curr->day > currDay) {
+        } else if (curr->day < currDay) {
             curr->overdue = true;
         }
         curr = curr->next;
@@ -345,9 +345,9 @@ void TaskList::editTask(string title) {
         if (option == 1) { //name
             string _name;
             cout << "Enter new task name: " << endl;
+            cin.clear();
             getline(cin, _name);
-            //cin.ignore;
-            curr->name = _name;
+            curr->setName(_name);
         } else if (option == 2) { //tag
             int _option;
             cout << "Tag options" << endl;
@@ -357,29 +357,29 @@ void TaskList::editTask(string title) {
             cin >> _option;
 
             if (_option == 1) {
-                curr->tag = "chore";
+                curr->setTag("chore");
             } else if (_option == 2) {
-                curr->tag = "essay";
+                curr->setTag("essay");
             } else if (_option == 3) {
-                curr->tag = "short";
+                curr->setTag("short");
             } else if (_option == 4) {
-                curr->tag = "long";
+                curr->setTag("long");
             } else if (_option == 5) {
-                curr->tag = "study";
+                curr->setTag("study");
             } else if (_option == 6) {
-                curr->tag = "proj";
+                curr->setTag("proj");
             } else if (_option == 7) {
-                curr->tag = "lab";
+                curr->setTag("lab");
             } else if (_option == 8) {
-                curr->tag = "other";
+                curr->setTag("other");
             }
 
         } else if (option == 3) { //description
             string _des;
             cout << "Enter new description: " << endl;
+            cin.clear();
             getline(cin, _des);
-            //cin.ignore;
-            curr->description = _des;
+            curr->setDescription(_des);
         } else if (option == 4) { //date 
             int _option;
             cout << "Current Date: " << curr->printDate() << endl;
@@ -391,19 +391,19 @@ void TaskList::editTask(string title) {
             while (_option != 4) {
                 if (_option == 1) {
                     int _month;
-                    cout << "Enter new month (MM): " << endl;
+                    cout << "Enter new month: " << endl;
                     cin >> _month;
-                    curr->month = _month;
+                    curr->setMonth(_month);
                 } else if (_option == 2) {
                     int _day;
-                    cout << "Enter new day (DD): " << endl;
+                    cout << "Enter new day: " << endl;
                     cin >> _day;
-                    curr->day = _day;
+                    curr->setDay(_day);
                 } else if (_option == 3) {
                     int _year;
                     cout << "Enter new year (YYYY): " << endl;
                     cin >> _year;
-                    curr->year = _year;
+                    curr->setYear(_year);
                 }
                 cout << "Current Date: " << curr->printDate() << endl;
                 cout << "What would you like to change?" << endl;
