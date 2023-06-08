@@ -11,6 +11,7 @@ using namespace std;
 class AwardListGUI: public AwardList{
     public:
         void displayAwards(); //showing the awards on GUI
+        void displayPointLog();
         AwardListGUI();
 };
 

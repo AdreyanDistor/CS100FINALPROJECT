@@ -15,17 +15,18 @@ TaskList::TaskList()
 TaskList::~TaskList()
 {
     TaskNode* currNode = head;
+    TaskNode* next = nullptr;
     while(currNode != nullptr)
     {
-        TaskNode* tempNode = nullptr;
-        tempNode = currNode;
-        currNode = currNode->next;
-        delete tempNode;
+        next = currNode->next;
+        delete currNode;
+        currNode = next;
     }
 }
 
 void TaskList::addTask(string name, string tag,string description, int day, int month, int year)
 {
+
     TaskNode* newNode = new TaskNode(name, tag,description, day, month,year);
     if(head == nullptr)
     {
@@ -35,30 +36,11 @@ void TaskList::addTask(string name, string tag,string description, int day, int 
     {
         tail = newNode;
         head->next = tail;
-        bool tailEarlier = false;
-        TaskNode* tempNode = head;
-       
-        if(tail->year < head->year)
-        {
-            tailEarlier = true;
-        }
-        else if(tail->year == head->year)
-        {
-            if(tail->month < head->month)
-            {
-                tailEarlier == true;
-            }
-            else if(tail->month == head->month)
-            {
-                if(tail->day <= head->day)
-                {
-                    tailEarlier == true;
-                }
-            }
-        }
+        tail->next = nullptr;
 
-        if(tailEarlier)
+        if(tail->thisNodeEarlier(head))
         {
+            TaskNode* tempNode = head;
             head = tail;
             tail = tempNode;
             tail->next = nullptr;
@@ -68,53 +50,37 @@ void TaskList::addTask(string name, string tag,string description, int day, int 
     }
     else
     {
-        
-            TaskNode* currNode = head;
-            TaskNode* prevNode = head;
-            while(currNode != nullptr)
+        TaskNode* currNode = head;
+        TaskNode* prevNode = head;
+        while(currNode != nullptr)
+        {   
+            if(newNode->thisNodeEarlier(currNode))
             {
-                bool newNodeEarlier = false;
-                if(newNode->year < currNode->year)
+                if(currNode == head)
                 {
-                    newNodeEarlier = true;
+                    newNode->next = head;
+                    head = newNode;
                 }
-                else if(newNode->year == currNode->year)
+                else if(currNode == tail)
                 {
-                    if(newNode->month < currNode->month)
-                    {
-                        newNodeEarlier = true;
-                    }
-                    else if(newNode->month == currNode->month)
-                    {
-                        if(newNode->day <= currNode->day)
-                        {
-                           newNodeEarlier == true;
-                        }
-                    }
+                    prevNode->next = newNode;
+                    newNode->next = tail;
                 }
-
-                if(newNodeEarlier)
+                else
                 {
-                    if(currNode == head)
-                    {
-                        newNode->next = head;
-                        head = newNode;
-                    }
-                    else
-                    {
-                        prevNode->next = newNode;
-                        newNode->next = currNode;
-                    }
-                    return;
+                    prevNode->next = newNode;
+                    newNode->next = currNode;
                 }
-                prevNode = currNode;
-                currNode = currNode->next;
+                return;
 
             }
+            prevNode = currNode;
+            currNode = currNode->next;
+        }
 
-            tail->next = newNode;
-            tail = newNode;
-            tail->next = nullptr;
+        tail->next = newNode;
+        tail = newNode;
+        tail->next = nullptr;
         
     }
     return;
@@ -149,7 +115,7 @@ void TaskList::deleteTask(string name)
             delete currNode;
             return;
         }
-                    recent_deleted_Task = new TaskNode(currNode->name, currNode->tag,currNode->description, currNode->day, currNode->month, currNode->year);
+        recent_deleted_Task = new TaskNode(currNode->name, currNode->tag,currNode->description, currNode->day, currNode->month, currNode->year);
         prevNode = currNode;
         currNode = currNode->next;
     }
@@ -157,7 +123,7 @@ void TaskList::deleteTask(string name)
 
 TaskNode* TaskList::search(string name) {
     TaskNode* curr = head;
-    while (curr->name != name && curr != nullptr) {
+    while (curr != nullptr && curr->name != name) {
         curr = curr->next;
     }
     return curr;
@@ -211,7 +177,7 @@ void TaskList::markTaskCompleted(string name, int& totalPoints) {
 
 void TaskList::importTasks() {
     ifstream input;
-    input.open("TaskList.txt");
+    input.open("saved_files/TaskList.txt");
     if (!input.is_open()) {
         cout << "Failed to open TaskList.txt" << endl;
         return;
@@ -248,7 +214,6 @@ void TaskList::importTasks() {
         prev = temp;
         temp = temp->next;
     }
-    cout << "3" << endl;
     tail = prev;
     delete temp;
     input.close();
@@ -416,4 +381,10 @@ void TaskList::editTask(string title) {
         printEditMenu();
         cin >> option;
     }
+}
+
+void TaskList::undoDeleteTask()
+{
+    addTask(recent_deleted_Task->name,recent_deleted_Task->tag,recent_deleted_Task->description,recent_deleted_Task->day,recent_deleted_Task->month,recent_deleted_Task->year);
+    recent_deleted_Task = nullptr;
 }

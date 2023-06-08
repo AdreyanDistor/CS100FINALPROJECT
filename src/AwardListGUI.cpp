@@ -13,3 +13,16 @@ void AwardListGUI::displayAwards()
         cout << endl;
     }
 }
+
+void AwardListGUI::displayPointLog()
+{
+    ifstream pointLog;
+    pointLog.open("saved_files/Point_Log.txt");
+    while(!pointLog.eof())
+    {
+        string message;
+        getline(pointLog,message);
+        cout << message << endl;
+    }
+    pointLog.close();
+}

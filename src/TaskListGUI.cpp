@@ -5,12 +5,6 @@
 #include <sstream>
 using namespace std;
 
-TaskListGUI::TaskListGUI()
-{
-    head = nullptr;
-    recent_deleted_Task = nullptr;
-    tail = nullptr;
-}
 
 string TaskListGUI::showOverdue() {
     TaskNode* curr = head;
@@ -84,7 +78,7 @@ string TaskListGUI::printList()
     }
     while (currNode !=nullptr)
     {
-        list+= currNode->exportTask() + "\n";
+        list+= currNode->displayTask() + "\n";
         currNode = currNode->next; 
     }
     return list;
