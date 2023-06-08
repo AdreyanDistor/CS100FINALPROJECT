@@ -160,6 +160,16 @@ TEST(buyAwardTest, testMultipleQuantity) {
     EXPECT_EQ(testAwardList.getTotalPoints(), 0);
     EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 5);
 }
+
+TEST(buyAwardTest, notEnoughPoints) {
+    AwardList testAwardList;
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.setTotalPoints(5);
+
+    testAwardList.buyAward("cupcake", 1);
+    EXPECT_EQ(testAwardList.getTotalPoints(), 5);
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 0);
+}
 // TEST(markTaskComplete, test) {
 //     TaskList list;
 //     int points = 0;
