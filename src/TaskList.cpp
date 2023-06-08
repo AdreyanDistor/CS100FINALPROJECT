@@ -249,7 +249,6 @@ void TaskList::markOverdue(char* tm) {
     int currDay = stoi(time.substr(8, 2));
     int currMonth = 0;
     int currYear = stoi(time.substr(20, 4));
-    
     if (monthStr == "Jan") {
         currMonth = 1;
     } else if (monthStr == "Feb") {
@@ -275,15 +274,26 @@ void TaskList::markOverdue(char* tm) {
     } else if (monthStr == "Dec") {
         currMonth = 12;
     }
-
     while (curr != nullptr) {
-        if (curr->year < currYear) {
+        if (curr->year < currYear) 
+        {
             curr->overdue = true;
-        } else if (curr->month < currMonth) {
-            curr->overdue = true;
-        } else if (curr->day < currDay) {
-            curr->overdue = true;
+        } 
+        else if(curr->year == currYear)
+        {
+            if (curr->month < currMonth) 
+            {
+                curr->overdue = true;
+            } 
+            else if(curr->year == currYear)
+            {
+                if (curr->day < currDay) 
+                {
+                    curr->overdue = true;
+                }
+            }
         }
+        
         curr = curr->next;
     }
 }

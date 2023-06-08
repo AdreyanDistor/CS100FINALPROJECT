@@ -233,7 +233,7 @@ TEST(buyAward, pointLog)
     EXPECT_EQ(5, list.getTotalPoints());
 }
 
-TEST(markOverDue, test) {
+TEST(markOverDue, allOnTime) {
     TaskListGUI list;
     list.addTask("one", "chore", "first one", 1, 1, 2024);
     list.addTask("two", "chore", "second one", 3, 6, 2024);
@@ -248,10 +248,40 @@ TEST(markOverDue, test) {
     EXPECT_EQ(curr3->overdue, false);
 } 
 
+TEST(markOverDue, allOverdue) {
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 1, 2023);
+    list.addTask("two", "chore", "second one", 3, 6, 2023);
+    list.addTask("three", "chore", "third one", 2, 11, 2023);
+    char* tm = "Fri Aug 15 00:00:00 2023";
+    list.markOverdue(tm);
+    TaskNode* curr1 = list.search("one");
+    TaskNode* curr2 = list.search("two");
+    TaskNode* curr3 = list.search("three");
+    EXPECT_EQ(curr1->overdue, true);
+    EXPECT_EQ(curr2->overdue, true);
+    EXPECT_EQ(curr3->overdue, true);
+} 
+
+TEST(markOverDue, SomeOverdue) {
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 1, 2022);
+    list.addTask("two", "chore", "second one", 3, 6, 2025);
+    list.addTask("three", "chore", "third one", 22, 11, 2021);
+    char* tm = "Fri Aug 15 00:00:00 2023";
+    list.markOverdue(tm);
+    TaskNode* curr1 = list.search("one");
+    TaskNode* curr2 = list.search("two");
+    TaskNode* curr3 = list.search("three");
+    EXPECT_EQ(curr1->overdue, true);
+    EXPECT_EQ(curr2->overdue, false);
+    EXPECT_EQ(curr3->overdue, true);
+} 
+
 TEST(markTaskComplete, testTaskOverdue) {
     TaskListGUI list;
     int points = 0;
-    list.addTask("one", "essay", "random", 5, 4, 2023);
+    list.addTask("one", "essay", "random", 5, 4, 202);
     char* tm = "Fri Jul 3 00:00:00 2023";
     list.markOverdue(tm);
     list.markTaskCompleted("one", points);
@@ -279,6 +309,7 @@ TEST(editingATask, editTaskname) {
     string newDes = "changed";
     list.editTask("two");
     EXPECT_EQ(list.search("three")->name, "changed");
+    
 }
 
 
