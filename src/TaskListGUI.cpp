@@ -12,6 +12,18 @@ TaskListGUI::TaskListGUI()
     tail = nullptr;
 }
 
+TaskListGUI::~TaskListGUI()
+{
+    TaskNode* currNode = head;
+    while(currNode != nullptr)
+    {
+        TaskNode* tempNode = nullptr;
+        tempNode = currNode;
+        currNode = currNode->next;
+        delete tempNode;
+    }
+}
+
 string TaskListGUI::showOverdue() {
     TaskNode* curr = head;
     ostringstream osS; 
