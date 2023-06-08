@@ -2,7 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
 
 project(TimeManagement)
 
-ADD_SUBDIRECTORY(googletest)
+ADD_SUBDIRECTORY(test/googletest)
 
 ADD_EXECUTABLE(run
     test/test.cpp

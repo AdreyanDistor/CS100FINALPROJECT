@@ -1,4 +1,4 @@
-#include "../googletest/googletest/include/gtest/gtest.h"
+#include "googletest/googletest/include/gtest/gtest.h"
 #include "../header/AwardList.h"
 #include "../header/TaskList.h"
 #include "../header/TaskListGUI.h"
@@ -26,46 +26,46 @@ TEST(markTaskComplete, test) {
 }
 
 TEST(markTaskComplete, testtaskOverdue) {
-    TaskList list;
+    TaskListGUI list;
     int points = 0;
     list.addTask("one", "essay", "random", 5, 4, 2023);
     char* tm = "Fri Jul 3 00:00:00 2023";
-    list.showOverdue(tm);
+    list.markOverdue(tm);
     list.markTaskCompleted("one", points);
     EXPECT_EQ(points, 5); 
 }
 
 TEST(createAwardTest, testAwardSucessfullyCreated) {
-    TaskList t1;
+    AwardList t1;
     t1.createAward("test award", 50);
-    EXPECT_EQ(awardlistSize, 1);
-    EXPECT_EQ(t1.getAwardList.at(0)->award_name, "test award");
+    EXPECT_EQ(t1.getAwardVector().size(), 1);
+    EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award");
 }
 
 TEST(createAwardTest, testAwardPushBack) {
-    TaskList t1;
+    AwardList t1;
     t1.createAward("test award", 50);
     t1.createAward("test award 2", 75);
-    EXPECT_EQ(awardlistSize, 2);
-    EXPECT_EQ(t1.getAwardList().at(1)->award_name, "test award 2" );
+    EXPECT_EQ(t1.getAwardVector().size(), 2);
+    EXPECT_EQ(t1.getAwardVector().at(1)->award_name, "test award 2" );
 }
 
 TEST(deleteAwardTest, testAwardDeleted) {
-    TaskList t1;
+    AwardList t1;
     t1.createAward("test award", 50);
-    EXPECT_EQ(awardlistSize, 1);
+    EXPECT_EQ(t1.getAwardVector().size(), 1);
     t1.deleteAward("test award");
-    EXPECT_EQ(awardlistSize, 0);
+    EXPECT_EQ(t1.getAwardVector().size(), 0);
 }
 
 TEST(deleteAwardTest, testCorrectAwardDeleted) {
-    TaskList t1;
+    AwardList t1;
     t1.createAward("test award", 50);
     t1.createAward("test award 2", 75);
     t1.createAward("test award 3", 100);
     t1.deleteAward("test award");
-    EXPECT_EQ(awardlistSize, 2);
-    EXPECT_EQ(t1.getAwardList.at(0)->award_name, "test award 2");
+    EXPECT_EQ(t1.getAwardVector().size(), 2);
+    EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award 2");
 }
 
 TEST(showOverDue, test) {
@@ -74,7 +74,8 @@ TEST(showOverDue, test) {
     list.addTask("two", "chore", "second one", 3, 6, 2023);
     list.addTask("three", "chore", "third one", 22, 11, 2023);
     char* tm = "Fri Aug 15 00:00:00 2023";
-    list.showOverdue(tm);
+    list.markOverdue(tm);
+    list.showOverdue();
     TaskNode* curr1 = list.search("one");
     TaskNode* curr2 = list.search("two");
     TaskNode* curr3 = list.search("three");
@@ -89,16 +90,17 @@ TEST(PrintList, noOverDue) {
     list.addTask("two", "studying", "second one", 14, 11, 2023);
     list.addTask("three", "other", "third one", 22, 11, 2023);
     char* tm = "Fri Aug 15 00:00:00 2023";
-    list.showOverdue(tm);
+    list.markOverdue(tm);
+    list.showOverdue();
     TaskNode* curr1 = list.search("one");
     TaskNode* curr2 = list.search("two");
     TaskNode* curr3 = list.search("three");
     bool curr1Bool;
     bool curr2Bool;
     bool curr3Bool;
-    curr1Bool = (curr1.displayTask() == "      11/23/2023      CHORE      one");
-    curr2Bool = (curr2.displayTask() == "      11/14/2023      STUDY      two");
-    curr3Bool = (curr2.displayTask() == "      11/22/2023      OTHER      three");
+    curr1Bool = (curr1->displayTask() == "      11/23/2023      CHORE      one");
+    curr2Bool = (curr2->displayTask() == "      11/14/2023      STUDY      two");
+    curr3Bool = (curr2->displayTask() == "      11/22/2023      OTHER      three");
     EXPECT_EQ(curr1Bool, true);
     EXPECT_EQ(curr2Bool, true);
     EXPECT_EQ(curr3Bool, true);
@@ -232,14 +234,6 @@ TEST(markOverDue, test) {
     EXPECT_EQ(curr2->overdue, true);
     EXPECT_EQ(curr3->overdue, false);
 } 
-
-TEST(markTaskComplete, test) {
-    TaskList list;
-    int points = 0;
-    list.addTask("one", "chore", "random", 5, 4, 2023);
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 5);
-}
 
 TEST(markTaskComplete, testTaskOverdue) {
     TaskListGUI list;
