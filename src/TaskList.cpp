@@ -112,10 +112,10 @@ void TaskList::deleteTask(string name)
             {
                 prevNode->next = currNode->next;
             }
+            recent_deleted_Task = new TaskNode(currNode->name, currNode->tag,currNode->description, currNode->day, currNode->month, currNode->year);
             delete currNode;
             return;
         }
-        recent_deleted_Task = new TaskNode(currNode->name, currNode->tag,currNode->description, currNode->day, currNode->month, currNode->year);
         prevNode = currNode;
         currNode = currNode->next;
     }
@@ -249,7 +249,6 @@ void TaskList::markOverdue(char* tm) {
     int currDay = stoi(time.substr(8, 2));
     int currMonth = 0;
     int currYear = stoi(time.substr(20, 4));
-    
     if (monthStr == "Jan") {
         currMonth = 1;
     } else if (monthStr == "Feb") {
@@ -275,15 +274,26 @@ void TaskList::markOverdue(char* tm) {
     } else if (monthStr == "Dec") {
         currMonth = 12;
     }
-
     while (curr != nullptr) {
-        if (curr->year < currYear) {
+        if (curr->year < currYear) 
+        {
             curr->overdue = true;
-        } else if (curr->month < currMonth) {
-            curr->overdue = true;
-        } else if (curr->day < currDay) {
-            curr->overdue = true;
+        } 
+        else if(curr->year == currYear)
+        {
+            if (curr->month < currMonth) 
+            {
+                curr->overdue = true;
+            } 
+            else if(curr->year == currYear)
+            {
+                if (curr->day < currDay) 
+                {
+                    curr->overdue = true;
+                }
+            }
         }
+        
         curr = curr->next;
     }
 }
@@ -385,6 +395,10 @@ void TaskList::editTask(string title) {
 
 void TaskList::undoDeleteTask()
 {
-    addTask(recent_deleted_Task->name,recent_deleted_Task->tag,recent_deleted_Task->description,recent_deleted_Task->day,recent_deleted_Task->month,recent_deleted_Task->year);
-    recent_deleted_Task = nullptr;
+    if(recent_deleted_Task != nullptr)
+    {
+        addTask(recent_deleted_Task->name,recent_deleted_Task->tag,recent_deleted_Task->description,recent_deleted_Task->day,recent_deleted_Task->month,recent_deleted_Task->year);
+        recent_deleted_Task = nullptr;
+    }
+    
 }
