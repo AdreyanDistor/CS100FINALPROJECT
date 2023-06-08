@@ -31,8 +31,6 @@ class AwardList
 	protected:
 		vector<Award*> awardVector;
 		int totalPoints;
-		string congratsMessage(const Award* boughtAward, const int quantity); //prints out a random congratulatory message
-
 	public:
 		AwardList();
 		~AwardList();
@@ -45,7 +43,8 @@ class AwardList
 		int getTotalPoints(); //return totalPoints
 		void setTotalPoints(int newTotalPoints); //set totalPoints
 		void importTotalPoints(); //imports totalPoints
-  
+		string congratsMessage(const Award* boughtAward, const int quantity); //prints out a random congratulatory message
+
 	  //for testing
 		vector<Award*> getAwardVector();
 };

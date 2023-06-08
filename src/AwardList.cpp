@@ -89,7 +89,6 @@ string AwardList::congratsMessage(const Award* boughtAward, const int quantity) 
     string randomMsgs[4] = {"Nice catch there bob!","Good eye their chief","Congrats!","That's a nice treat!"};
     srand(time(NULL));
     congratsMsg = randomMsgs[(rand() % 4)] + " You just bought: " + to_string(quantity) + " " + boughtAward->award_name + " and spent " +  to_string(boughtAward->cost*quantity) + " points";
-    cout << congratsMsg << endl;
     return congratsMsg;
 }
 
