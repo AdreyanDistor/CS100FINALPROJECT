@@ -1,19 +1,15 @@
-cmake_minimum_required(VERSION 3.2)
-project(unit-test-exercise)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib")
+project(TimeManagement)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y")
+ADD_SUBDIRECTORY(googletest)
 
-include_directories(${CMAKE_SOURCE_DIR}/include)
-link_directories(${LIBRARY_OUTPUT_PATH})
-
-include_directories(
-  ${CMAKE_SOURCE_DIR}/test/lib/googletest/include/
-  ${CMAKE_SOURCE_DIR}/test/lib/googlemock/include/
+ADD_EXECUTABLE(run
+    test/test.cpp
+    src/TaskList.cpp
+    src/TaskListGUI.cpp
+    src/AwardList.cpp
+    src/AwardListGUI.cpp
 )
 
-add_subdirectory(src)
-add_subdirectory(test)
+TARGET_LINK_LIBRARIES (run gtest gtest_main)

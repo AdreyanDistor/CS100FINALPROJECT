@@ -1,4 +1,8 @@
 #include "../header/TaskListGUI.h"
+#include <string>
+#include <iostream>
+#include <string>
+#include <sstream>
 using namespace std;
 
 TaskListGUI::TaskListGUI()
@@ -8,50 +12,21 @@ TaskListGUI::TaskListGUI()
     tail = nullptr;
 }
 
-void TaskListGUI::showOverdue(char* tm) {
+string TaskListGUI::showOverdue() {
     TaskNode* curr = head;
-    string time = tm;
-    string monthStr = time.substr(4, 3);
-    int currDay = stoi(time.substr(8, 2));
-    int currMonth = 0;
-    int currYear = stoi(time.substr(20, 4));
-    
-    if (monthStr == "Jan") {
-        currMonth = 1;
-    } else if (monthStr == "Feb") {
-        currMonth = 2;
-    } else if (monthStr == "Mar") {
-        currMonth = 3;
-    } else if (monthStr == "Apr") {
-        currMonth = 4;
-    } else if (monthStr == "May") {
-        currMonth = 5;
-    } else if (monthStr == "Jun") {
-        currMonth = 6;
-    } else if (monthStr == "Jul") {
-        currMonth = 7;
-    } else if (monthStr == "Aug") {
-        currMonth = 8;
-    } else if (monthStr == "Sep") {
-        currMonth = 9;
-    } else if (monthStr == "Oct") {
-        currMonth = 10;
-    } else if (monthStr == "Nov") {
-        currMonth = 11;
-    } else if (monthStr == "Dec") {
-        currMonth = 12;
+    ostringstream osS; 
+    osS << "       Date      -       Tag       -       Name" << endl;
+    if (curr == nullptr) {
+        return osS.str();
     }
-
     while (curr != nullptr) {
-        if (curr->year > currYear) {
-            curr->overdue = true;
-        } else if (curr->month > currMonth) {
-            curr->overdue = true;
-        } else if (curr->day > currDay) {
-            curr->overdue = true;
+        if (curr->overdue == true) {
+            osS << curr->displayTask() << endl;
         }
         curr = curr->next;
     }
+
+    return osS.str();
 }
 
 string TaskListGUI::showTodayOnly(int day, int month, int year)
@@ -97,9 +72,10 @@ string TaskListGUI::sortByTag(string user_tag)
     
     return sortedTags;
 }
+
 string TaskListGUI::printList()
 {
-    int i = 1;
+    cout << "       Date      -       Tag       -       Name" << endl;
     TaskNode* currNode = head;
     string list = "";
     if(head == nullptr)
@@ -108,9 +84,8 @@ string TaskListGUI::printList()
     }
     while (currNode !=nullptr)
     {
-        list+= i + ". " + currNode->exportTask() + "\n";
+        list+= currNode->exportTask() + "\n";
         currNode = currNode->next; 
-        i++;
     }
     return list;
 }
@@ -128,3 +103,5 @@ void TaskListGUI::printOverdueMessage()
         }
     }
 }
+
+

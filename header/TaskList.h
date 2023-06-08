@@ -36,6 +36,58 @@ struct TaskNode
         string output = name + '`' + description + '`' + tag +  '`' + to_string(month) + '`' + to_string(day) + '`' + to_string(year) + '`' + isOverdue;
         return output;
     }; //this will be used in exportTasks of the Tasklist file
+
+    // TEST THIS
+    string displayTask() {
+
+        string x;
+        string shortTag;
+        string date;
+
+        if (overdue) {
+            x = "x    ";
+        } else {
+            x = "      ";
+        }
+
+        // abbreviates the tag
+        if (tag == "chore") {
+            shortTag = "CHORE";
+        } else if (tag == "essay") {
+            shortTag = "ESSAY";
+        } else if (tag == "short_assign") {
+            shortTag = "SHORT";
+        } else if (tag == "long_assign") {
+            shortTag = "LONG_";
+        } else if (tag == "studying") {
+            shortTag = "STUDY";
+        } else if (tag == "project") {
+            shortTag = "PROJT";
+        } else if (tag == "lab") {
+            shortTag = "LAB__";
+        } else {
+            shortTag = "OTHER";
+        }
+
+        string newYear = to_string(year%2000);
+        string newDay = to_string(day);
+        string newMonth = to_string(month);
+
+        if (day < 10) {
+            newDay = "0" + newDay;
+        }
+        if (month < 10) {
+            newMonth = "0" + newMonth;
+        }
+        if (day < 10) {
+            newMonth = "0" + newMonth;
+        }
+
+        date = to_string(day) + "/" + to_string(month) + "/" + to_string(year%2000);
+        
+        return x + "      " + date + "      " + shortTag + "      " + name;
+    }
+
 	string printDate() {
     ostringstream osS; 
     osS << setfill('0') << setw(2) << month << "/" << setw(2) << day << "/" << year;
@@ -60,9 +112,8 @@ class TaskList
         TaskNode* search(string); //searches list until task with same name is found, returns nullptr otherwise	
         void importTasks(); //import tasks from “TaskList.txt”, look at TaskList to see how to import, makes the linked list 
         void exportTasks(); //will ouput and write the file the function named “TaskList.txt”
-        void sortByTag(string user_tag); //displays tasks of a specific tag
-        void markTaskCompleted(string name, int& totalPoints); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points,
-        void printList(); //prints entire list, could be added to a class called gui, or user input 
+        void markOverdue(char* tm); //marks tasks overdue by turning the isOverdue bool true 
+        void markTaskCompleted(string name, int& totalPoints); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points, 
         void editTask(string title); //edits a task
         void printEditMenu(); //helper func used in editTask();
 };
