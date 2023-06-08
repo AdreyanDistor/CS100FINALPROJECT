@@ -82,8 +82,8 @@ void AwardList::buyAward(string buyingAward, int quantity) {
             else
             {
                 cout << "Error: not enough points!" << endl;
-                return;
             }
+            return;
         }
     }
     cout << "Error: Award not found!" << endl;
