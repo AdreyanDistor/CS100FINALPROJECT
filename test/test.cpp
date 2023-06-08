@@ -99,7 +99,7 @@ int main(int argc, char **argv) {
     list10.printList();
 }
 
-TEST(buyAwardTest, testAwardSuccessfullyBought) {
+TEST(buyAwardTest, testOnlyAward) {
     AwardList testAwardList;
     testAwardList.createAward("cupcake", 10);
     testAwardList.setTotalPoints(10);
@@ -120,6 +120,20 @@ TEST(buyAwardTest, testFrontOfVec) {
     EXPECT_EQ(testAwardList.getTotalPoints(), 0);
     EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 1);
     EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 0);
+}
+
+TEST(buyAwardTest, testMiddleOfVec) {
+    AwardList testAwardList;
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(10);
+
+    testAwardList.buyAward("poke", 1);
+    EXPECT_EQ(testAwardList.getTotalPoints(), 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 1);
     EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 0);
 }
 
