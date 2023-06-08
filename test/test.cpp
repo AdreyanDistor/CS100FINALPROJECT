@@ -137,6 +137,20 @@ TEST(buyAwardTest, testMiddleOfVec) {
     EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 0);
 }
 
+TEST(buyAwardTest, testEndOfVec) {
+    AwardList testAwardList;
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(10);
+
+    testAwardList.buyAward("boba", 1);
+    EXPECT_EQ(testAwardList.getTotalPoints(), 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 1);
+}
+
 // TEST(markTaskComplete, test) {
 //     TaskList list;
 //     int points = 0;
