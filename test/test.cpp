@@ -211,3 +211,54 @@ TEST(buyAward, pointLog)
         }
     EXPECT_TRUE(isMsgPresent);
 }
+
+TEST(useAward, frontOfVec) {
+    AwardList testAwardList;
+
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(30);
+    testAwardList.buyAward("cupcake", 1);
+    testAwardList.buyAward("poke", 1);
+    testAwardList.buyAward("boba", 1);
+    testAwardList.useAward("cupcake");
+
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 1);
+}
+
+TEST(useAward, middleOfVec) {
+    AwardList testAwardList;
+
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(30);
+    testAwardList.buyAward("cupcake", 1);
+    testAwardList.buyAward("poke", 1);
+    testAwardList.buyAward("boba", 1);
+    testAwardList.useAward("poke");
+
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 1);
+}
+
+TEST(useAward, endOfVec) {
+    AwardList testAwardList;
+
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(30);
+    testAwardList.buyAward("cupcake", 1);
+    testAwardList.buyAward("poke", 1);
+    testAwardList.buyAward("boba", 1);
+    testAwardList.useAward("boba");
+
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 0);
+}
