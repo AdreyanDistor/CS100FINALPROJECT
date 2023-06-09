@@ -15,17 +15,18 @@ TaskList::TaskList()
 TaskList::~TaskList()
 {
     TaskNode* currNode = head;
+    TaskNode* next = nullptr;
     while(currNode != nullptr)
     {
-        TaskNode* tempNode = nullptr;
-        tempNode = currNode;
-        currNode = currNode->next;
-        delete tempNode;
+        next = currNode->next;
+        delete currNode;
+        currNode = next;
     }
 }
 
 void TaskList::addTask(string name, string tag,string description, int day, int month, int year)
 {
+
     TaskNode* newNode = new TaskNode(name, tag,description, day, month,year);
     if(head == nullptr)
     {
@@ -35,30 +36,11 @@ void TaskList::addTask(string name, string tag,string description, int day, int 
     {
         tail = newNode;
         head->next = tail;
-        bool tailEarlier = false;
-        TaskNode* tempNode = head;
-       
-        if(tail->year < head->year)
-        {
-            tailEarlier = true;
-        }
-        else if(tail->year == head->year)
-        {
-            if(tail->month < head->month)
-            {
-                tailEarlier == true;
-            }
-            else if(tail->month == head->month)
-            {
-                if(tail->day <= head->day)
-                {
-                    tailEarlier == true;
-                }
-            }
-        }
+        tail->next = nullptr;
 
-        if(tailEarlier)
+        if(tail->thisNodeEarlier(head))
         {
+            TaskNode* tempNode = head;
             head = tail;
             tail = tempNode;
             tail->next = nullptr;
@@ -68,53 +50,37 @@ void TaskList::addTask(string name, string tag,string description, int day, int 
     }
     else
     {
-        
-            TaskNode* currNode = head;
-            TaskNode* prevNode = head;
-            while(currNode != nullptr)
+        TaskNode* currNode = head;
+        TaskNode* prevNode = head;
+        while(currNode != nullptr)
+        {   
+            if(newNode->thisNodeEarlier(currNode))
             {
-                bool newNodeEarlier = false;
-                if(newNode->year < currNode->year)
+                if(currNode == head)
                 {
-                    newNodeEarlier = true;
+                    newNode->next = head;
+                    head = newNode;
                 }
-                else if(newNode->year == currNode->year)
+                else if(currNode == tail)
                 {
-                    if(newNode->month < currNode->month)
-                    {
-                        newNodeEarlier = true;
-                    }
-                    else if(newNode->month == currNode->month)
-                    {
-                        if(newNode->day <= currNode->day)
-                        {
-                           newNodeEarlier == true;
-                        }
-                    }
+                    prevNode->next = newNode;
+                    newNode->next = tail;
                 }
-
-                if(newNodeEarlier)
+                else
                 {
-                    if(currNode == head)
-                    {
-                        newNode->next = head;
-                        head = newNode;
-                    }
-                    else
-                    {
-                        prevNode->next = newNode;
-                        newNode->next = currNode;
-                    }
-                    return;
+                    prevNode->next = newNode;
+                    newNode->next = currNode;
                 }
-                prevNode = currNode;
-                currNode = currNode->next;
+                return;
 
             }
+            prevNode = currNode;
+            currNode = currNode->next;
+        }
 
-            tail->next = newNode;
-            tail = newNode;
-            tail->next = nullptr;
+        tail->next = newNode;
+        tail = newNode;
+        tail->next = nullptr;
         
     }
     return;
@@ -146,10 +112,10 @@ void TaskList::deleteTask(string name)
             {
                 prevNode->next = currNode->next;
             }
+            recent_deleted_Task = new TaskNode(currNode->name, currNode->tag,currNode->description, currNode->day, currNode->month, currNode->year);
             delete currNode;
             return;
         }
-                    recent_deleted_Task = new TaskNode(currNode->name, currNode->tag,currNode->description, currNode->day, currNode->month, currNode->year);
         prevNode = currNode;
         currNode = currNode->next;
     }
@@ -157,7 +123,7 @@ void TaskList::deleteTask(string name)
 
 TaskNode* TaskList::search(string name) {
     TaskNode* curr = head;
-    while (curr->name != name && curr != nullptr) {
+    while (curr != nullptr && curr->name != name) {
         curr = curr->next;
     }
     return curr;
@@ -209,16 +175,14 @@ void TaskList::markTaskCompleted(string name, int& totalPoints) {
     pointLog.close();
 }
 
-void TaskList::importTasks() {
+void TaskList::importTasks(string filename) {
     ifstream input;
-    input.open("TaskList.txt");
+    input.open(filename);
     if (!input.is_open()) {
-        cout << "Failed to open TaskList.txt" << endl;
+        cout << "Failed to open " + filename << endl;
         return;
     }
 
-    TaskNode* temp = head;
-    TaskNode* prev = head;
     string name;
     string tag;
     string description;
@@ -227,9 +191,8 @@ void TaskList::importTasks() {
     string year; // to convert to int
     string overdue; 
 
-    // iterates through file to find each parameter in each TaskNode
-    while (!input.eof()) {
-        getline(input, name, '`');
+    // // iterates through file to find each parameter in each TaskNode
+    while (getline(input, name, '`')) {
         getline(input, tag, '`');
         getline(input, description, '`');
         getline(input, day, '`');
@@ -237,25 +200,14 @@ void TaskList::importTasks() {
         getline(input, year, '`');
         getline(input, overdue);
 
-        // creates a new TaskNode and moves to the next one
-        // stoi() is to convert the string to an int
-        temp = new TaskNode(name, tag, description, stoi(day), stoi(month), stoi(year));
-        if (overdue == "true")
-            temp->overdue = true;
-        else
-            temp->overdue = false;
-
-        prev = temp;
-        temp = temp->next;
+        addTask(name, tag, description, stoi(day), stoi(month), stoi(year));
     }
-    cout << "3" << endl;
-    tail = prev;
-    delete temp;
+
     input.close();
 
 }
 
-void TaskList::exportTasks() {
+void TaskList::exportTasks(string filename) {
 
     // creating a file to replace TaskList.cpp
     ofstream output;
@@ -271,54 +223,41 @@ void TaskList::exportTasks() {
         temp = temp->next;
     }
 
-    remove("TaskList.txt");
-    rename("temp.txt", "TaskList.txt");
+    const char* newFileName = filename.c_str();
+
+    remove(newFileName);
+    rename("temp.txt", newFileName);
     output.close();
 
 }
 
-void TaskList::markOverdue(char* tm) {
+void TaskList::markOverdue() {
     TaskNode* curr = head;
-    string time = tm;
-    string monthStr = time.substr(4, 3);
-    int currDay = stoi(time.substr(8, 2));
-    int currMonth = 0;
-    int currYear = stoi(time.substr(20, 4));
-    
-    if (monthStr == "Jan") {
-        currMonth = 1;
-    } else if (monthStr == "Feb") {
-        currMonth = 2;
-    } else if (monthStr == "Mar") {
-        currMonth = 3;
-    } else if (monthStr == "Apr") {
-        currMonth = 4;
-    } else if (monthStr == "May") {
-        currMonth = 5;
-    } else if (monthStr == "Jun") {
-        currMonth = 6;
-    } else if (monthStr == "Jul") {
-        currMonth = 7;
-    } else if (monthStr == "Aug") {
-        currMonth = 8;
-    } else if (monthStr == "Sep") {
-        currMonth = 9;
-    } else if (monthStr == "Oct") {
-        currMonth = 10;
-    } else if (monthStr == "Nov") {
-        currMonth = 11;
-    } else if (monthStr == "Dec") {
-        currMonth = 12;
-    }
-
+    time_t currentTime = time(0);
+    struct tm* timeInfo = localtime(&currentTime);
+    int currYear = timeInfo->tm_year + 1900;
+    int currMonth = timeInfo->tm_mon + 1; 
+    int currDay = timeInfo->tm_mday;
     while (curr != nullptr) {
-        if (curr->year > currYear) {
+        if (curr->year < currYear) 
+        {
             curr->overdue = true;
-        } else if (curr->month > currMonth) {
-            curr->overdue = true;
-        } else if (curr->day > currDay) {
-            curr->overdue = true;
+        } 
+        else if(curr->year == currYear)
+        {
+            if (curr->month < currMonth) 
+            {
+                curr->overdue = true;
+            } 
+            else if(curr->year == currYear)
+            {
+                if (curr->day < currDay) 
+                {
+                    curr->overdue = true;
+                }
+            }
         }
+        
         curr = curr->next;
     }
 }
@@ -345,9 +284,9 @@ void TaskList::editTask(string title) {
         if (option == 1) { //name
             string _name;
             cout << "Enter new task name: " << endl;
+            cin.clear();
             getline(cin, _name);
-            //cin.ignore;
-            curr->name = _name;
+            curr->setName(_name);
         } else if (option == 2) { //tag
             int _option;
             cout << "Tag options" << endl;
@@ -357,29 +296,29 @@ void TaskList::editTask(string title) {
             cin >> _option;
 
             if (_option == 1) {
-                curr->tag = "chore";
+                curr->setTag("chore");
             } else if (_option == 2) {
-                curr->tag = "essay";
+                curr->setTag("essay");
             } else if (_option == 3) {
-                curr->tag = "short";
+                curr->setTag("short");
             } else if (_option == 4) {
-                curr->tag = "long";
+                curr->setTag("long");
             } else if (_option == 5) {
-                curr->tag = "study";
+                curr->setTag("study");
             } else if (_option == 6) {
-                curr->tag = "proj";
+                curr->setTag("proj");
             } else if (_option == 7) {
-                curr->tag = "lab";
+                curr->setTag("lab");
             } else if (_option == 8) {
-                curr->tag = "other";
+                curr->setTag("other");
             }
 
         } else if (option == 3) { //description
             string _des;
             cout << "Enter new description: " << endl;
+            cin.clear();
             getline(cin, _des);
-            //cin.ignore;
-            curr->description = _des;
+            curr->setDescription(_des);
         } else if (option == 4) { //date 
             int _option;
             cout << "Current Date: " << curr->printDate() << endl;
@@ -391,19 +330,19 @@ void TaskList::editTask(string title) {
             while (_option != 4) {
                 if (_option == 1) {
                     int _month;
-                    cout << "Enter new month (MM): " << endl;
+                    cout << "Enter new month: " << endl;
                     cin >> _month;
-                    curr->month = _month;
+                    curr->setMonth(_month);
                 } else if (_option == 2) {
                     int _day;
-                    cout << "Enter new day (DD): " << endl;
+                    cout << "Enter new day: " << endl;
                     cin >> _day;
-                    curr->day = _day;
+                    curr->setDay(_day);
                 } else if (_option == 3) {
                     int _year;
                     cout << "Enter new year (YYYY): " << endl;
                     cin >> _year;
-                    curr->year = _year;
+                    curr->setYear(_year);
                 }
                 cout << "Current Date: " << curr->printDate() << endl;
                 cout << "What would you like to change?" << endl;
@@ -416,4 +355,14 @@ void TaskList::editTask(string title) {
         printEditMenu();
         cin >> option;
     }
+}
+
+void TaskList::undoDeleteTask()
+{
+    if(recent_deleted_Task != nullptr)
+    {
+        addTask(recent_deleted_Task->name,recent_deleted_Task->tag,recent_deleted_Task->description,recent_deleted_Task->day,recent_deleted_Task->month,recent_deleted_Task->year);
+        recent_deleted_Task = nullptr;
+    }
+    
 }

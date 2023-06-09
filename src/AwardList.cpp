@@ -14,11 +14,11 @@ AwardList::~AwardList() {
     }
 }
 
-void AwardList::importAwards() {
+void AwardList::importAwards(string filename) {
     ifstream input;
-    input.open("AwardList.txt");
+    input.open(filename);
     if (!input.is_open()) {
-        cout << "Failed to open AwardList.txt" << endl;
+        cout << "Failed to open "+ filename << endl;
         return;
     }
   
@@ -36,7 +36,7 @@ void AwardList::importAwards() {
     input.close();
 } 
   
-void AwardList::exportAwards() {
+void AwardList::exportAwards(string filename) {
     // creating a file to replace AwardList.cpp
     ofstream output;
     output.open("temp.txt");
@@ -49,8 +49,10 @@ void AwardList::exportAwards() {
         output << awardVector.at(i)->exportAward() << endl;
     }
 
-    remove("AwardList.txt");
-    rename("temp.txt", "AwardList.txt");
+    const char* newFileName = filename.c_str();
+
+    remove(newFileName);
+    rename("temp.txt", newFileName);
     output.close();
 }
 
@@ -144,3 +146,19 @@ void AwardList::setTotalPoints(int newTotalPoints) {totalPoints = newTotalPoints
 
 //for testing
 vector<Award*> AwardList::getAwardVector() { return awardVector; }
+
+void AwardList::importTotalPoints()
+{
+    ifstream points;
+    points.open("saved_files/Total_Points.txt");
+    points >> totalPoints;
+    points.close();
+}
+
+void AwardList::exportTotalPoints()
+{
+    ofstream points;
+    points.open("saved_files/Total_Points.txt");
+    points << totalPoints;
+    points.close();
+}

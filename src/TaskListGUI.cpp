@@ -5,56 +5,45 @@
 #include <sstream>
 using namespace std;
 
-TaskListGUI::TaskListGUI()
-{
-    head = nullptr;
-    recent_deleted_Task = nullptr;
-    tail = nullptr;
-}
 
-string TaskListGUI::showOverdue() {
+void TaskListGUI::showOverdue() {
     TaskNode* curr = head;
-    ostringstream osS; 
-    osS << "       Date      -       Tag       -       Name" << endl;
+    cout << "       Date      -       Tag       -       Name" << endl;
     if (curr == nullptr) {
-        return osS.str();
+        return;
     }
     while (curr != nullptr) {
         if (curr->overdue == true) {
-            osS << curr->displayTask() << endl;
+           cout << curr->displayTask() << endl;
         }
         curr = curr->next;
     }
 
-    return osS.str();
 }
 
-string TaskListGUI::showTodayOnly(int day, int month, int year)
+void TaskListGUI::showTodayOnly(int day, int month, int year)
 {
-    string todayList = "";
     TaskNode* currNode = head;
     while(currNode != nullptr)
     {
         if(currNode->day == day && currNode->month == month && currNode->year == year)
         {
-            todayList+=currNode->exportTask() + "\n";
+            cout << currNode->displayTask() << endl;
         }
         currNode = currNode->next;
     }
-    return todayList;
 }
 
-string TaskListGUI::sortByTag(string user_tag)
+void TaskListGUI::showByTag(string user_tag)
 {
     TaskNode* currNode = head;
-    string sortedTags;
     if(currNode != nullptr)
     {
         if(head == tail)
         {
             if(currNode->tag == user_tag)
             {
-                sortedTags+= currNode->exportTask() + "\n";
+                cout << currNode->displayTask() << endl;
             }
         }
         else
@@ -63,31 +52,28 @@ string TaskListGUI::sortByTag(string user_tag)
             {
                 if(currNode->tag == user_tag)
                 {
-                    sortedTags+= currNode->exportTask() + "\n";
+                    cout << currNode->displayTask() << endl;
                 }
                 currNode = currNode->next;
             }
         }
     }
     
-    return sortedTags;
 }
 
-string TaskListGUI::printList()
+void TaskListGUI::printList()
 {
     cout << "       Date      -       Tag       -       Name" << endl;
     TaskNode* currNode = head;
-    string list = "";
     if(head == nullptr)
     {
-        return list;
+        return;
     }
     while (currNode !=nullptr)
     {
-        list+= currNode->exportTask() + "\n";
+        cout << currNode->displayTask() << endl;
         currNode = currNode->next; 
     }
-    return list;
 }
 
 
