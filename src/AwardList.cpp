@@ -27,8 +27,7 @@ void AwardList::importAwards(string filename) {
     string award_name;
 
     // iterates through file to find each parameter in each TaskNode
-    while (!input.eof()) {
-        getline(input, award_name, '`');
+    while (getline(input, award_name, '`')) {
         getline(input, cost, '`');
         getline(input, user_count);
         awardVector.push_back(new Award(award_name, stoi(cost), stoi(user_count) ) );
