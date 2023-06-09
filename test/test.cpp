@@ -549,14 +549,27 @@ TEST(markComplete, pointLog)
 
 }
 
-TEST(buyAwardTest, pointLog)
+TEST(buyAward, pointLog)
 {
     AwardListGUI list;
-    list.createAward("WOWOWOW",5);
-    list.setTotalPoints(10);
-    list.buyAward("WOWOWOW",1);
-    list.useAward("WOWOWOW");
-    EXPECT_EQ(5, list.getTotalPoints());
+    list.createAward("customTestAward",5);
+    list.setTotalPoints(5);
+    list.buyAward("customTestAward",1);
+
+    ifstream ifs;
+    ifs.open("saved_files/Point_Log.txt",ios::app);
+    EXPECT_TRUE(ifs.is_open());
+
+    bool isMsgPresent;
+    string logMsg;
+    while(getline(ifs,logMsg)) //loops to last line of file
+    if(logMsg == "Nice catch there bob! You just bought: 1 WOWOWOW and spent 5 points" || 
+        logMsg == "Good eye their chief You just bought: 1 WOWOWOW and spent 5 points" ||
+        logMsg == "Congrats! You just bought: 1 WOWOWOW and spent 5 points" || 
+        logMsg == "That's a nice treat! You just bought: 1 WOWOWOW and spent 5 points") {
+            isMsgPresent = true;
+        }
+    EXPECT_TRUE(isMsgPresent);
 }
 
 TEST(buyAwardTest, testOnlyAward) {
@@ -838,3 +851,55 @@ TEST(editingATask, editTaskname) {
     EXPECT_EQ(list.search("three")->name, "changed");
     
 }
+
+TEST(useAward, frontOfVec) {
+    AwardList testAwardList;
+
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(30);
+    testAwardList.buyAward("cupcake", 1);
+    testAwardList.buyAward("poke", 1);
+    testAwardList.buyAward("boba", 1);
+    testAwardList.useAward("cupcake");
+
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 1);
+}
+
+TEST(useAward, middleOfVec) {
+    AwardList testAwardList;
+
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(30);
+    testAwardList.buyAward("cupcake", 1);
+    testAwardList.buyAward("poke", 1);
+    testAwardList.buyAward("boba", 1);
+    testAwardList.useAward("poke");
+
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 1);
+}
+
+TEST(useAward, endOfVec) {
+    AwardList testAwardList;
+
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(30);
+    testAwardList.buyAward("cupcake", 1);
+    testAwardList.buyAward("poke", 1);
+    testAwardList.buyAward("boba", 1);
+    testAwardList.useAward("boba");
+
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 0);
+}
+

@@ -43,8 +43,9 @@ class AwardList
 		int getTotalPoints(); //return totalPoints
 		void setTotalPoints(int newTotalPoints); //set totalPoints
 		void importTotalPoints(); //imports totalPoints
-		void exportTotalPoints();
-  
+	  void exportTotalPoints();
+    string congratsMessage(const Award* boughtAward, const int quantity); //prints out a random congratulatory message
+
 	  //for testing
 		vector<Award*> getAwardVector();
 };
