@@ -55,26 +55,9 @@ This screen is accessed by clicking the "+" at the bottom of the awards list in 
 There are two main classes in which each includes a node struct. First there is the TaskList class with a TaskNode struct. Each node is its own task object which is why there is the struct. Each TaskNode has 8 variables: title, day, month, year, a description, the tag, a boolean to mark them overdue, and a TaskNode refernece to the next node. There are also a functions that are a mix of modifiers and display functions. The modifiers are there to help edit the variables and make it easier to write unit tests. The display functions are helper functions that output certain data in a desired format. The TaskList class itself has 3 protected variables which are 3 TaskNode* references to the head, tail, and the most recently deleted node. There a lot of functions that allow the user to interact with the list. There is also a subclass, TaskListGUI, which focuses on the display aspect of the list. The AwardList class is strucutured in a similar way. The Awards class defines an award object. Each award object has 3 private variables: its name, cost, and how many a user has "bought." We are not using a linked list to store the awards because it can easily be stored in a vector of award objects which will be initialized in the main function. Just like the TaskList class there are multiple public functions that allow for different types of interactions. There are 2 protected variables in this class: a vector that holds Award object references and an integer for the total points the user has. There is also a subclass that has 2 functions that focus on display. 
 
  > ## Phase III
- > You will need to schedule a check-in for the second scrum meeting with the same reader you had your first scrum meeting with (using Calendly). Your entire team must be present. This meeting will occur on week 8 during lab time.
- 
- > BEFORE the meeting you should do the following:
- > * Update your class diagram from Phase II to include any feedback you received from your TA/grader.
- > * Considering the SOLID design principles, reflect back on your class diagram and think about how you can use the SOLID principles to improve your design. You should then update the README.md file by adding the following:
- >   * A new class diagram incorporating your changes after considering the SOLID principles.
- >   * For each update in your class diagram, you must explain in 3-4 sentences:
- >     * What SOLID principle(s) did you apply?
- >     * How did you apply it? i.e. describe the change.
- >     * How did this change help you write better code?
- > * Perform a new sprint plan like you did in Phase II.
- > * You should also make sure that your README file (and Project board) are up-to-date reflecting the current status of your project and the most recent class diagram. Previous versions of the README file should still be visible through your commit history.
- 
-> During the meeting with your reader you will discuss: 
- > * How effective your last sprint was (each member should talk about what they did)
- > * Any tasks that did not get completed last sprint, and how you took them into consideration for this sprint
- > * Any bugs you've identified and created issues for during the sprint. Do you plan on fixing them in the next sprint or are they lower priority?
- > * What tasks you are planning for this next sprint.
+ > TaskListGUI: We added TaskListGUI to apply the Single Responsibility Principle, and the Liskov Principle. We applied it by moving any functions that display information about TaskLists into TaskListGUI, meaning the TaskList's class only job is to manage information, while TaskListGUI's only job is to display, and let the user interact with information related to TaskList. The Liskov principle was applied because TaskListGUI can be used as a TaskList object.
+ > AwardListGUI: We added TaskListGUI to apply the Single Responsibility Principle, and the Liskov Principle. We applied it by moving any functions that display information about AwardLists into AwardListGUI, meaning the AwardList's class only job is to manage information, while TaskListGUI's only job is to display, and let the user interact with information related to AwardList. The Liskov principle was applied because AwardList can replace a AwardList object.
 
- 
  > ## Final deliverable
  > All group members will give a demo to the reader during lab time. ou should schedule your demo on Calendly with the same reader who took your second scrum meeting. The reader will check the demo and the project GitHub repository and ask a few questions to all the team members. 
  > Before the demo, you should do the following:
