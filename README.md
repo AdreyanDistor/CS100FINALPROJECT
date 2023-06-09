@@ -73,8 +73,14 @@ There are two main classes in which each includes a node struct. First there is 
  > * Make sure your README file and Project board are up-to-date reflecting the current status of your project (e.g. any changes that you have made during the project such as changes to your class diagram). Previous versions should still be visible through your commit history. 
  
  ## Screenshots
- > Screenshots of the input/output after running your application
- ## Installation/Usage
+ ![image](https://github.com/cs100/final-project-scelo002-nvern003-adist003-ogodh001/assets/46554183/ee2239fe-6194-4671-91f0-a1ef1d5677fd)
+ ![image](https://github.com/cs100/final-project-scelo002-nvern003-adist003-ogodh001/assets/46554183/edccd090-66e2-4e41-9e54-5547658b22e7)
+![image](https://github.com/cs100/final-project-scelo002-nvern003-adist003-ogodh001/assets/46554183/1d6e2f49-da44-42a7-9a79-b42d5cdb10e3)
+![image](https://github.com/cs100/final-project-scelo002-nvern003-adist003-ogodh001/assets/46554183/1d52b5a9-e8f6-4437-8209-1a0c56308b07)
+![image](https://github.com/cs100/final-project-scelo002-nvern003-adist003-ogodh001/assets/46554183/53982fb1-52fc-4007-810e-d7bd75cbcf53)
+![image](https://github.com/cs100/final-project-scelo002-nvern003-adist003-ogodh001/assets/46554183/4e58e875-fa4c-46f5-8c09-9fc2ce2dafc3)
+
+## Installation/Usage
  > Instructions on installing and running your application
  
  ## Testing
