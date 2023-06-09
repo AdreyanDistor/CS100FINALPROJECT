@@ -76,6 +76,7 @@ There are two main classes in which each includes a node struct. First there is 
  > Screenshots of the input/output after running your application
  ## Installation/Usage
  > Instructions on installing and running your application
+ 
  ## Testing
- > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
+ > Our project was tested using the googletest submodule to generate a test file using "cmake ."->"make"->"./runTests" that contains 74 tests. We also used Valgrind to check that we were memcheck clean using "./valgrind --leak-check=yes".
  
