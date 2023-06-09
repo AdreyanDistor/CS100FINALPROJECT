@@ -181,9 +181,9 @@ void taskPageMenu(TaskListGUI& taskList) {
             cout << "Which task would you like to view?" << endl;
             getline(cin, name);
             TaskNode* taskToView = taskList.search(name);
-            if (tasktoView != nullptr) {
+            if (taskToView != nullptr) {
                 while (key == -1) {
-                if (tasktoView->overdue == true) {
+                if (taskToView->overdue == true) {
                     cout << "OVERDUE!\n" <<
                         "Name: " << taskToView->name << "\n" <<
                         "Due Date: " << taskToView->printDate() << "\n" <<
