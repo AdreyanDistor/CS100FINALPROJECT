@@ -549,7 +549,7 @@ TEST(markComplete, pointLog)
 
 }
 
-TEST(buyAward, pointLog)
+TEST(buyAwardTest, pointLog)
 {
     AwardListGUI list;
     list.createAward("WOWOWOW",5);
@@ -557,6 +557,88 @@ TEST(buyAward, pointLog)
     list.buyAward("WOWOWOW",1);
     list.useAward("WOWOWOW");
     EXPECT_EQ(5, list.getTotalPoints());
+}
+
+TEST(buyAwardTest, testOnlyAward) {
+    AwardList testAwardList;
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.setTotalPoints(10);
+
+    testAwardList.buyAward("cupcake", 1);
+    EXPECT_EQ(testAwardList.getTotalPoints(), 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 1);
+}
+
+TEST(buyAwardTest, testFrontOfVec) {
+    AwardList testAwardList;
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(10);
+
+    testAwardList.buyAward("cupcake", 1);
+    EXPECT_EQ(testAwardList.getTotalPoints(), 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 0);
+}
+
+TEST(buyAwardTest, testMiddleOfVec) {
+    AwardList testAwardList;
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(10);
+
+    testAwardList.buyAward("poke", 1);
+    EXPECT_EQ(testAwardList.getTotalPoints(), 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 0);
+}
+
+TEST(buyAwardTest, testEndOfVec) {
+    AwardList testAwardList;
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(10);
+
+    testAwardList.buyAward("boba", 1);
+    EXPECT_EQ(testAwardList.getTotalPoints(), 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 1);
+}
+
+TEST(buyAwardTest, testMultipleQuantity) {
+    AwardList testAwardList;
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.setTotalPoints(50);
+
+    testAwardList.buyAward("cupcake", 5);
+    EXPECT_EQ(testAwardList.getTotalPoints(), 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 5);
+}
+
+TEST(buyAwardTest, notEnoughPoints) {
+    AwardList testAwardList;
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.setTotalPoints(5);
+
+    testAwardList.buyAward("cupcake", 1);
+    EXPECT_EQ(testAwardList.getTotalPoints(), 5);
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 0);
+}
+
+TEST(buyAwardTest, quantityTooHigh) {
+    AwardList testAwardList;
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.setTotalPoints(40);
+
+    testAwardList.buyAward("cupcake", 5);
+    EXPECT_EQ(testAwardList.getTotalPoints(), 40);
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 0);
 }
 
 TEST(markOverDue, allOnTime) {
@@ -746,6 +828,7 @@ TEST(editingATask, setYEar3) {
 //     EXPECT_EQ(points, 10);
 
 // }
+
 TEST(editingATask, editTaskname) {
     TaskList list;
     list.addTask("one", "chore", "first one", 1, 2, 2022);
@@ -755,6 +838,3 @@ TEST(editingATask, editTaskname) {
     EXPECT_EQ(list.search("three")->name, "changed");
     
 }
-
-
-
