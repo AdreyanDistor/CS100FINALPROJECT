@@ -176,16 +176,14 @@ void TaskList::markTaskCompleted(string name, AwardListGUI& awardList) {
     pointLog.close();
 }
 
-void TaskList::importTasks() {
+void TaskList::importTasks(string filename) {
     ifstream input;
-    input.open("saved_files/TaskList.txt");
+    input.open(filename);
     if (!input.is_open()) {
-        cout << "Failed to open TaskList.txt" << endl;
+        cout << "Failed to open " + filename << endl;
         return;
     }
 
-    TaskNode* temp = head;
-    TaskNode* prev = head;
     string name;
     string tag;
     string description;
@@ -194,9 +192,8 @@ void TaskList::importTasks() {
     string year; // to convert to int
     string overdue; 
 
-    // iterates through file to find each parameter in each TaskNode
-    while (!input.eof()) {
-        getline(input, name, '`');
+    // // iterates through file to find each parameter in each TaskNode
+    while (getline(input, name, '`')) {
         getline(input, tag, '`');
         getline(input, description, '`');
         getline(input, day, '`');
@@ -204,24 +201,14 @@ void TaskList::importTasks() {
         getline(input, year, '`');
         getline(input, overdue);
 
-        // creates a new TaskNode and moves to the next one
-        // stoi() is to convert the string to an int
-        temp = new TaskNode(name, tag, description, stoi(day), stoi(month), stoi(year));
-        if (overdue == "true")
-            temp->overdue = true;
-        else
-            temp->overdue = false;
-
-        prev = temp;
-        temp = temp->next;
+        addTask(name, tag, description, stoi(day), stoi(month), stoi(year));
     }
-    tail = prev;
-    delete temp;
+
     input.close();
 
 }
 
-void TaskList::exportTasks() {
+void TaskList::exportTasks(string filename) {
 
     // creating a file to replace TaskList.cpp
     ofstream output;
@@ -237,8 +224,10 @@ void TaskList::exportTasks() {
         temp = temp->next;
     }
 
-    remove("TaskList.txt");
-    rename("temp.txt", "TaskList.txt");
+    const char* newFileName = filename.c_str();
+
+    remove(newFileName);
+    rename("temp.txt", newFileName);
     output.close();
 
 }

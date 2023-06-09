@@ -78,11 +78,10 @@ struct TaskNode
         {
             isOverdue = "false";
         }
-        string output = name + '`' + description + '`' + tag +  '`' + to_string(month) + '`' + to_string(day) + '`' + to_string(year) + '`' + isOverdue;
+        string output = name + '`' + tag + '`' + description +  '`' + to_string(day) + '`' + to_string(month) + '`' + to_string(year) + '`' + isOverdue;
         return output;
     }; //this will be used in exportTasks of the Tasklist file
 
-    // TEST THIS
     string displayTask() {
 
         string x;
@@ -182,8 +181,8 @@ class TaskList
         void deleteTask(string name); // removes task from list, 
         void undoDeleteTask(); //adds task back into list, if unsorted, just at the end of the list. If recent_deleted_task is = “” then nothin happens
         TaskNode* search(string); //searches list until task with same name is found, returns nullptr otherwise	
-        void importTasks(); //import tasks from “TaskList.txt”, look at TaskList to see how to import, makes the linked list 
-        void exportTasks(); //will ouput and write the file the function named “TaskList.txt”
+        void importTasks(string filename); //import tasks from the file(name) parameter and forms a linked list
+        void exportTasks(string filename); //will use the linked list and write to the file to save the user's data
         void markOverdue(); //marks tasks overdue by turning the isOverdue bool true 
         void markTaskCompleted(string name, AwardListGUI& awardList); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points, 
         void editTask(string title); //edits a task

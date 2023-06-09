@@ -34,8 +34,8 @@ class AwardList
 	public:
 		AwardList();
 		~AwardList();
-		void importAwards(); //import tasks from “AwardsList.txt”
-		void exportAwards(); //will write the file within the function named “AwardsList.txt”
+		void importAwards(string filename); //import tasks from “AwardsList.txt”
+		void exportAwards(string filename); //will write the file within the function named “AwardsList.txt”
 		void buyAward(string buyingAward, int quantity); //increases user_count by 1, subtracts from totalPoints, error message if not enough points
 		void useAward(string name); //lower user_count by 1, erorr message if 0
 		void createAward(string name, int cost); //add award to award list
@@ -43,8 +43,9 @@ class AwardList
 		int getTotalPoints(); //return totalPoints
 		void setTotalPoints(int newTotalPoints); //set totalPoints
 		void importTotalPoints(); //imports totalPoints
-		void exportTotalPoints();
-  
+	  void exportTotalPoints();
+    string congratsMessage(const Award* boughtAward, const int quantity); //prints out a random congratulatory message
+
 	  //for testing
 		vector<Award*> getAwardVector();
 };
