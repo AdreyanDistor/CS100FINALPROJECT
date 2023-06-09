@@ -81,7 +81,7 @@ There are two main classes in which each includes a node struct. First there is 
 ![image](https://github.com/cs100/final-project-scelo002-nvern003-adist003-ogodh001/assets/46554183/4e58e875-fa4c-46f5-8c09-9fc2ce2dafc3)
 
 ## Installation/Usage
- > Instructions on installing and running your application
+Copying this repo into vscode and and running executables will run the program.
  
  ## Testing
  > Our project was tested using the googletest submodule to generate a test file using "cmake ."->"make"->"./runTests" that contains 74 tests. We also used Valgrind to check that we were memcheck clean using "./valgrind --leak-check=yes". We also had to run some visual tests to check the GUI's spacing and other small details.
