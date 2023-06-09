@@ -1,85 +1,49 @@
 #include "../header/TaskListGUI.h"
+#include <string>
+#include <iostream>
+#include <string>
+#include <sstream>
 using namespace std;
 
-TaskListGUI::TaskListGUI()
-{
-    head = nullptr;
-    recent_deleted_Task = nullptr;
-    tail = nullptr;
-}
 
-void TaskListGUI::showOverdue(char* tm) {
+void TaskListGUI::showOverdue() {
     TaskNode* curr = head;
-    string time = tm;
-    string monthStr = time.substr(4, 3);
-    int currDay = stoi(time.substr(8, 2));
-    int currMonth = 0;
-    int currYear = stoi(time.substr(20, 4));
-    
-    if (monthStr == "Jan") {
-        currMonth = 1;
-    } else if (monthStr == "Feb") {
-        currMonth = 2;
-    } else if (monthStr == "Mar") {
-        currMonth = 3;
-    } else if (monthStr == "Apr") {
-        currMonth = 4;
-    } else if (monthStr == "May") {
-        currMonth = 5;
-    } else if (monthStr == "Jun") {
-        currMonth = 6;
-    } else if (monthStr == "Jul") {
-        currMonth = 7;
-    } else if (monthStr == "Aug") {
-        currMonth = 8;
-    } else if (monthStr == "Sep") {
-        currMonth = 9;
-    } else if (monthStr == "Oct") {
-        currMonth = 10;
-    } else if (monthStr == "Nov") {
-        currMonth = 11;
-    } else if (monthStr == "Dec") {
-        currMonth = 12;
+    cout << "       Date      -       Tag       -       Name" << endl;
+    if (curr == nullptr) {
+        return;
     }
-
     while (curr != nullptr) {
-        if (curr->year > currYear) {
-            curr->overdue = true;
-        } else if (curr->month > currMonth) {
-            curr->overdue = true;
-        } else if (curr->day > currDay) {
-            curr->overdue = true;
+        if (curr->overdue == true) {
+           cout << curr->displayTask() << endl;
         }
         curr = curr->next;
     }
+
 }
 
-string TaskListGUI::showTodayOnly(int day, int month, int year)
+void TaskListGUI::showTodayOnly(int day, int month, int year)
 {
-    string todayList = "";
     TaskNode* currNode = head;
     while(currNode != nullptr)
     {
         if(currNode->day == day && currNode->month == month && currNode->year == year)
         {
-            todayList+=currNode->exportTask() + "\n";
+            cout << currNode->displayTask() << endl;
         }
         currNode = currNode->next;
     }
-    return todayList;
 }
 
-string TaskListGUI::sortByTag(string user_tag)
+void TaskListGUI::showByTag(string user_tag)
 {
     TaskNode* currNode = head;
-    string sortedTags;
     if(currNode != nullptr)
     {
         if(head == tail)
         {
             if(currNode->tag == user_tag)
             {
-                sortedTags+= currNode->exportTask() + "\n";
+                cout << currNode->displayTask() << endl;
             }
         }
         else
@@ -88,31 +52,28 @@ string TaskListGUI::sortByTag(string user_tag)
             {
                 if(currNode->tag == user_tag)
                 {
-                    sortedTags+= currNode->exportTask() + "\n";
+                    cout << currNode->displayTask() << endl;
                 }
                 currNode = currNode->next;
             }
         }
     }
     
-    return sortedTags;
 }
-string TaskListGUI::printList()
+
+void TaskListGUI::printList()
 {
-    int i = 1;
+    cout << "       Date      -       Tag       -       Name" << endl;
     TaskNode* currNode = head;
-    string list = "";
     if(head == nullptr)
     {
-        return list;
+        return;
     }
     while (currNode !=nullptr)
     {
-        list+= i + ". " + currNode->exportTask() + "\n";
+        cout << currNode->displayTask() << endl;
         currNode = currNode->next; 
-        i++;
     }
-    return list;
 }
 
 
@@ -128,3 +89,5 @@ void TaskListGUI::printOverdueMessage()
         }
     }
 }
+
+

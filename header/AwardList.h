@@ -43,6 +43,7 @@ class AwardList
 		int getTotalPoints(); //return totalPoints
 		void setTotalPoints(int newTotalPoints); //set totalPoints
 		void importTotalPoints(); //imports totalPoints
+		void exportTotalPoints();
   
 	  //for testing
 		vector<Award*> getAwardVector();

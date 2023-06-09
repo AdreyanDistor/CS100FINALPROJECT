@@ -10,8 +10,9 @@ using namespace std;
 
 class AwardListGUI: public AwardList{
     public:
-        AwardListGUI();
         void displayAwards(); //showing the awards on GUI
+        void displayPointLog();
+        AwardListGUI();
         
 };
 

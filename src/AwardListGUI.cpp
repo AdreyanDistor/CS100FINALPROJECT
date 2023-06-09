@@ -1,8 +1,7 @@
 #include "../header/AwardListGUI.h"
 
-AwardListGUI::AwardListGUI() {
-    totalPoints = 0;
-}
+ AwardListGUI::AwardListGUI()
+ {}
 
 void AwardListGUI::displayAwards()
 {
@@ -13,4 +12,17 @@ void AwardListGUI::displayAwards()
         awardVector.at(i)->displayAward();
         cout << endl;
     }
+}
+
+void AwardListGUI::displayPointLog()
+{
+    ifstream pointLog;
+    pointLog.open("saved_files/Point_Log.txt");
+    while(!pointLog.eof())
+    {
+        string message;
+        getline(pointLog,message);
+        cout << message << endl;
+    }
+    pointLog.close();
 }
