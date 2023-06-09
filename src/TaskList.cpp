@@ -1,6 +1,8 @@
 #include "../header/TaskList.h"
 #include <iostream>
 #include <string>
+#include <fstream>
+#include<cstdlib>
 using namespace std;
 
 TaskList::TaskList()
@@ -155,7 +157,7 @@ void TaskList::deleteTask(string name)
 
 TaskNode* TaskList::search(string name) {
     TaskNode* curr = head;
-    while (curr->name != name) {
+    while (curr->name != name && curr != nullptr) {
         curr = curr->next;
     }
     return curr;
@@ -187,19 +189,24 @@ void TaskList::markTaskCompleted(string name, int& totalPoints) {
         totalPoints += point/2;
     }
     this->deleteTask(name);
-}
+    string congratsMsg;
+    string randomMsgs[4] = {"That's a job well done.","Good Job!","Congrats!","Cheers on finishing the task!"};
+    srand(time(NULL));
+    congratsMsg = randomMsgs[(rand() % 4)] + " You just completed: " + name + " and got " + to_string(point) + " points";
+    cout << congratsMsg << endl;
+    ofstream pointLog;
+    pointLog.open("saved_files/Point_Log.txt",ios::app);
 
-// COULD ADD TO GUI CLASS
-void TaskList::printList()
-{
-    int i = 1;
-    TaskNode* currNode = head;
-    while (currNode !=nullptr)
+    if(pointLog.is_open())
     {
-        cout << i << ". " << currNode->exportTask() << endl;
-        currNode = currNode->next; 
-        i++;
+        pointLog << congratsMsg << endl;
     }
+    else
+    {
+        cout << "WOW THAT DID NOT WORK" << endl;
+    }
+    pointLog.close();
+    
     
 }
 
@@ -283,72 +290,87 @@ void TaskList::printEditMenu() {
 
     cout << "Enter option: " << endl;
 }
+
 void TaskList::editTask(string title) {
     TaskNode* curr = search(title);
+    cout << "EditTask Page" << endl << endl;
     int option;
     printEditMenu();
     cin >> option;
+
     while (option != 5) {
-        if (option == 1) { //name 
+        if (option == 1) { //name
             string _name;
-            cout << "Enter new name: " << endl;
+            cout << "Enter new task name: " << endl;
             getline(cin, _name);
-            cin.ignore();
+            //cin.ignore;
             curr->name = _name;
-            cout << "Name is now:" << _name << end;
         } else if (option == 2) { //tag
-            int _tag;
-            cout << "1- chore, 2- essay, 3- short assignment, 4- long assigment" << endl;
-            cout << "5- studying, 6- project, 7- lab, 8- other " << endl;
-            cout << "Enter the coresponding number for the new tag: " << endl;
-            cin >> _tag;
-            if (_tag == 1) {
+            int _option;
+            cout << "Tag options" << endl;
+            cout << "1- chore | 2- essay | 3- short assignment | 4- long assignment" << endl;
+            cout << "5- studying | 6- project | 7- lab | 8- other" << endl << endl;
+            cout << "Enter option: " << endl;
+            cin >> _option;
+
+            if (_option == 1) {
                 curr->tag = "chore";
-            } else if (_tag == 2) {
+            } else if (_option == 2) {
                 curr->tag = "essay";
-            } else if (_tag == 3) {
+            } else if (_option == 3) {
                 curr->tag = "short";
-            } else if (_tag == 4) {
+            } else if (_option == 4) {
                 curr->tag = "long";
-            } else if (_tag == 5) {
+            } else if (_option == 5) {
                 curr->tag = "study";
-            } else if (_tag == 6) {
+            } else if (_option == 6) {
                 curr->tag = "proj";
-            } else if (_tag == 7) {
+            } else if (_option == 7) {
                 curr->tag = "lab";
-            } else if (_tag == 8) {
+            } else if (_option == 8) {
                 curr->tag = "other";
-            } else {
-                cout << "Error: invalid input. Please try again." << endl;
-                break;
             }
-        } else if(option == 3) { //description 
+
+        } else if (option == 3) { //description
             string _des;
             cout << "Enter new description: " << endl;
             getline(cin, _des);
-            cin.ignore();
+            //cin.ignore;
             curr->description = _des;
-        } else if (option == 4) { //date
-            int _option = 1;
+        } else if (option == 4) { //date 
+            int _option;
+            cout << "Current Date: " << curr->printDate() << endl;
+            cout << "What would you like to change?" << endl;
+            cout << "1- Month | 2- Day | 3- Year | 4- Exit" << endl;
+            cout << "Enter option: " << endl;
+            cin >> _option;
+
             while (_option != 4) {
-                cout << "Current due date: " << curr->printDate() << endl << endl;
-                cout << "What do you want to change? Enter a number from the following options: " << endl;
-                cout << "1- month, 2- day, 3-year, 4- done: " << endl;
-                cin >> _option;
-                if (_option == 1) { //month
+                if (_option == 1) {
                     int _month;
-                    count << "Enter new month number: " << endl;
+                    cout << "Enter new month (MM): " << endl;
+                    cin >> _month;
                     curr->month = _month;
-                } else if (_option == 2) { //day
-                    int _day; 
-                    count << "Enter new day: " << endl;
+                } else if (_option == 2) {
+                    int _day;
+                    cout << "Enter new day (DD): " << endl;
+                    cin >> _day;
                     curr->day = _day;
-                } else if (_option == 3) { //year
+                } else if (_option == 3) {
                     int _year;
-                    count << "Enter new year (YYYY): " << endl;
+                    cout << "Enter new year (YYYY): " << endl;
+                    cin >> _year;
                     curr->year = _year;
                 }
+                cout << "Current Date: " << curr->printDate() << endl;
+                cout << "What would you like to change?" << endl;
+                cout << "1- Month | 2- Day | 3- Year | 4- Exit" << endl;
+                cout << "Enter option: " << endl;
+                cin >> _option;
             }
         }
+
+        printEditMenu();
+        cin >> option;
     }
 }

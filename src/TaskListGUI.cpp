@@ -1,10 +1,15 @@
 #include "../header/TaskListGUI.h"
-#include <string>
-#include <iostream>
 using namespace std;
 
-void TaskListGUI::showOverdue(TaskList list, char* tm) {
-    TaskNode* curr = list->head;
+TaskListGUI::TaskListGUI()
+{
+    head = nullptr;
+    recent_deleted_Task = nullptr;
+    tail = nullptr;
+}
+
+void TaskListGUI::showOverdue(char* tm) {
+    TaskNode* curr = head;
     string time = tm;
     string monthStr = time.substr(4, 3);
     int currDay = stoi(time.substr(8, 2));
@@ -40,7 +45,7 @@ void TaskListGUI::showOverdue(TaskList list, char* tm) {
     while (curr != nullptr) {
         if (curr->year > currYear) {
             curr->overdue = true;
-        } else if (curr->month > currMon) {
+        } else if (curr->month > currMonth) {
             curr->overdue = true;
         } else if (curr->day > currDay) {
             curr->overdue = true;
@@ -59,7 +64,7 @@ string TaskListGUI::showTodayOnly(int day, int month, int year)
         {
             todayList+=currNode->exportTask() + "\n";
         }
-        curr = curr->next;
+        currNode = currNode->next;
     }
     return todayList;
 }
@@ -91,4 +96,35 @@ string TaskListGUI::sortByTag(string user_tag)
     }
     
     return sortedTags;
+}
+string TaskListGUI::printList()
+{
+    int i = 1;
+    TaskNode* currNode = head;
+    string list = "";
+    if(head == nullptr)
+    {
+        return list;
+    }
+    while (currNode !=nullptr)
+    {
+        list+= i + ". " + currNode->exportTask() + "\n";
+        currNode = currNode->next; 
+        i++;
+    }
+    return list;
+}
+
+
+void TaskListGUI::printOverdueMessage()
+{
+    TaskNode* currNode = head;
+    while(currNode != nullptr)
+    {
+        if(currNode->overdue == true)
+        {
+            cout << "YOU HAVE OVERDUE TASKS!!!!" << endl;
+            return;
+        }
+    }
 }
