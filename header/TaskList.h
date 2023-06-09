@@ -91,7 +91,7 @@ struct TaskNode
         if (overdue) {
             x = "x    ";
         } else {
-            x = "      ";
+            x = "     ";
         }
 
         // abbreviates the tag
@@ -127,7 +127,7 @@ struct TaskNode
             newMonth = "0" + newMonth;
         }
 
-        date = to_string(day) + "/" + to_string(month) + "/" + to_string(year%2000);
+        date = to_string(month) + "/" + to_string(day) + "/" + to_string(year%2000);
         
         return x + "      " + date + "      " + shortTag + "      " + name;
     }
@@ -183,7 +183,7 @@ class TaskList
         TaskNode* search(string); //searches list until task with same name is found, returns nullptr otherwise	
         void importTasks(); //import tasks from “TaskList.txt”, look at TaskList to see how to import, makes the linked list 
         void exportTasks(); //will ouput and write the file the function named “TaskList.txt”
-        void markOverdue(char* tm); //marks tasks overdue by turning the isOverdue bool true 
+        void markOverdue(); //marks tasks overdue by turning the isOverdue bool true 
         void markTaskCompleted(string name, int& totalPoints); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points, 
         void editTask(string title); //edits a task
         void printEditMenu(); //helper func used in editTask();

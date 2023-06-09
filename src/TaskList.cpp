@@ -242,38 +242,13 @@ void TaskList::exportTasks() {
 
 }
 
-void TaskList::markOverdue(char* tm) {
+void TaskList::markOverdue() {
     TaskNode* curr = head;
-    string time = tm;
-    string monthStr = time.substr(4, 3);
-    int currDay = stoi(time.substr(8, 2));
-    int currMonth = 0;
-    int currYear = stoi(time.substr(20, 4));
-    if (monthStr == "Jan") {
-        currMonth = 1;
-    } else if (monthStr == "Feb") {
-        currMonth = 2;
-    } else if (monthStr == "Mar") {
-        currMonth = 3;
-    } else if (monthStr == "Apr") {
-        currMonth = 4;
-    } else if (monthStr == "May") {
-        currMonth = 5;
-    } else if (monthStr == "Jun") {
-        currMonth = 6;
-    } else if (monthStr == "Jul") {
-        currMonth = 7;
-    } else if (monthStr == "Aug") {
-        currMonth = 8;
-    } else if (monthStr == "Sep") {
-        currMonth = 9;
-    } else if (monthStr == "Oct") {
-        currMonth = 10;
-    } else if (monthStr == "Nov") {
-        currMonth = 11;
-    } else if (monthStr == "Dec") {
-        currMonth = 12;
-    }
+    time_t currentTime = time(0);
+    struct tm* timeInfo = localtime(&currentTime);
+    int currYear = timeInfo->tm_year + 1900;
+    int currMonth = timeInfo->tm_mon + 1; 
+    int currDay = timeInfo->tm_mday;
     while (curr != nullptr) {
         if (curr->year < currYear) 
         {
