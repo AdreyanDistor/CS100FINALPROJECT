@@ -29,10 +29,10 @@ void taskPageMenu(TaskListGUI& taskList) {
 
     while (option != 8) {
         if (option == 1) { //add 
-            cout << "Enter New Task Name: (ex: Lecture HomeWork)" << endl << endl;
+            cout << "Enter New Task Name: (ex: Lecture HomeWork)" << endl;
             string taskName;
+            cin.ignore();
             getline(cin,taskName);
-            cin.clear();
             cout << "1 - Chore" << endl <<
             "2 - Essay" << endl <<
             "3 - Short Assignment" << endl <<
@@ -89,8 +89,8 @@ void taskPageMenu(TaskListGUI& taskList) {
             cin >> taskYear;
             cout << endl << "Enter Description: ";
             string taskDescription;
+            cin.ignore();
             getline(cin,taskDescription);
-            cin.clear();
             taskList.addTask(taskName, taskTag, taskDescription,taskDay,taskMonth,taskYear);
         } else if (option == 2) { //delete 
             cout << "Which task would you like to delete?" << endl;
@@ -112,13 +112,14 @@ void taskPageMenu(TaskListGUI& taskList) {
             << "Printing Types" << endl 
             << "1 - Show Today Only" << endl
             << "2 - Show by Tag" << endl
-            << "3 - Show Overdue" << endl << endl
+            << "3 - Show Overdue" << endl  <<
+                 "4 - Show Whole List"      <<endl << endl
             << "Enter option: " << endl;
             cin >> choice;
             
-            if (option == 1) {
+            if (choice == 1) {
                 taskList.showTodayOnly();
-            } else if (option == 2) {
+            } else if (choice == 2) {
                 cout << "1 - Chore" << endl <<
                 "2 - Essay" << endl <<
                 "3 - Short Assignment" << endl <<
@@ -165,27 +166,32 @@ void taskPageMenu(TaskListGUI& taskList) {
                     taskTag = "other";
                 }
                 taskList.showByTag(taskTag);
-            } else {
+            }
+            else if(choice == 4)
+            {
+                taskList.printList();
+            }
+             else {
                 taskList.showOverdue();
             }
         } else if (option == 4) { //edit
             string _name;
             cout << "Enter the name of the task you want to edit: " << endl;
+            cin.ignore();
             getline(cin, _name);
-            cin.clear();
             taskList.editTask(_name);
         } else if (option == 5) { //show details 
             string _name;
             cout << "Enter the name of which task you want to see the details of: " << endl;
+            cin.ignore();
             getline(cin, _name);
-            cin.clear();
             TaskNode* curr = taskList.search(_name);
             //display details 
         } else if (option == 6) { //mark complete
             string _name;
             cout << "Enter the name of the task you want to mark complete: " << endl;
+            cin.ignore();
             getline(cin, _name);
-            cin.clear();
             //mark complete
         } else if (option == 7) {  //undo delete 
             taskList.undoDeleteTask();
@@ -318,6 +324,7 @@ int main() {
     taskList.markOverdue();
     
     startMenu(taskList, awardList);
+
 
     //saving data 
     taskList.exportTasks("saved_files/TaskList.txt");

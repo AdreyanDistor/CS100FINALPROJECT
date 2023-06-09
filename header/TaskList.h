@@ -69,16 +69,7 @@ struct TaskNode
 
 	string exportTask()
     {
-        string isOverdue;
-        if(overdue == true)
-        {
-            isOverdue = "true";
-        }
-        else
-        {
-            isOverdue = "false";
-        }
-        string output = name + '`' + tag + '`' + description +  '`' + to_string(day) + '`' + to_string(month) + '`' + to_string(year) + '`' + isOverdue;
+        string output = name + '`' + tag + '`' + description +  '`' + to_string(day) + '`' + to_string(month) + '`' + to_string(year);
         return output;
     }; //this will be used in exportTasks of the Tasklist file
 
