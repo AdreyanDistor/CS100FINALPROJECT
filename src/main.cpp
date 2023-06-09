@@ -104,5 +104,46 @@ int main() {
 
     //PointLogScreen
     awardList.displayPointLog();
+
+
+    //Show Task Details Screen
+    string name;
+    char key = -1;
+    cout << "Which task would you like to view?" << endl;
+    getline(cin, name);
+    TaskNode* taskToView = taskList.search(name);
+    if (tasktoView != nullptr) {
+        while (key == -1) {
+        if (tasktoView->overdue == true) {
+            cout << "OVERDUE!\n" <<
+                "Name: " << taskToView->name << "\n" <<
+                "Due Date: " << taskToView->printDate() << "\n" <<
+                "Tag: " << taskToView->tag << "\n" <<
+                "Description:\n" <<
+                taskToView->Description << "\n\n" <<
+
+                "Click any key to exit." << endl;
+        } else {
+                cout << "Name: " << taskToView->name << "\n" <<
+                "Due Date: " << taskToView->printDate() << "\n" <<
+                "Tag: " << taskToView->tag << "\n" <<
+                "Description:\n" <<
+                taskToView->Description << "\n\n" <<
+
+                "Click any key to exit." << endl;
+        }
+            cin >> key;
+        }
+    } else {
+        cout << "That task was not found\n\n";
+    }
     return 0;
+
+
+    // mark task completed screen
+    string completedTaskName;
+    cout << "Which task have you completed?" << endl;
+    getline(cin, completedTaskName);
+    // make sure this function can check for invalid input
+    TaskList.markTaskCompleted(completedTaskName);
 }
