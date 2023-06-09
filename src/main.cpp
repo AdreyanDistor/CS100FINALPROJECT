@@ -29,10 +29,10 @@ void taskPageMenu(TaskListGUI& taskList) {
 
     while (option != 8) {
         if (option == 1) { //add 
-            cout << "Enter New Task Name: (ex: Lecture HomeWork)" << endl << endl;
+            cout << "Enter New Task Name: (ex: Lecture HomeWork)" << endl;
             string taskName;
+            cin.ignore();
             getline(cin,taskName);
-            cin.clear();
             cout << "1 - Chore" << endl <<
             "2 - Essay" << endl <<
             "3 - Short Assignment" << endl <<
@@ -89,14 +89,14 @@ void taskPageMenu(TaskListGUI& taskList) {
             cin >> taskYear;
             cout << endl << "Enter Description: ";
             string taskDescription;
+            cin.ignore();
             getline(cin,taskDescription);
-            cin.clear();
             taskList.addTask(taskName, taskTag, taskDescription,taskDay,taskMonth,taskYear);
         } else if (option == 2) { //delete 
             cout << "Which task would you like to delete?" << endl;
             string task_toDeleteName;
+            cin.ignore();
             getline(cin, task_toDeleteName);
-            cin.clear();
             TaskNode* task_toDelete = taskList.search(task_toDeleteName);
             if(task_toDelete != nullptr)
             {
@@ -171,25 +171,26 @@ void taskPageMenu(TaskListGUI& taskList) {
         } else if (option == 4) { //edit
             string _name;
             cout << "Enter the name of the task you want to edit: " << endl;
+            cin.ignore();
             getline(cin, _name);
-            cin.clear();
             taskList.editTask(_name);
         } else if (option == 5) { //show details 
             string name;
             char key = -1;
           
             cout << "Which task would you like to view?" << endl;
+            cin.ignore();
             getline(cin, name);
             TaskNode* taskToView = taskList.search(name);
-            if (tasktoView != nullptr) {
+            if (taskToView != nullptr) {
                 while (key == -1) {
-                if (tasktoView->overdue == true) {
+                if (taskToView->overdue == true) {
                     cout << "OVERDUE!\n" <<
                         "Name: " << taskToView->name << "\n" <<
                         "Due Date: " << taskToView->printDate() << "\n" <<
                         "Tag: " << taskToView->tag << "\n" <<
                         "Description:\n" <<
-                        taskToView->Description << "\n\n" <<
+                        taskToView->description << "\n\n" <<
 
                         "Click any key to exit." << endl;
                 } else {
@@ -197,7 +198,7 @@ void taskPageMenu(TaskListGUI& taskList) {
                         "Due Date: " << taskToView->printDate() << "\n" <<
                         "Tag: " << taskToView->tag << "\n" <<
                         "Description:\n" <<
-                        taskToView->Description << "\n\n" <<
+                        taskToView->description << "\n\n" <<
 
                         "Click any key to exit." << endl;
                 }
