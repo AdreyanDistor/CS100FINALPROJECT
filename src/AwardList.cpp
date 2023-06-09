@@ -99,7 +99,10 @@ void AwardList::useAward(string name) {
     for(int i = 0; i < awardVector.size(); ++i) {
         if(name == awardVector.at(i)->award_name)
         {
-            awardVector.at(i)->user_count--;
+            if(awardVector.at(i)->user_count > 0)
+                awardVector.at(i)->user_count--;
+            else
+                cout << "Error: not enough of award" << endl;
         }
             
         else
