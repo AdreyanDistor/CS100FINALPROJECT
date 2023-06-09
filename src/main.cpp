@@ -33,15 +33,15 @@ void taskPageMenu(TaskListGUI& taskList) {
             string taskName;
             cin.ignore();
             getline(cin,taskName);
-            cout << "1 - Chore" << endl <<
+            cout << endl << "1 - Chore" << endl <<
             "2 - Essay" << endl <<
             "3 - Short Assignment" << endl <<
             "4 - Long Assignment" << endl <<
             "5 - Studying" << endl <<
             "6 - Project" << endl <<
             "7 - Lab" << endl <<
-            "8 - Other" << endl << 
-            "Choose Tag:" << endl << endl;
+            "8 - Other" << endl << endl <<
+            "Choose Tag:" << endl;
             string taskTag;
             cin >> taskTag;
             if(taskTag == "1")
@@ -92,6 +92,7 @@ void taskPageMenu(TaskListGUI& taskList) {
             cin.ignore();
             getline(cin,taskDescription);
             taskList.addTask(taskName, taskTag, taskDescription,taskDay,taskMonth,taskYear);
+            cout << endl;
         } else if (option == 2) { //delete 
             cout << "Which task would you like to delete?" << endl;
             string task_toDeleteName;
@@ -112,7 +113,8 @@ void taskPageMenu(TaskListGUI& taskList) {
             << "Printing Types" << endl 
             << "1 - Show Today Only" << endl
             << "2 - Show by Tag" << endl
-            << "3 - Show Overdue" << endl << endl
+            << "3 - Show Overdue" << endl
+            << "4 - Entire List" << endl << endl
             << "Enter option: " << endl;
             cin >> choice;
             
@@ -210,8 +212,8 @@ void taskPageMenu(TaskListGUI& taskList) {
         } else if (option == 6) { //mark complete
             string _name;
             cout << "Enter the name of the task you want to mark complete: " << endl;
+            cin.ignore();
             getline(cin, _name);
-            cin.clear();
             //mark complete
         } else if (option == 7) {  //undo delete 
             taskList.undoDeleteTask();
@@ -253,31 +255,31 @@ void awardShopMenu(AwardListGUI& awardList) {
             string _name;
             int _cost;
             cout << "Enter name of new award: " << endl;
+            cin.ignore();
             getline(cin, _name);
-            cin.clear();
             cout << "Enter price of new award: " << endl;
             cin >> _cost;
             awardList.createAward(_name, _cost);
         } else if (option == 2) { //delete
             string _name;
             cout << "Enter name of award you want to delete: " << endl;
+            cin.ignore();
             getline(cin, _name);
-            cin.clear();
             awardList.deleteAward(_name);
         } else if (option == 3) { //buy 
             string _name;
             int quantity;
             cout << "Enter name of award you want to buy: " << endl;
+            cin.ignore();
             getline(cin, _name);
-            cin.clear();
             cout << "How many do you want to buy: " << endl;
             cin >> quantity;
             awardList.buyAward(_name, quantity);
         } else if (option == 4) { //use 
             string _name;
             cout << "Enter name of award you want to use: " << endl;
+            cin.ignore();
             getline(cin, _name);
-            cin.clear();
             awardList.useAward(_name);
         }
 
@@ -302,7 +304,7 @@ void startMenu(TaskListGUI& taskList, AwardListGUI& awardList) {
     taskList.printList();
 
     cout 
-    << "MAIN PAGE" << endl << endl
+    << endl << "MAIN PAGE" << endl << endl
 
     << "1 - Tasks" << endl
     << "2 - Award Shop" << endl

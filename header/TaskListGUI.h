@@ -10,6 +10,7 @@ using namespace std;
 
 class TaskListGUI : public TaskList {
     public:
+        TaskListGUI() : TaskList() {}
         void showOverdue();//displays tasks that are overdue
         void showTodayOnly(); // displays today’s tasks
         void showByTag(string user_tag); //displays tasks of a specific tag
