@@ -10,46 +10,6 @@
 #include<ctime>
 using namespace std;
 
-void startMenu(TaskListGUI& taskList, AwardListGUI& awardList) {
-    int option;
-    cout << "TIME MANAGMENT" << endl << endl; //print the title 
-    cout << "Points: 'CHORE' = 5 | 'ESSAY' =  10 | 'SHORT' = 7 | 'LONG_' = 12 | 'STUDY' = 7 | 'PROJT' = 20 | 'LAB__' = 7 | 'OTHER' = 0" << endl << endl;
-    taskList.printList();
-
-    cout 
-    << "MAIN PAGE" << endl << endl
-
-    << "1. Tasks" << endl
-    << "2. Award Shop" << endl
-    << "3. Point Log" << endl
-    << "4. Quit Program" << endl << endl
-
-    << "Enter option: " << endl;
-    cin >> option;
-
-    while (option != 4) {
-        if (option == 1) { //task page 
-            taskPageMenu(taskList);
-        } else if (option == 2) { //award page 
-            awardShopMenu(awardList);
-        } else if (option == 3) { //point log 
-            awardList.displayPointLog();
-        } 
-
-        cout 
-        << "MAIN PAGE" << endl << endl
-
-        << "1. Tasks" << endl
-        << "2. Award Shop" << endl
-        << "3. Point Log" << endl
-        << "4. Quit Program" << endl << endl
-
-        << "Enter option: " << endl;
-        cin >> option;
-    }
-}
-
-
 void taskPageMenu(TaskListGUI& taskList) {
     int option;
     cout 
@@ -149,7 +109,7 @@ void taskPageMenu(TaskListGUI& taskList) {
         } else if (option == 3) { //printing 
             int choice;
             cout 
-            << "Printing Types" << endl <<
+            << "Printing Types" << endl 
             << "1 - Show Today Only" << endl
             << "2 - Show by Tag" << endl
             << "3 - Show Overdue" << endl << endl
@@ -168,7 +128,7 @@ void taskPageMenu(TaskListGUI& taskList) {
                 "7 - Lab" << endl <<
                 "8 - Other" << endl << 
                 "Choose Tag:" << endl << endl;
-                int taskTag;
+                string taskTag;
                 cin >> taskTag;
                 if(taskTag == "1")
                 {
@@ -219,7 +179,7 @@ void taskPageMenu(TaskListGUI& taskList) {
             cout << "Enter the name of which task you want to see the details of: " << endl;
             getline(cin, _name);
             cin.clear();
-            TaskNode* curr = search(_name);
+            TaskNode* curr = taskList.search(_name);
             //display details 
         } else if (option == 6) { //mark complete
             string _name;
@@ -247,7 +207,7 @@ void taskPageMenu(TaskListGUI& taskList) {
     }
 }
 
-void awardShopMenu(AwardList& awardList) {
+void awardShopMenu(AwardListGUI& awardList) {
     int option;
     cout 
     << "AWARD SHOP" << endl << endl;
@@ -304,6 +264,45 @@ void awardShopMenu(AwardList& awardList) {
         << "4 - Use an Award" << endl
         << "5 - Back to Main Page" << endl << endl
     
+        << "Enter option: " << endl;
+        cin >> option;
+    }
+}
+
+void startMenu(TaskListGUI& taskList, AwardListGUI& awardList) {
+    int option;
+    cout << "TIME MANAGMENT" << endl << endl; //print the title 
+    cout << "Points: 'CHORE' = 5 | 'ESSAY' =  10 | 'SHORT' = 7 | 'LONG_' = 12 | 'STUDY' = 7 | 'PROJT' = 20 | 'LAB__' = 7 | 'OTHER' = 0" << endl << endl;
+    taskList.printList();
+
+    cout 
+    << "MAIN PAGE" << endl << endl
+
+    << "1. Tasks" << endl
+    << "2. Award Shop" << endl
+    << "3. Point Log" << endl
+    << "4. Quit Program" << endl << endl
+
+    << "Enter option: " << endl;
+    cin >> option;
+
+    while (option != 4) {
+        if (option == 1) { //task page 
+            taskPageMenu(taskList);
+        } else if (option == 2) { //award page 
+            awardShopMenu(awardList);
+        } else if (option == 3) { //point log 
+            awardList.displayPointLog();
+        } 
+
+        cout 
+        << "MAIN PAGE" << endl << endl
+
+        << "1. Tasks" << endl
+        << "2. Award Shop" << endl
+        << "3. Point Log" << endl
+        << "4. Quit Program" << endl << endl
+
         << "Enter option: " << endl;
         cin >> option;
     }

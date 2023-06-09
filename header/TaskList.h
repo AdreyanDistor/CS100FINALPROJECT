@@ -9,6 +9,7 @@
 #include <sstream>
 #include <stdio.h>
 #include <assert.h>
+#include "AwardListGUI.h"
 using namespace std;
 
 struct TaskNode
@@ -184,7 +185,7 @@ class TaskList
         void importTasks(); //import tasks from “TaskList.txt”, look at TaskList to see how to import, makes the linked list 
         void exportTasks(); //will ouput and write the file the function named “TaskList.txt”
         void markOverdue(); //marks tasks overdue by turning the isOverdue bool true 
-        void markTaskCompleted(string name, int& totalPoints); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points, 
+        void markTaskCompleted(string name, AwardListGUI& awardList); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points, 
         void editTask(string title); //edits a task
         void printEditMenu(); //helper func used in editTask();
 };

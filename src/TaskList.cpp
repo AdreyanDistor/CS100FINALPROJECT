@@ -130,7 +130,7 @@ TaskNode* TaskList::search(string name) {
 }
 
 // should not return a number
-void TaskList::markTaskCompleted(string name, int& totalPoints) {
+void TaskList::markTaskCompleted(string name, AwardListGUI& awardList) {
     TaskNode* curr = search(name);
     int point = 0;
     if (curr->tag == "chore") {
@@ -151,10 +151,11 @@ void TaskList::markTaskCompleted(string name, int& totalPoints) {
         point = 7;
     }
     if (curr->overdue == false) {
-        totalPoints += point; 
+        awardList.setTotalPoints(awardList.getTotalPoints() + point);
     } else {
-        totalPoints += point/2;
+        awardList.setTotalPoints(awardList.getTotalPoints() + (point/2));
     }
+    
     this->deleteTask(name);
     string congratsMsg;
     string randomMsgs[4] = {"That's a job well done.","Good Job!","Congrats!","Cheers on finishing the task!"};
