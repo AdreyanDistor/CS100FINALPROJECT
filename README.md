@@ -78,5 +78,5 @@ There are two main classes in which each includes a node struct. First there is 
  > Instructions on installing and running your application
  
  ## Testing
- > Our project was tested using the googletest submodule to generate a test file using "cmake ."->"make"->"./runTests" that contains 74 tests. We also used Valgrind to check that we were memcheck clean using "./valgrind --leak-check=yes".
+ > Our project was tested using the googletest submodule to generate a test file using "cmake ."->"make"->"./runTests" that contains 74 tests. We also used Valgrind to check that we were memcheck clean using "./valgrind --leak-check=yes". We also had to run some visual tests to check the GUI's spacing and other small details.
  
