@@ -12,6 +12,7 @@ void AwardListGUI::displayAwards()
         awardVector.at(i)->displayAward();
         cout << endl;
     }
+    cout << "POINTS: " << totalPoints << endl;
 }
 
 void AwardListGUI::displayPointLog()

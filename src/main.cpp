@@ -288,7 +288,7 @@ void awardShopMenu(AwardListGUI& awardList) {
             getline(cin, _name);
             awardList.useAward(_name);
         }
-
+        awardList.displayAwards();
         cout 
         << "AWARD SHOP" << endl << endl
 

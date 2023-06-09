@@ -108,7 +108,7 @@ struct TaskNode
         string newDay = to_string(day);
         string newMonth = to_string(month);
 
-        date = printDate();;
+        date = printDate();
         
         return x + "      " + date + "      " + shortTag + "      " + name;
     }
