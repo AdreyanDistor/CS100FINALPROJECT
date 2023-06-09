@@ -108,17 +108,7 @@ struct TaskNode
         string newDay = to_string(day);
         string newMonth = to_string(month);
 
-        if (day < 10) {
-            newDay = "0" + newDay;
-        }
-        if (month < 10) {
-            newMonth = "0" + newMonth;
-        }
-        if (day < 10) {
-            newMonth = "0" + newMonth;
-        }
-
-        date = to_string(month) + "/" + to_string(day) + "/" + to_string(year%2000);
+        date = printDate();;
         
         return x + "      " + date + "      " + shortTag + "      " + name;
     }

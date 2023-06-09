@@ -10,7 +10,7 @@
 #include<ctime>
 using namespace std;
 
-void taskPageMenu(TaskListGUI& taskList) {
+void taskPageMenu(TaskListGUI& taskList,AwardListGUI& awardList) {
     int option;
     cout 
     << "TASK PAGE" << endl << endl
@@ -220,6 +220,7 @@ void taskPageMenu(TaskListGUI& taskList) {
             cin.ignore();
             getline(cin, _name);
             //mark complete
+            taskList.markTaskCompleted(_name,awardList);
         } else if (option == 7) {  //undo delete 
             taskList.undoDeleteTask();
         }
@@ -321,7 +322,7 @@ void startMenu(TaskListGUI& taskList, AwardListGUI& awardList) {
 
     while (option != 4) {
         if (option == 1) { //task page 
-            taskPageMenu(taskList);
+            taskPageMenu(taskList,awardList);
         } else if (option == 2) { //award page 
             awardShopMenu(awardList);
         } else if (option == 3) { //point log 
@@ -330,8 +331,9 @@ void startMenu(TaskListGUI& taskList, AwardListGUI& awardList) {
 
         cout 
         << "MAIN PAGE" << endl << endl
-
-        << "1 - Tasks" << endl
+         << "Points: 'CHORE' = 5 | 'ESSAY' =  10 | 'SHORT' = 7 | 'LONG_' = 12 | 'STUDY' = 7 | 'PROJT' = 20 | 'LAB__' = 7 | 'OTHER' = 0" << endl << endl;
+    taskList.printList();
+        cout << "1 - Tasks" << endl
         << "2 - Award Shop" << endl
         << "3 - Point Log" << endl
         << "4 - Quit Program" << endl << endl
