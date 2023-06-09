@@ -312,16 +312,16 @@ int main() {
     AwardListGUI awardList;
     TaskListGUI taskList;
     // set up
-    taskList.importTasks();
-    awardList.importAwards();
+    taskList.importTasks("saved_files/TaskList.txt");
+    awardList.importAwards("saved_files/Point_Log.txt");
     awardList.importTotalPoints();
     taskList.markOverdue();
     
     startMenu(taskList, awardList);
 
     //saving data 
-    taskList.exportTasks();
-    awardList.exportAwards();
+    taskList.exportTasks("saved_files/TaskList.txt");
+    awardList.exportAwards("saved_files/Point_Log.txt");
     awardList.exportTotalPoints();
     
     return 0;
