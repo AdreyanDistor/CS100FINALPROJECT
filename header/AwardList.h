@@ -21,7 +21,7 @@ struct Award
 	};
 	void displayAward()
 	{
-		cout << user_count << "     " << cost << "     " << award_name;
+		cout << user_count << "     " << cost << "    " << award_name;
 	};
 
 };

@@ -452,13 +452,12 @@ TEST(undoTask, inMiddleOfList)
     EXPECT_TRUE(list.search("three") != nullptr);
 }
 
-
 TEST(markTaskComplete, test) {
     TaskList list;
-    int points = 0;
+    AwardListGUI awardList;
     list.addTask("one", "chore", "random", 5, 4, 2023);
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 5);
+    list.markTaskCompleted("one", awardList);
+    EXPECT_EQ(awardList.getTotalPoints(), 5);
 }
 
 TEST(markTaskComplete, testtaskOverdue) {
@@ -474,13 +473,13 @@ TEST(markTaskComplete, testtaskOverdue) {
 
 TEST(markTaskComplete, otherPoints) {
     TaskListGUI list;
-    int points = 0;
+    AwardListGUI aList;
     list.addTask("one", "other", "random", 5, 4, 2023);
     char* tm = "Fri Jul 3 00:00:00 2023";
     list.markOverdue();
     list.showOverdue();
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 0); 
+    list.markTaskCompleted("one", aList);
+    EXPECT_EQ(aList.getTotalPoints(), 0); 
 }
 
 TEST(createAwardTest, testAwardSucessfullyCreated) {
@@ -489,7 +488,6 @@ TEST(createAwardTest, testAwardSucessfullyCreated) {
     EXPECT_EQ(t1.getAwardVector().size(), 1);
     EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award");
 }
-
 
 TEST(createAwardTest, testAwardPushBack) {
     AwardList t1;
@@ -507,7 +505,6 @@ TEST(createAwardTest, testAwards3) {
     EXPECT_EQ(t1.getAwardVector().size(), 3);
     EXPECT_EQ(t1.getAwardVector().at(2)->award_name, "test award 3" );
 }
-
 
 TEST(deleteAwardTest, testAwardDeleted) {
     AwardList t1;
@@ -538,15 +535,14 @@ TEST(deleteAwardTest, testCorrectAwardDeleted2) {
     EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award 3");
 }
 
-
 TEST(markComplete, pointLog)
 {
     TaskListGUI list;
+    AwardListGUI aList;
     list.addTask("one", "chore", "first one", 1, 1, 2022);
-    int points = 5;
-    list.markTaskCompleted("one",points);
-    EXPECT_EQ(points, 10);
-
+    aList.setTotalPoints(5);
+    list.markTaskCompleted("one", aList);
+    EXPECT_EQ(aList.getTotalPoints(), 10);
 }
 
 TEST(buyAward, pointLog)
@@ -701,15 +697,15 @@ TEST(markOverDue, SomeOverdue) {
 
 TEST(markTaskComplete, testTaskOverdue) {
     TaskListGUI list;
-    int points = 0;
+    AwardListGUI aList;
     list.addTask("one", "essay", "random", 5, 4, 202);
     char* tm = "Fri Jul 3 00:00:00 2023";
     list.markOverdue();
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 5); 
+    list.markTaskCompleted("one", aList);
+    EXPECT_EQ(aList.getTotalPoints(), 5); 
 }
 
-TEST(editingATask, printDateFunc) {
+TEST(editingATask, printDateFunc1) {
     TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
     EXPECT_EQ(curr->printDate(), "01/01/2022");
 } 
@@ -826,31 +822,11 @@ TEST(editingATask, setYear2) {
     EXPECT_EQ(curr->year, 3023);
 } 
 
-TEST(editingATask, setYEar3) {
+TEST(editingATask, setYear3) {
     TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
     curr->setYear(2022);
     EXPECT_EQ(curr->year, 2022);
 } 
-
-// TEST(markComplete, pointLog)
-// {
-//     TaskListGUI list;
-//     list.addTask("one", "chore", "first one", 1, 1, 2022);
-//     int points = 5;
-//     list.markTaskCompleted("one",points);
-//     EXPECT_EQ(points, 10);
-
-// }
-
-TEST(editingATask, editTaskname) {
-    TaskList list;
-    list.addTask("one", "chore", "first one", 1, 2, 2022);
-    list.addTask("two", "essay", "second one", 2, 3, 2023);
-    string newDes = "changed";
-    list.editTask("two");
-    EXPECT_EQ(list.search("three")->name, "changed");
-    
-}
 
 TEST(useAward, frontOfVec) {
     AwardList testAwardList;
