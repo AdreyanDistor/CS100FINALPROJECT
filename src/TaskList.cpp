@@ -22,6 +22,10 @@ TaskList::~TaskList()
         delete currNode;
         currNode = next;
     }
+    if(recent_deleted_Task != nullptr)
+    {
+        delete recent_deleted_Task;
+    }
 }
 
 void TaskList::addTask(string name, string tag,string description, int day, int month, int year)
