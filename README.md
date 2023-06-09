@@ -7,22 +7,29 @@
  > Authors: [Adreyan Distor](https://github.com/AdreyanDistor) [Isabelle Celo](https://github.com/isabellecelo) [Nolan Vernon](https://github.com/slow-poker) [Ojasvi Godha](https://github.com/ogod1)
 
 ## Project Description
- > ### Why is it important or interesting to us? 
- >- With the mayhem of modern life, you need a way to keep track of your life. Time is limited, so it must be managed. Our project is an app that will help people, students in particular.
- > ### Technologies:
->- C++, Git, CMake, Vim, VSCode, imgui
-> ### Inputs/Outputs:
- >- Inputs: Tasks that contain text and dates, reminders
- >- Outputs: Visual time-table of all your tasks. 
- > ### Features:
- >- Task creation
- >- Task lists
- >- Displaying, editing, and deleting tasks
- >- Classification tags 
- >- Time duration support
- >- Awards (for motivation) 
- 
- > ## Phase II
+This program is a terminal based task manager. The user is able to view their current tasks, in order of date, and accumulate points according to the number of tasks they mark as complete. Their points can be used to purchase awards that they create themselves from the award shop. Each task has a name, deadline, tag, and description. The number of points the user gains from marking a task as complete corresponds to the specific tag the task is assigned. If the user were to complete a task that is marked overdue, they would only gain half the number of points. The user is also able to filter their task list according to today’s tasks and tags.
+ ### Why is it important or interesting to us? 
+This project is important to our group since we are all students who thrive off organization. Although we have many other resources to keep track of our tasks, we wanted to create a program that implemented a system to encourage productivity and discourage procrastination. The award shop/point system will give the user motivation to complete their tasks in order to reward themselves and the overdue system that decreases the number of points the user gains may encourage the user to complete their tasks before the deadline. 
+### Technologies:
+C++ - This project will be programmed primarily using C++ 11.
+
+Visual Studio Code - This is a text and code editor that we will use to write and test code in Windows/Mac.
+
+Git - Git allows us to make changes to the GitHub repository that houses our project.
+
+Valgrind - Valgrind is a Linux tool which detects errors and memory management bugs in C++ code. We will use it to fix memory leaks in our code.
+
+Github - GitHub is a version control system that allows multiple users to share and edit code together online, as well as manage the development of the project with a collection of Agile tools. Github allows for the creation of task boards to sort features into “To-do, doing, done” categories to organize the implementation of program features between multiple group members.
+
+CMake - CMake is a Linux tool which allows us to compile C++ code into executable programs that will run in Linux.
+
+Google Test Framework - This is a collection of tools made by Google which will allow us to create and run test cases for our project code. This will allow us to test the functionality and edge cases for our program and ensure that all program inputs have the intended outputs.
+
+### Inputs/Outputs:
+Inputs: The user will be able to create the tasks with specs including: task name, deadline, tag, and description. They will also be able to create awards in the awards shop with an award name and price.
+
+Outputs: The user will be able to see an organized list of all their tasks they added in order of date (by default) or based on any filters they apply. They also will be able to view the award shop that houses any awards they create.
+
 ## User Interface Specification
 ### Navigation Diagram
 ![Navigation Diagram drawio (1)](https://github.com/cs100/final-project-scelo002-nvern003-adist003-ogodh001/assets/117056281/655814ca-66a0-4fa2-93bd-7b9449ca8d60)
