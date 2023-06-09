@@ -462,13 +462,13 @@ TEST(markTaskComplete, test) {
 
 TEST(markTaskComplete, testtaskOverdue) {
     TaskListGUI list;
-    int points = 0;
+    AwardListGUI awardList;
     list.addTask("one", "essay", "random", 5, 4, 2023);
     char* tm = "Fri Jul 3 00:00:00 2023";
     list.markOverdue();
     list.showOverdue();
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 5); 
+    list.markTaskCompleted("one", awardList);
+    EXPECT_EQ(awardList.getTotalPoints(), 5); 
 }
 
 TEST(markTaskComplete, otherPoints) {

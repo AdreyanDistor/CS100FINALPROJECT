@@ -129,7 +129,6 @@ TaskNode* TaskList::search(string name) {
     return curr;
 }
 
-// should not return a number
 void TaskList::markTaskCompleted(string name, AwardListGUI& awardList) {
     TaskNode* curr = search(name);
     int point = 0;
@@ -190,7 +189,6 @@ void TaskList::importTasks(string filename) {
     string day; // to convert to int
     string month; // to convert to int 
     string year; // to convert to int
-    string overdue; 
 
     // // iterates through file to find each parameter in each TaskNode
     while (getline(input, name, '`')) {
@@ -199,10 +197,10 @@ void TaskList::importTasks(string filename) {
         getline(input, day, '`');
         getline(input, month, '`');
         getline(input, year, '`');
-        getline(input, overdue);
 
         addTask(name, tag, description, stoi(day), stoi(month), stoi(year));
     }
+    markOverdue();
 
     input.close();
 
