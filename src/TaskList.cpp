@@ -285,8 +285,8 @@ void TaskList::editTask(string title) {
         if (option == 1) { //name
             string _name;
             cout << "Enter new task name: " << endl;
+            cin.ignore();
             getline(cin, _name);
-            cin.clear();
             curr->setName(_name);
         } else if (option == 2) { //tag
             int _option;
@@ -317,8 +317,8 @@ void TaskList::editTask(string title) {
         } else if (option == 3) { //description
             string _des;
             cout << "Enter new description: " << endl;
+            cin.ignore();
             getline(cin, _des);
-            cin.clear();
             curr->setDescription(_des);
         } else if (option == 4) { //date 
             int _option;
