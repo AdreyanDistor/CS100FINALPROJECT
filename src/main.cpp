@@ -345,9 +345,6 @@ int main() {
     
     startMenu(taskList, awardList);
 
-    //PointLogScreen
-    awardList.displayPointLog();
-
     //saving data 
     taskList.exportTasks("saved_files/TaskList.txt");
     awardList.exportAwards("saved_files/AwardList.txt");
