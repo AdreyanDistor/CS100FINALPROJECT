@@ -15,6 +15,8 @@ class TaskListGUI : public TaskList {
         void showByTag(string user_tag); //displays tasks of a specific tag
         void printOverdueMessage();
         void printList(); //prints entire list, could be added to a class called gui, or user input 
+        void addTaskGUI();
+        void deleteTaskGUI();
 
 };
 
