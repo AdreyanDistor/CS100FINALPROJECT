@@ -879,3 +879,11 @@ TEST(useAward, endOfVec) {
     EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 0);
 }
 
+TEST(useAward, notEnoughAwards) {
+    AwardList testAwardList;
+
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.setTotalPoints(10);
+    
+    EXPECT_EQ(0, testAwardList.getAwardVector().at(0)->user_count);
+}
