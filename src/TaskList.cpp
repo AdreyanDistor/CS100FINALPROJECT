@@ -129,8 +129,7 @@ TaskNode* TaskList::search(string name) {
     return curr;
 }
 
-// should not return a number
-void TaskList::markTaskCompleted(string name, int& totalPoints) {
+void TaskList::markTaskCompleted(string name, AwardListGUI& awardList) {
     TaskNode* curr = search(name);
     int point = 0;
     if (curr->tag == "chore") {
@@ -151,10 +150,11 @@ void TaskList::markTaskCompleted(string name, int& totalPoints) {
         point = 7;
     }
     if (curr->overdue == false) {
-        totalPoints += point; 
+        awardList.setTotalPoints(awardList.getTotalPoints() + point);
     } else {
-        totalPoints += point/2;
+        awardList.setTotalPoints(awardList.getTotalPoints() + (point/2));
     }
+    
     this->deleteTask(name);
     string congratsMsg;
     string randomMsgs[4] = {"That's a job well done.","Good Job!","Congrats!","Cheers on finishing the task!"};
@@ -189,7 +189,6 @@ void TaskList::importTasks(string filename) {
     string day; // to convert to int
     string month; // to convert to int 
     string year; // to convert to int
-    string overdue; 
 
     // // iterates through file to find each parameter in each TaskNode
     while (getline(input, name, '`')) {
@@ -198,10 +197,10 @@ void TaskList::importTasks(string filename) {
         getline(input, day, '`');
         getline(input, month, '`');
         getline(input, year, '`');
-        getline(input, overdue);
 
         addTask(name, tag, description, stoi(day), stoi(month), stoi(year));
     }
+    markOverdue();
 
     input.close();
 
@@ -263,14 +262,16 @@ void TaskList::markOverdue() {
 }
 
 void TaskList::printEditMenu() {
+    cout << "EDIT A TASK" << endl << endl;
+    
     cout << "What would you like to edit?" << endl;
     cout << "1 - Name" << endl;
     cout << "2 - Tag" << endl;
     cout << "3 - Description" << endl;
     cout << "4 - Date" << endl;
-    cout << "5 - Exit Page" << endl << endl;
+    cout << "5 - Exit editor" << endl << endl;
 
-    cout << "Enter choice: " << endl;
+    cout << "Enter option: " << endl;
 }
 
 void TaskList::editTask(string title) {
@@ -284,8 +285,8 @@ void TaskList::editTask(string title) {
         if (option == 1) { //name
             string _name;
             cout << "Enter new task name: " << endl;
-            cin.clear();
             getline(cin, _name);
+            cin.clear();
             curr->setName(_name);
         } else if (option == 2) { //tag
             int _option;
@@ -316,8 +317,8 @@ void TaskList::editTask(string title) {
         } else if (option == 3) { //description
             string _des;
             cout << "Enter new description: " << endl;
-            cin.clear();
             getline(cin, _des);
+            cin.clear();
             curr->setDescription(_des);
         } else if (option == 4) { //date 
             int _option;
@@ -350,6 +351,11 @@ void TaskList::editTask(string title) {
                 cout << "Enter option: " << endl;
                 cin >> _option;
             }
+
+            TaskNode* newNode = new TaskNode(curr->name, curr->tag, curr->description, curr->day, curr->month, curr->year);
+            deleteTask(curr->name);
+            addTask(newNode->name, newNode->tag, newNode->description, newNode->day, newNode->month, newNode->year);
+            curr = search(newNode->name);
         }
 
         printEditMenu();

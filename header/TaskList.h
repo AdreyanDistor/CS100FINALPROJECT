@@ -4,11 +4,12 @@
 #include <fstream>
 #include <ostream>
 #include <ctime>
-#include<string>
+#include <string>
 #include <iomanip>
 #include <sstream>
 #include <stdio.h>
 #include <assert.h>
+#include "AwardListGUI.h"
 using namespace std;
 
 struct TaskNode
@@ -183,7 +184,7 @@ class TaskList
         void importTasks(string filename); //import tasks from the file(name) parameter and forms a linked list
         void exportTasks(string filename); //will use the linked list and write to the file to save the user's data
         void markOverdue(); //marks tasks overdue by turning the isOverdue bool true 
-        void markTaskCompleted(string name, int& totalPoints); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points, 
+        void markTaskCompleted(string name, AwardListGUI& awardList); //returns amount of points associated with the tag of the task.  calls delete Task  Will be used to add to global: total_points, 
         void editTask(string title); //edits a task
         void printEditMenu(); //helper func used in editTask();
 };

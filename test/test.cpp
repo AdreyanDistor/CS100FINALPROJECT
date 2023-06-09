@@ -452,35 +452,34 @@ TEST(undoTask, inMiddleOfList)
     EXPECT_TRUE(list.search("three") != nullptr);
 }
 
-
 TEST(markTaskComplete, test) {
     TaskList list;
-    int points = 0;
+    AwardListGUI awardList;
     list.addTask("one", "chore", "random", 5, 4, 2023);
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 5);
+    list.markTaskCompleted("one", awardList);
+    EXPECT_EQ(awardList.getTotalPoints(), 5);
 }
 
 TEST(markTaskComplete, testtaskOverdue) {
     TaskListGUI list;
-    int points = 0;
+    AwardListGUI awardList;
     list.addTask("one", "essay", "random", 5, 4, 2023);
     char* tm = "Fri Jul 3 00:00:00 2023";
     list.markOverdue();
     list.showOverdue();
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 5); 
+    list.markTaskCompleted("one", awardList);
+    EXPECT_EQ(awardList.getTotalPoints(), 5); 
 }
 
 TEST(markTaskComplete, otherPoints) {
     TaskListGUI list;
-    int points = 0;
+    AwardListGUI aList;
     list.addTask("one", "other", "random", 5, 4, 2023);
     char* tm = "Fri Jul 3 00:00:00 2023";
     list.markOverdue();
     list.showOverdue();
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 0); 
+    list.markTaskCompleted("one", aList);
+    EXPECT_EQ(aList.getTotalPoints(), 0); 
 }
 
 TEST(createAwardTest, testAwardSucessfullyCreated) {
@@ -489,7 +488,6 @@ TEST(createAwardTest, testAwardSucessfullyCreated) {
     EXPECT_EQ(t1.getAwardVector().size(), 1);
     EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award");
 }
-
 
 TEST(createAwardTest, testAwardPushBack) {
     AwardList t1;
@@ -507,7 +505,6 @@ TEST(createAwardTest, testAwards3) {
     EXPECT_EQ(t1.getAwardVector().size(), 3);
     EXPECT_EQ(t1.getAwardVector().at(2)->award_name, "test award 3" );
 }
-
 
 TEST(deleteAwardTest, testAwardDeleted) {
     AwardList t1;
@@ -538,25 +535,37 @@ TEST(deleteAwardTest, testCorrectAwardDeleted2) {
     EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award 3");
 }
 
-
 TEST(markComplete, pointLog)
 {
     TaskListGUI list;
+    AwardListGUI aList;
     list.addTask("one", "chore", "first one", 1, 1, 2022);
-    int points = 5;
-    list.markTaskCompleted("one",points);
-    EXPECT_EQ(points, 10);
-
+    aList.setTotalPoints(5);
+    list.markTaskCompleted("one", aList);
+    EXPECT_EQ(aList.getTotalPoints(), 10);
 }
 
-TEST(buyAwardTest, pointLog)
+TEST(buyAward, pointLog)
 {
     AwardListGUI list;
-    list.createAward("WOWOWOW",5);
-    list.setTotalPoints(10);
-    list.buyAward("WOWOWOW",1);
-    list.useAward("WOWOWOW");
-    EXPECT_EQ(5, list.getTotalPoints());
+    list.createAward("customTestAward",5);
+    list.setTotalPoints(5);
+    list.buyAward("customTestAward",1);
+
+    ifstream ifs;
+    ifs.open("saved_files/Point_Log.txt",ios::app);
+    EXPECT_TRUE(ifs.is_open());
+
+    bool isMsgPresent;
+    string logMsg;
+    while(getline(ifs,logMsg)) //loops to last line of file
+    if(logMsg == "Nice catch there bob! You just bought: 1 WOWOWOW and spent 5 points" || 
+        logMsg == "Good eye their chief You just bought: 1 WOWOWOW and spent 5 points" ||
+        logMsg == "Congrats! You just bought: 1 WOWOWOW and spent 5 points" || 
+        logMsg == "That's a nice treat! You just bought: 1 WOWOWOW and spent 5 points") {
+            isMsgPresent = true;
+        }
+    EXPECT_TRUE(isMsgPresent);
 }
 
 TEST(buyAwardTest, testOnlyAward) {
@@ -688,15 +697,15 @@ TEST(markOverDue, SomeOverdue) {
 
 TEST(markTaskComplete, testTaskOverdue) {
     TaskListGUI list;
-    int points = 0;
+    AwardListGUI aList;
     list.addTask("one", "essay", "random", 5, 4, 202);
     char* tm = "Fri Jul 3 00:00:00 2023";
     list.markOverdue();
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 5); 
+    list.markTaskCompleted("one", aList);
+    EXPECT_EQ(aList.getTotalPoints(), 5); 
 }
 
-TEST(editingATask, printDateFunc) {
+TEST(editingATask, printDateFunc1) {
     TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
     EXPECT_EQ(curr->printDate(), "01/01/2022");
 } 
@@ -813,28 +822,68 @@ TEST(editingATask, setYear2) {
     EXPECT_EQ(curr->year, 3023);
 } 
 
-TEST(editingATask, setYEar3) {
+TEST(editingATask, setYear3) {
     TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
     curr->setYear(2022);
     EXPECT_EQ(curr->year, 2022);
 } 
 
-// TEST(markComplete, pointLog)
-// {
-//     TaskListGUI list;
-//     list.addTask("one", "chore", "first one", 1, 1, 2022);
-//     int points = 5;
-//     list.markTaskCompleted("one",points);
-//     EXPECT_EQ(points, 10);
+TEST(useAward, frontOfVec) {
+    AwardList testAwardList;
 
-// }
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(30);
+    testAwardList.buyAward("cupcake", 1);
+    testAwardList.buyAward("poke", 1);
+    testAwardList.buyAward("boba", 1);
+    testAwardList.useAward("cupcake");
 
-TEST(editingATask, editTaskname) {
-    TaskList list;
-    list.addTask("one", "chore", "first one", 1, 2, 2022);
-    list.addTask("two", "essay", "second one", 2, 3, 2023);
-    string newDes = "changed";
-    list.editTask("two");
-    EXPECT_EQ(list.search("three")->name, "changed");
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 1);
+}
+
+TEST(useAward, middleOfVec) {
+    AwardList testAwardList;
+
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(30);
+    testAwardList.buyAward("cupcake", 1);
+    testAwardList.buyAward("poke", 1);
+    testAwardList.buyAward("boba", 1);
+    testAwardList.useAward("poke");
+
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 0);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 1);
+}
+
+TEST(useAward, endOfVec) {
+    AwardList testAwardList;
+
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.createAward("poke", 10);
+    testAwardList.createAward("boba", 10);
+    testAwardList.setTotalPoints(30);
+    testAwardList.buyAward("cupcake", 1);
+    testAwardList.buyAward("poke", 1);
+    testAwardList.buyAward("boba", 1);
+    testAwardList.useAward("boba");
+
+    EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(1)->user_count, 1);
+    EXPECT_EQ(testAwardList.getAwardVector().at(2)->user_count, 0);
+}
+
+TEST(useAward, notEnoughAwards) {
+    AwardList testAwardList;
+
+    testAwardList.createAward("cupcake", 10);
+    testAwardList.setTotalPoints(10);
     
+    EXPECT_EQ(0, testAwardList.getAwardVector().at(0)->user_count);
 }

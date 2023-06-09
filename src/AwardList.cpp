@@ -27,10 +27,11 @@ void AwardList::importAwards(string filename) {
     string award_name;
 
     // iterates through file to find each parameter in each TaskNode
-    while (getline(input, award_name, '`')) {
+    while (!input.eof()) {
+        getline(input, award_name, '`');
         getline(input, cost, '`');
         getline(input, user_count);
-        
+        cout << award_name + " " + cost + " " + user_count << endl;
         awardVector.push_back(new Award(award_name, stoi(cost), stoi(user_count) ) );
     } 
     input.close();
@@ -62,22 +63,17 @@ void AwardList::buyAward(string buyingAward, int quantity) {
             if(totalPoints >= (awardVector.at(i)->cost * quantity) ) {
                 totalPoints -= awardVector.at(i)->cost * quantity;
                 awardVector.at(i)->user_count += quantity;
-                //pointLog and congrats message
-                string congratsMsg;
-                string randomMsgs[4] = {"Nice catch there bob!","Good eye their chief","Congrats!","That's a nice treat!"};
-                srand(time(NULL));
-                congratsMsg = randomMsgs[(rand() % 4)] + " You just bought: " + awardVector.at(i)->award_name + " and spent " +  to_string(awardVector.at(i)->cost*quantity) + " points";
-                cout << congratsMsg << endl;
+                //pointLog
                 ofstream pointLog;
                 pointLog.open("saved_files/Point_Log.txt",ios::app);
 
                 if(pointLog.is_open())
                 {
-                    pointLog << congratsMsg << endl;
+                    pointLog << congratsMessage(awardVector.at(i), quantity) << endl;
                 }
                 else
                 {
-                    cout << "WOW THAT DID NOT WORK" << endl;
+                    cout << "Error: cannot open Point_Log.txt" << endl;
                 }
                 pointLog.close();
             }
@@ -91,11 +87,22 @@ void AwardList::buyAward(string buyingAward, int quantity) {
     cout << "Error: Award not found!" << endl;
 }
 
+string AwardList::congratsMessage(const Award* boughtAward, const int quantity) { 
+    string congratsMsg;
+    string randomMsgs[4] = {"Nice catch there bob!","Good eye their chief","Congrats!","That's a nice treat!"};
+    srand(time(NULL));
+    congratsMsg = randomMsgs[(rand() % 4)] + " You just bought: " + to_string(quantity) + " " + boughtAward->award_name + " and spent " +  to_string(boughtAward->cost*quantity) + " points";
+    return congratsMsg;
+}
+
 void AwardList::useAward(string name) {
     for(int i = 0; i < awardVector.size(); ++i) {
         if(name == awardVector.at(i)->award_name)
         {
-            awardVector.at(i)->user_count--;
+            if(awardVector.at(i)->user_count > 0)
+                awardVector.at(i)->user_count--;
+            else
+                cout << "Error: not enough of award" << endl;
         }
             
         else

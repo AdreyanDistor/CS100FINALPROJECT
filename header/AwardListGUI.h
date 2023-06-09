@@ -13,6 +13,7 @@ class AwardListGUI: public AwardList{
         void displayAwards(); //showing the awards on GUI
         void displayPointLog();
         AwardListGUI();
+        
 };
 
 #endif 

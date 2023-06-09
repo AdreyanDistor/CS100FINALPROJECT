@@ -21,12 +21,17 @@ void TaskListGUI::showOverdue() {
 
 }
 
-void TaskListGUI::showTodayOnly(int day, int month, int year)
+void TaskListGUI::showTodayOnly()
 {
+    time_t currentTime = time(0);
+    struct tm* timeInfo = localtime(&currentTime);
+    int currYear = timeInfo->tm_year + 1900;
+    int currMonth = timeInfo->tm_mon + 1; 
+    int currDay = timeInfo->tm_mday;
     TaskNode* currNode = head;
     while(currNode != nullptr)
     {
-        if(currNode->day == day && currNode->month == month && currNode->year == year)
+        if(currNode->day == currDay && currNode->month == currMonth && currNode->year == currYear)
         {
             cout << currNode->displayTask() << endl;
         }
