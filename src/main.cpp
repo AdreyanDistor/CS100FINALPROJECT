@@ -19,9 +19,9 @@ void taskPageMenu(TaskListGUI& taskList) {
     << "2 - Delete a Task" << endl
     << "3 - Print a Task List" << endl //leads to print menu 
     << "4 - Edit a Task" << endl
-    << "5. Show Details" << endl
-    << "6. Mark Complete" << endl
-    << "7. Undo Delete" << endl
+    << "5 - Show Details" << endl
+    << "6 - Mark Complete" << endl
+    << "7 - Undo Delete" << endl
     << "8 - Back to Main Page" << endl << endl
    
     << "Enter option: " << endl;
@@ -222,9 +222,9 @@ void taskPageMenu(TaskListGUI& taskList) {
         << "2 - Delete a Task" << endl
         << "3 - Print a Task List" << endl 
         << "4 - Edit a Task" << endl
-        << "5. Show Details" << endl
-        << "6. Mark Complete" << endl
-        << "7. Undo Delete" << endl
+        << "5 - Show Details" << endl
+        << "6 - Mark Complete" << endl
+        << "7 - Undo Delete" << endl
         << "8 - Back to Main Page" << endl << endl
     
         << "Enter option: " << endl;
@@ -303,10 +303,10 @@ void startMenu(TaskListGUI& taskList, AwardListGUI& awardList) {
     cout 
     << "MAIN PAGE" << endl << endl
 
-    << "1. Tasks" << endl
-    << "2. Award Shop" << endl
-    << "3. Point Log" << endl
-    << "4. Quit Program" << endl << endl
+    << "1 - Tasks" << endl
+    << "2 - Award Shop" << endl
+    << "3 - Point Log" << endl
+    << "4 - Quit Program" << endl << endl
 
     << "Enter option: " << endl;
     cin >> option;
@@ -323,10 +323,10 @@ void startMenu(TaskListGUI& taskList, AwardListGUI& awardList) {
         cout 
         << "MAIN PAGE" << endl << endl
 
-        << "1. Tasks" << endl
-        << "2. Award Shop" << endl
-        << "3. Point Log" << endl
-        << "4. Quit Program" << endl << endl
+        << "1 - Tasks" << endl
+        << "2 - Award Shop" << endl
+        << "3 - Point Log" << endl
+        << "4 - Quit Program" << endl << endl
 
         << "Enter option: " << endl;
         cin >> option;
