@@ -118,9 +118,9 @@ void taskPageMenu(TaskListGUI& taskList) {
             << "Enter option: " << endl;
             cin >> choice;
             
-            if (option == 1) {
+            if (choice == 1) {
                 taskList.showTodayOnly();
-            } else if (option == 2) {
+            } else if (choice == 2) {
                 cout << "1 - Chore" << endl <<
                 "2 - Essay" << endl <<
                 "3 - Short Assignment" << endl <<
@@ -167,7 +167,12 @@ void taskPageMenu(TaskListGUI& taskList) {
                     taskTag = "other";
                 }
                 taskList.showByTag(taskTag);
-            } else {
+            }
+            else if(choice == 4)
+            {
+                taskList.printList();
+            }
+             else {
                 taskList.showOverdue();
             }
         } else if (option == 4) { //edit
@@ -347,6 +352,7 @@ int main() {
     taskList.markOverdue();
     
     startMenu(taskList, awardList);
+
 
     //saving data 
     taskList.exportTasks("saved_files/TaskList.txt");

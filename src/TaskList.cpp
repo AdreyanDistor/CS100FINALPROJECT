@@ -189,14 +189,13 @@ void TaskList::importTasks(string filename) {
     string day; // to convert to int
     string month; // to convert to int 
     string year; // to convert to int
-
     // // iterates through file to find each parameter in each TaskNode
     while (getline(input, name, '`')) {
         getline(input, tag, '`');
         getline(input, description, '`');
         getline(input, day, '`');
         getline(input, month, '`');
-        getline(input, year, '`');
+        getline(input, year);
 
         addTask(name, tag, description, stoi(day), stoi(month), stoi(year));
     }
@@ -280,7 +279,10 @@ void TaskList::editTask(string title) {
     int option;
     printEditMenu();
     cin >> option;
-
+    if(curr == nullptr)
+    {
+        return;
+    }
     while (option != 5) {
         if (option == 1) { //name
             string _name;
