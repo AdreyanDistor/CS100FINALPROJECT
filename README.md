@@ -25,7 +25,8 @@
  > ## Phase II
 ## User Interface Specification
 ### Navigation Diagram
-![Navigation Diagram drawio](https://github.com/cs100/final-project-scelo002-nvern003-adist003-ogodh001/assets/117056281/f41e99ef-3f74-4c81-895e-8bc1ce3635ed.png)
+![Navigation Diagram drawio (1)](https://github.com/cs100/final-project-scelo002-nvern003-adist003-ogodh001/assets/117056281/655814ca-66a0-4fa2-93bd-7b9449ca8d60)
+
 
 
 ### Screen Layouts
