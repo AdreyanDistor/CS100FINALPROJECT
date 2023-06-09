@@ -1,102 +1,295 @@
+#include "../googletest/googletest/include/gtest/gtest.h"
 #include "../header/AwardListGUI.h"
 #include "../header/TaskListGUI.h"
 #include<iostream>
 #include<fstream>
-#include <ostream>
+#include<ostream>
 #include<string>
 #include<iomanip>
 #include<vector>
 #include<ctime>
-#include "time.h"
 #include <stdio.h>      /* printf, NULL */
 #include <stdlib.h>     /* srand, rand */
-#include <time.h>   
-#include "googletest/googletest/include/gtest/gtest.h"    /* time */
+#include <time.h>       /* time */    
 using namespace std;
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
+}
 
-     // srand(time(NULL));
-    vector<string> names = {"Task 1","Task 2","Task 3","Task 4","Task5"};
-    vector<string> tag = {"Tag 1","Tag 2","Tag 3","Tag 4","Tag 5"};
-    vector<string> desc = {"Description 1","Description 2","Description 3","Description 4","Description 5"};
-    vector<int> year = {2001,2002,2003,2004,2005,};
+TEST(PrintList, noOverDue) {
     TaskListGUI list;
+    list.addTask("one", "chore", "first one", 23, 11, 2023);
+    list.addTask("two", "studying", "second one", 14, 11, 2023);
+    list.addTask("three", "other", "third one", 22, 11, 2023);
+    char* tm = "Fri Aug 15 00:00:00 2023";
+    list.markOverdue();
+    TaskNode* curr1 = list.search("one");
+    TaskNode* curr2 = list.search("two");
+    TaskNode* curr3 = list.search("three");
+    bool curr1Bool;
+    bool curr2Bool;
+    bool curr3Bool;
 
-    cout << "UNIT TESTS: " << endl;
+    curr1Bool = (curr1->displayTask() == "           11/23/23      CHORE      one");
+    curr2Bool = (curr2->displayTask() == "           11/14/23      STUDY      two");
+    curr3Bool = (curr3->displayTask() == "           11/22/23      OTHER      three");
+    EXPECT_EQ(curr1Bool, true);
+    EXPECT_EQ(curr2Bool, true);
+    EXPECT_EQ(curr3Bool, true);
+}
 
-    cout << "Adding two tasks" << endl << "BEFORE: ";
+TEST(PrintList, alloverdue) {
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 23, 11, 2021);
+    list.addTask("two", "studying", "second one", 14, 11, 2021);
+    list.addTask("three", "other", "third one", 22, 11, 2021);
+    char* tm = "Fri Aug 15 00:00:00 2023";
+    list.markOverdue();
+    TaskNode* curr1 = list.search("one");
+    TaskNode* curr2 = list.search("two");
+    TaskNode* curr3 = list.search("three");
+    bool curr1Bool;
+    bool curr2Bool;
+    bool curr3Bool;
+    curr1Bool = (curr1->displayTask() == "x          11/23/21      CHORE      one");
+    curr2Bool = (curr2->displayTask() == "x          11/14/21      STUDY      two");
+    curr3Bool = (curr3->displayTask() == "x          11/22/21      OTHER      three");
+    EXPECT_EQ(curr1Bool, true);
+    EXPECT_EQ(curr2Bool, true);
+    EXPECT_EQ(curr3Bool, true);
+}
+
+TEST(PrintList, someoverdue) {
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 23, 11, 2021);
+    list.addTask("two", "studying", "second one", 14, 11, 2024);
+    list.addTask("three", "other", "third one", 22, 11, 2021);
+    char* tm = "Fri Aug 15 00:00:00 2023";
+    list.markOverdue();
+    TaskNode* curr1 = list.search("one");
+    TaskNode* curr2 = list.search("two");
+    TaskNode* curr3 = list.search("three");
+    bool curr1Bool;
+    bool curr2Bool;
+    bool curr3Bool;
+    curr1Bool = (curr1->displayTask() == "x          11/23/21      CHORE      one");
+    curr2Bool = (curr2->displayTask() == "           11/14/24      STUDY      two");
+    curr3Bool = (curr3->displayTask() == "x          11/22/21      OTHER      three");
+    EXPECT_EQ(curr1Bool, true);
+    EXPECT_EQ(curr2Bool, true);
+    EXPECT_EQ(curr3Bool, true);
+}
+
+TEST(addTask, onlyHead)
+{
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 1, 2022);
+    EXPECT_TRUE(list.search("one") != nullptr);
+}
+
+TEST(addTask, onlyHeadandTail)
+{
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 1, 2022);
+    list.addTask("two", "chore", "second one", 1, 1, 2022);
+    EXPECT_TRUE(list.search("two") != nullptr);
+}
+
+TEST(addTask, ThreeTasks)
+{
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 4, 2012);
+    list.addTask("two", "chore", "second one", 1, 2, 2022);
+    list.addTask("three", "chore", "third one", 1, 3, 2012);
+    EXPECT_TRUE(list.search("three") != nullptr);
+}
+
+TEST(deleteTask, onlyHead)
+{
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 1, 2022);
+    list.deleteTask("one");
+    EXPECT_TRUE(list.search("one") == nullptr);
+}
+
+TEST(deleteTask, onlyHeadandTail)
+{
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 1, 2022);
+    list.addTask("two", "chore", "second one", 0, 2, 2022);
+    list.deleteTask("one");
+    list.deleteTask("two");
+    EXPECT_TRUE(list.search("one") == nullptr);
+    EXPECT_TRUE(list.search("two") == nullptr);
+}
+
+TEST(deleteTask, ThreeTasks)
+{
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 4, 2012);
+    list.addTask("two", "chore", "second one", 1, 2, 2022);
+    list.addTask("three", "chore", "third one", 1, 4, 2012);
+    list.deleteTask("one");
+    list.deleteTask("two");
+    list.deleteTask("three");
+    EXPECT_TRUE(list.search("one") == nullptr);
+    EXPECT_TRUE(list.search("two") == nullptr);
+    EXPECT_TRUE(list.search("three") == nullptr);
+}
+
+TEST(search, noTasks)
+{
+    TaskListGUI list;
+    EXPECT_TRUE(list.search("three") == nullptr);
+}
+
+TEST(search, twoTasks)
+{
+    TaskListGUI list;
+    list.addTask("two", "chore", "second one", 1, 2, 2022);
+    list.addTask("three", "chore", "third one", 1, 4, 2012);
+    EXPECT_TRUE(list.search("three") != nullptr);
+}
+
+TEST(search, oneTasks)
+{
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 4, 2012);
+    EXPECT_TRUE(list.search("one") != nullptr);
+}
+
+TEST(undoTask, noTasks)
+{
+    TaskListGUI list;
+    list.undoDeleteTask();
+    EXPECT_TRUE(list.search("three") == nullptr);
+}
+
+TEST(undoTask, oneTasks)
+{
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 4, 2012);
+    list.deleteTask("one");
+    list.undoDeleteTask();
     list.printList();
-    list.addTask(names.at(0),tag.at(0),desc.at(0), 5,5,2005);
-    list.addTask(names.at(1),tag.at(0),desc.at(0), 5,3,2005);
-    list.printList();
-    cout << "Adding two tasks w/different years" << endl;
-    TaskListGUI list2;
-    list2.printList();
-    list2.addTask(names.at(0),tag.at(0),desc.at(0), 5,5,2005);
-    list2.addTask(names.at(1),tag.at(0),desc.at(0), 5,3,2003);
-    list2.printList();
-    cout << "Adding two tasks with different months and days and the same year" << endl;
-    TaskListGUI list3;
-    list3.printList();
-    list3.addTask(names.at(0),tag.at(0),desc.at(0), 6,2,2005);
-    list3.addTask(names.at(1),tag.at(0),desc.at(0), 5,3,2005);
-    list3.printList();
-    cout << "Adding two tasks where only the day is different" << endl;
-    TaskListGUI list4;
-    list4.printList();
-    list4.addTask(names.at(0),tag.at(0),desc.at(2), 5,2,2005);
-    list4.addTask(names.at(1),tag.at(0),desc.at(3), 5,3,2005);
-    list4.printList();
-    cout << "Adding multiple tasks w/different years" << endl;
-    TaskListGUI list5;
-    list5.printList();
-    list5.addTask(names.at(0),tag.at(0),desc.at(2), 5,2,2005);
-    list5.addTask(names.at(1),tag.at(0),desc.at(3), 5,3,2003);
-    list5.addTask(names.at(2),tag.at(0),desc.at(4), 5,3,2001);
-    list5.printList();
-    cout << "Adding multiple tasks w/months days and the same year" << endl;
-    TaskListGUI list6;
-    list6.printList();
-    list6.addTask(names.at(0),tag.at(0),desc.at(2), 2,2,2001);
-    list6.addTask(names.at(1),tag.at(0),desc.at(3), 3,3,2001);
-    list6.addTask(names.at(2),tag.at(0),desc.at(4), 4,5,2001);
-    list6.printList();
-    cout << "Adding multiple tasks where only the day is different" << endl;
-    TaskListGUI list7;
-    list7.printList();
-    list7.addTask(names.at(0),tag.at(0),desc.at(2), 5,2,2005);
-    list7.addTask(names.at(1),tag.at(0),desc.at(3), 5,3,2005);
-    list7.addTask(names.at(2),tag.at(0),desc.at(4), 5,24,2005);
-    list7.printList();
-    cout << "Deleting head" << endl;
-    TaskListGUI list8;
-    list8.addTask(names.at(1),tag.at(0),desc.at(3), 5,3,2005);    
-    list8.printList();
-    list8.deleteTask(names.at(1));
-    list8.printList();
-    cout <<"Deleting tail" << endl;
-    TaskListGUI list9;
-    list9.addTask(names.at(1),tag.at(0),desc.at(3), 5,3,2005);    
-    list9.addTask(names.at(0),tag.at(0),desc.at(3), 5,6,2005);    
-    list9.printList();
-    list9.deleteTask(names.at(0));
-    list9.printList();
-    cout << "Deleting head and tail" << endl;
-    list9.deleteTask(names.at(0));
-    list9.deleteTask(names.at(1));
-    list.printList();
-    cout << "Deleting in the middle of the list" << endl;
-    TaskListGUI list10;
-    list10.addTask(names.at(1),tag.at(0),desc.at(3), 5,3,2005);    
-    list10.addTask(names.at(0),tag.at(0),desc.at(3), 5,6,2005);  
-    list10.addTask(names.at(2),tag.at(0),desc.at(3), 5,7,2005);    
-  
-    list10.printList();
-    list10.deleteTask(names.at(0));
-    list10.printList();
+    EXPECT_TRUE(list.search("one") != nullptr);
+}
+
+TEST(undoTask, inMiddleOfList)
+{
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 4, 2012);
+    list.addTask("two", "chore", "second one", 1, 2, 2022);
+    list.addTask("three", "chore", "third one", 1, 4, 2012);
+    list.deleteTask("three");
+    list.undoDeleteTask();
+    EXPECT_TRUE(list.search("three") != nullptr);
+}
+
+
+TEST(markTaskComplete, test) {
+    TaskList list;
+    int points = 0;
+    list.addTask("one", "chore", "random", 5, 4, 2023);
+    list.markTaskCompleted("one", points);
+    EXPECT_EQ(points, 5);
+}
+
+TEST(markTaskComplete, testtaskOverdue) {
+    TaskListGUI list;
+    int points = 0;
+    list.addTask("one", "essay", "random", 5, 4, 2023);
+    char* tm = "Fri Jul 3 00:00:00 2023";
+    list.markOverdue();
+    list.showOverdue();
+    list.markTaskCompleted("one", points);
+    EXPECT_EQ(points, 5); 
+}
+
+TEST(markTaskComplete, otherPoints) {
+    TaskListGUI list;
+    int points = 0;
+    list.addTask("one", "other", "random", 5, 4, 2023);
+    char* tm = "Fri Jul 3 00:00:00 2023";
+    list.markOverdue();
+    list.showOverdue();
+    list.markTaskCompleted("one", points);
+    EXPECT_EQ(points, 0); 
+}
+
+TEST(createAwardTest, testAwardSucessfullyCreated) {
+    AwardList t1;
+    t1.createAward("test award", 50);
+    EXPECT_EQ(t1.getAwardVector().size(), 1);
+    EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award");
+}
+
+TEST(createAwardTest, testAwardPushBack) {
+    AwardList t1;
+    t1.createAward("test award", 50);
+    t1.createAward("test award 2", 75);
+    EXPECT_EQ(t1.getAwardVector().size(), 2);
+    EXPECT_EQ(t1.getAwardVector().at(1)->award_name, "test award 2" );
+}
+
+TEST(createAwardTest, testAwards3) {
+    AwardList t1;
+    t1.createAward("test award", 50);
+    t1.createAward("test award 2", 75);
+    t1.createAward("test award 3", 75);
+    EXPECT_EQ(t1.getAwardVector().size(), 3);
+    EXPECT_EQ(t1.getAwardVector().at(2)->award_name, "test award 3" );
+}
+
+
+TEST(deleteAwardTest, testAwardDeleted) {
+    AwardList t1;
+    t1.createAward("test award", 50);
+    EXPECT_EQ(t1.getAwardVector().size(), 1);
+    t1.deleteAward("test award");
+    EXPECT_EQ(t1.getAwardVector().size(), 0);
+}
+
+TEST(deleteAwardTest, testCorrectAwardDeleted) {
+    AwardList t1;
+    t1.createAward("test award", 50);
+    t1.createAward("test award 2", 75);
+    t1.createAward("test award 3", 100);
+    t1.deleteAward("test award");
+    EXPECT_EQ(t1.getAwardVector().size(), 2);
+    EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award 2");
+}
+
+TEST(deleteAwardTest, testCorrectAwardDeleted2) {
+    AwardList t1;
+    t1.createAward("test award", 50);
+    t1.createAward("test award 2", 75);
+    t1.createAward("test award 3", 100);
+    t1.deleteAward("test award");
+    t1.deleteAward("test award 2");
+    EXPECT_EQ(t1.getAwardVector().size(), 1);
+    EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award 3");
+}
+
+TEST(markComplete, pointLog)
+{
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 1, 2022);
+    int points = 5;
+    list.markTaskCompleted("one",points);
+    EXPECT_EQ(points, 10);
+}
+
+TEST(buyAwardTest, pointLog)
+{
+    AwardListGUI list;
+    list.createAward("WOWOWOW",5);
+    list.setTotalPoints(10);
+    list.buyAward("WOWOWOW",1);
+    list.useAward("WOWOWOW");
+    EXPECT_EQ(5, list.getTotalPoints());
 }
 
 TEST(buyAwardTest, testOnlyAward) {
@@ -181,70 +374,59 @@ TEST(buyAwardTest, quantityTooHigh) {
     EXPECT_EQ(testAwardList.getAwardVector().at(0)->user_count, 0);
 }
 
-TEST(markTaskComplete, test) {
-    TaskList list;
-    int points = 0;
-    list.addTask("one", "chore", "random", 5, 4, 2023);
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 5);
-}
-
-TEST(markTaskComplete, testtaskOverdue) {
+TEST(markOverDue, allOnTime) {
     TaskListGUI list;
-    int points = 0;
-    list.addTask("one", "essay", "random", 5, 4, 2023);
-    char* tm = "Fri Jul 3 00:00:00 2023";
-    list.showOverdue(tm);
-    list.markTaskCompleted("one", points);
-    EXPECT_EQ(points, 5); 
-}
-
-TEST(createAwardTest, testAwardSucessfullyCreated) {
-    AwardList t1;
-    t1.createAward("test award", 50);
-    EXPECT_EQ(t1.getAwardVector().size(), 1);
-    EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award");
-}
-
-TEST(createAwardTest, testAwardPushBack) {
-    AwardList t1;
-    t1.createAward("test award", 50);
-    t1.createAward("test award 2", 75);
-    EXPECT_EQ(t1.getAwardVector().size(), 2);
-    EXPECT_EQ(t1.getAwardVector().at(1)->award_name, "test award 2" );
-}
-
-TEST(deleteAwardTest, testAwardDeleted) {
-    AwardList t1;
-    t1.createAward("test award", 50);
-    EXPECT_EQ(t1.getAwardVector().size(), 1);
-    t1.deleteAward("test award");
-    EXPECT_EQ(t1.getAwardVector().size(), 0);
-}
-
-TEST(deleteAwardTest, testCorrectAwardDeleted) {
-    AwardList t1;
-    t1.createAward("test award", 50);
-    t1.createAward("test award 2", 75);
-    t1.createAward("test award 3", 100);
-    t1.deleteAward("test award");
-    EXPECT_EQ(t1.getAwardVector().size(), 2);
-    EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award 2");
-}
-
-TEST(showOverDue, test) {
-    TaskListGUI list;
-    list.addTask("one", "chore", "first one", 1, 1, 2022);
-    list.addTask("two", "chore", "second one", 3, 6, 2023);
-    list.addTask("three", "chore", "third one", 22, 11, 2023);
+    list.addTask("one", "chore", "first one", 1, 1, 2024);
+    list.addTask("two", "chore", "second one", 3, 6, 2024);
+    list.addTask("three", "chore", "third one", 22, 11, 2024);
     char* tm = "Fri Aug 15 00:00:00 2023";
-    list.showOverdue(tm);
+    list.markOverdue();
+    TaskNode* curr1 = list.search("one");
+    TaskNode* curr2 = list.search("two");
+    TaskNode* curr3 = list.search("three");
+    EXPECT_EQ(curr1->overdue, false);
+    EXPECT_EQ(curr2->overdue, false);
+    EXPECT_EQ(curr3->overdue, false);
+} 
+
+TEST(markOverDue, allOverdue) {
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 1, 2023);
+    list.addTask("two", "chore", "second one", 3, 6, 2023);
+    list.addTask("three", "chore", "third one", 2, 11, 2023);
+    char* tm = "Fri Aug 15 00:00:00 2023";
+    list.markOverdue();
     TaskNode* curr1 = list.search("one");
     TaskNode* curr2 = list.search("two");
     TaskNode* curr3 = list.search("three");
     EXPECT_EQ(curr1->overdue, true);
     EXPECT_EQ(curr2->overdue, true);
-    EXPECT_EQ(curr3->overdue, false);
+    EXPECT_EQ(curr3->overdue, true);
+} 
+
+TEST(markOverDue, SomeOverdue) {
+    TaskListGUI list;
+    list.addTask("one", "chore", "first one", 1, 1, 2022);
+    list.addTask("two", "chore", "second one", 3, 6, 2025);
+    list.addTask("three", "chore", "third one", 22, 11, 2021);
+    char* tm = "Fri Aug 15 00:00:00 2023";
+    list.markOverdue();
+    TaskNode* curr1 = list.search("one");
+    TaskNode* curr2 = list.search("two");
+    TaskNode* curr3 = list.search("three");
+    EXPECT_EQ(curr1->overdue, true);
+    EXPECT_EQ(curr2->overdue, false);
+    EXPECT_EQ(curr3->overdue, true);
+} 
+
+TEST(markTaskComplete, testTaskOverdue) {
+    TaskListGUI list;
+    int points = 0;
+    list.addTask("one", "essay", "random", 5, 4, 202);
+    char* tm = "Fri Jul 3 00:00:00 2023";
+    list.markOverdue();
+    list.markTaskCompleted("one", points);
+    EXPECT_EQ(points, 5); 
 }
 
 TEST(editingATask, printDateFunc) {
@@ -252,14 +434,123 @@ TEST(editingATask, printDateFunc) {
     EXPECT_EQ(curr->printDate(), "01/01/2022");
 } 
 
-TEST(editingATask, editTask) {
-    TaskList list;
-    list.addTask("one", "chore", "first one", 1, 2, 2022);
-    list.addTask("two", "essay", "second one", 2, 3, 2023);
-    string newDes = "changed";
-    list.editTask("two");
-    EXPECT_EQ(list.search("two")->description, "changed");
-}
+TEST(editingATask, printDateFunc2) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 12, 12, 2012);
+    EXPECT_EQ(curr->printDate(), "12/12/2012");
+} 
+
+TEST(editingATask, printDateFunc3) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 10, 11, 2022);
+    EXPECT_EQ(curr->printDate(), "11/10/2022");
+} 
+
+TEST(editingATask, setName1) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setName("changed");
+    EXPECT_EQ(curr->name, "changed");
+} 
+
+TEST(editingATask, setName2) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setName(" ");
+    EXPECT_EQ(curr->name, " ");
+} 
+
+TEST(editingATask, setName3) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setName("new one");
+    EXPECT_EQ(curr->name, "new one");
+} 
+
+TEST(editingATask, setDescription1) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setDescription("changed");
+    EXPECT_EQ(curr->description, "changed");
+} 
+
+TEST(editingATask, setDescription2) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setDescription(" ");
+    EXPECT_EQ(curr->description, " ");
+} 
+
+TEST(editingATask, setDescription3) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setDescription("new one");
+    EXPECT_EQ(curr->description, "new one");
+} 
+
+TEST(editingATask, setTag1) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setTag("essay");
+    EXPECT_EQ(curr->tag, "essay");
+} 
+
+TEST(editingATask, setTag2) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setTag("long");
+    EXPECT_EQ(curr->tag, "long");
+} 
+
+TEST(editingATask, setTag3) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setTag("");
+    EXPECT_EQ (curr->tag, "other");
+} 
+
+TEST(editingATask, setMonth1) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setMonth(0);
+    EXPECT_EQ(curr->month, 1);
+} 
+
+TEST(editingATask, setMonth2) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setMonth(3);
+    EXPECT_EQ(curr->month, 3);
+} 
+
+TEST(editingATask, setMonth3) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setMonth(15);
+    EXPECT_EQ(curr->month, 3);
+} 
+
+TEST(editingATask, setDay1) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setDay(0);
+    EXPECT_EQ(curr->day, 1);
+} 
+
+TEST(editingATask, setDay2) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setDay(23);
+    EXPECT_EQ(curr->day, 23);
+} 
+
+TEST(editingATask, setDay3) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setDay(32);
+    EXPECT_EQ(curr->day, 31);
+} 
+
+TEST(editingATask, setYear1) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setYear(0000);
+    EXPECT_EQ(curr->year, 0000);
+} 
+
+TEST(editingATask, setYear2) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setYear(3023);
+    EXPECT_EQ(curr->year, 3023);
+} 
+
+TEST(editingATask, setYEar3) {
+    TaskNode* curr = new TaskNode("one", "chore", "first one", 1, 1, 2022);
+    curr->setYear(2022);
+    EXPECT_EQ(curr->year, 2022);
+} 
 
 TEST(markComplete, pointLog)
 {
@@ -271,12 +562,12 @@ TEST(markComplete, pointLog)
 
 }
 
-TEST(buyAward, pointLog)
-{
-    AwardListGUI list;
-    list.createAward("WOWOWOW",5);
-    list.setTotalPoints(10);
-    list.buyAward("WOWOWOW",1);
-    list.useAward("WOWOWOW");
-    EXPECT_EQ(5, list.getTotalPoints());
+TEST(editingATask, editTaskname) {
+    TaskList list;
+    list.addTask("one", "chore", "first one", 1, 2, 2022);
+    list.addTask("two", "essay", "second one", 2, 3, 2023);
+    string newDes = "changed";
+    list.editTask("two");
+    EXPECT_EQ(list.search("three")->name, "changed");
+    
 }
