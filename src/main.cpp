@@ -175,12 +175,37 @@ void taskPageMenu(TaskListGUI& taskList) {
             cin.clear();
             taskList.editTask(_name);
         } else if (option == 5) { //show details 
-            string _name;
-            cout << "Enter the name of which task you want to see the details of: " << endl;
-            getline(cin, _name);
-            cin.clear();
-            TaskNode* curr = taskList.search(_name);
-            //display details 
+            string name;
+            char key = -1;
+          
+            cout << "Which task would you like to view?" << endl;
+            getline(cin, name);
+            TaskNode* taskToView = taskList.search(name);
+            if (tasktoView != nullptr) {
+                while (key == -1) {
+                if (tasktoView->overdue == true) {
+                    cout << "OVERDUE!\n" <<
+                        "Name: " << taskToView->name << "\n" <<
+                        "Due Date: " << taskToView->printDate() << "\n" <<
+                        "Tag: " << taskToView->tag << "\n" <<
+                        "Description:\n" <<
+                        taskToView->Description << "\n\n" <<
+
+                        "Click any key to exit." << endl;
+                } else {
+                        cout << "Name: " << taskToView->name << "\n" <<
+                        "Due Date: " << taskToView->printDate() << "\n" <<
+                        "Tag: " << taskToView->tag << "\n" <<
+                        "Description:\n" <<
+                        taskToView->Description << "\n\n" <<
+
+                        "Click any key to exit." << endl;
+                }
+                    cin >> key;
+                }
+            } else {
+                cout << "That task was not found\n\n";
+            }
         } else if (option == 6) { //mark complete
             string _name;
             cout << "Enter the name of the task you want to mark complete: " << endl;
@@ -309,6 +334,7 @@ void startMenu(TaskListGUI& taskList, AwardListGUI& awardList) {
 }
 
 int main() {
+  
     AwardListGUI awardList;
     TaskListGUI taskList;
     // set up
@@ -318,6 +344,9 @@ int main() {
     taskList.markOverdue();
     
     startMenu(taskList, awardList);
+
+    //PointLogScreen
+    awardList.displayPointLog();
 
     //saving data 
     taskList.exportTasks("saved_files/TaskList.txt");
