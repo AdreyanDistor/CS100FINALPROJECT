@@ -3,14 +3,15 @@
 #include "../header/TaskListGUI.h"
 #include<iostream>
 #include<fstream>
-#include<ostream>
+#include <ostream>
 #include<string>
 #include<iomanip>
 #include<vector>
 #include<ctime>
+#include "time.h"
 #include <stdio.h>      /* printf, NULL */
 #include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */    
+#include <time.h>       /* time */
 using namespace std;
 
 int main(int argc, char **argv) {
@@ -139,6 +140,269 @@ TEST(deleteTask, ThreeTasks)
     EXPECT_TRUE(list.search("three") == nullptr);
 }
 
+TEST(importTasks, multipleTaskFile) {
+    TaskListGUI list;
+    list.importTasks("test/TaskListTest1.txt");
+    TaskNode* firstTask = list.search("First Task");
+    ASSERT_FALSE(firstTask == nullptr);
+    TaskNode* secondTask = firstTask->next;
+    ASSERT_FALSE(secondTask == nullptr);
+    TaskNode* thirdTask = secondTask->next;
+    ASSERT_FALSE(thirdTask == nullptr);
+    TaskNode* fourthTask = thirdTask->next;
+    ASSERT_FALSE(fourthTask == nullptr);
+
+    bool firstTaskBool = false;
+    bool secondTaskBool = false;
+    bool thirdTaskBool = false;
+    bool fourthTaskBool = false;
+    if (firstTask->name == "First Task" && firstTask->tag == "short_assign" && firstTask->description == "description"
+    && firstTask->day == 24 && firstTask->month == 3 && firstTask->year == 2023 && firstTask->overdue == false) {
+        firstTaskBool = true;
+    }
+
+    if (secondTask->name == "Second Task" && secondTask->tag == "studying" && secondTask->description == "description"
+    && secondTask->day == 12 && secondTask->month == 4 && secondTask->year == 2023 && secondTask->overdue == false) {
+        secondTaskBool = true;
+    }
+
+
+    if (thirdTask->name == "Third Task" && thirdTask->tag == "other" && thirdTask->description == "description"
+    && thirdTask->day == 29 && thirdTask->month == 5 && thirdTask->year == 2023 && thirdTask->overdue == false) {
+        thirdTaskBool = true;
+    }
+    
+    if (fourthTask->name == "Fourth Task" && fourthTask->tag == "chore" && fourthTask->description == "description"
+    && fourthTask->day == 1 && fourthTask->month == 8 && fourthTask->year == 2023 && fourthTask->overdue == false) {
+        fourthTaskBool = true;
+    }
+    EXPECT_EQ(firstTaskBool, true);
+    EXPECT_EQ(secondTaskBool, true);
+    EXPECT_EQ(thirdTaskBool, true);
+    EXPECT_EQ(fourthTaskBool, true);
+ 
+}
+
+TEST(importTasks, oneTaskFile) {
+    TaskListGUI list;
+    list.importTasks("test/TaskListTest2.txt");
+    TaskNode* firstTask = list.search("First Task");
+    ASSERT_FALSE(firstTask == nullptr);
+
+    bool firstTaskBool = false;
+
+    if (firstTask->name == "First Task" && firstTask->tag == "long_assign" && firstTask->description == "hello"
+    && firstTask->day == 26 && firstTask->month == 2 && firstTask->year == 2024 && firstTask->overdue == false) {
+        firstTaskBool = true;
+    }
+    EXPECT_EQ(firstTaskBool, true);
+ 
+}
+
+TEST(importTasks, emptyFile) {
+    TaskListGUI list;
+    list.importTasks("test/TaskListTest3.txt");
+    TaskNode* firstTask = list.search("First Task");
+    ASSERT_TRUE(firstTask == nullptr);
+ 
+}
+
+TEST(exportTasks, emptyList) {
+    TaskListGUI list;
+    list.exportTasks("test/TaskListTest3.txt");
+    ifstream input;
+    input.open("test/TaskListTest3.txt");
+    if (!input.is_open()) {
+        cout << "Failed to open TaskListTest3.txt" << endl;
+        return;
+    }
+
+    string name;
+    EXPECT_FALSE(getline(input, name, '`'));
+    input.close();
+}
+
+TEST(exportTasks, oneTaskList) {
+    TaskListGUI list;
+    list.addTask("one", "long_assign", "the description", 14, 1, 2025);
+    list.exportTasks("test/TaskListTest3.txt");
+    ifstream input;
+    input.open("test/TaskListTest3.txt");
+    if (!input.is_open()) {
+        cout << "Failed to open TaskListTest3.txt" << endl;
+        return;
+    }
+
+    string name;
+    string tag;
+    string description;
+    string day; 
+    string month; 
+    string year;
+    string overdue; 
+
+    EXPECT_TRUE(getline(input, name, '`'));
+    EXPECT_TRUE(name == "one");
+    EXPECT_TRUE(getline(input, tag, '`'));
+    EXPECT_TRUE(tag == "long_assign");
+    EXPECT_TRUE(getline(input, description, '`'));
+    EXPECT_TRUE(description == "the description");
+    EXPECT_TRUE(getline(input, day, '`'));
+    EXPECT_TRUE(day == "14");
+    EXPECT_TRUE(getline(input, month, '`'));
+    EXPECT_TRUE(month == "1");
+    EXPECT_TRUE(getline(input, year, '`'));
+    EXPECT_TRUE(year == "2025");
+    EXPECT_TRUE(getline(input, overdue));
+    EXPECT_TRUE(overdue == "false");
+    input.close();
+}
+
+TEST(exportTasks, multipleTaskList) {
+    TaskListGUI list;
+    list.addTask("one", "long_assign", "the description", 14, 1, 2023);
+    list.addTask("two", "project", "the description", 4, 8, 2024);
+    list.addTask("three", "lab", "the description", 19, 1, 2025);
+    list.addTask("four", "other", "the description", 20, 3, 2026);
+    list.exportTasks("test/TaskListTest3.txt");
+    ifstream input;
+    input.open("test/TaskListTest3.txt");
+    if (!input.is_open()) {
+        cout << "Failed to open TaskListTest3.txt" << endl;
+        return;
+    }
+
+    string line1;
+    string line2;
+    string line3;
+    string line4;
+
+    EXPECT_TRUE(getline(input, line1));
+    EXPECT_TRUE(line1 == "one`long_assign`the description`14`1`2023`false");
+    EXPECT_TRUE(getline(input, line2));
+    EXPECT_TRUE(line2 == "two`project`the description`4`8`2024`false");
+    EXPECT_TRUE(getline(input, line3));
+    EXPECT_TRUE(line3 == "three`lab`the description`19`1`2025`false");
+    EXPECT_TRUE(getline(input, line4));
+    EXPECT_TRUE(line4 == "four`other`the description`20`3`2026`false");
+    input.close();
+}
+
+TEST(importAwards, multipleAwardFile) {
+    AwardList list;
+    list.importAwards("test/AwardListTest1.txt");
+    ASSERT_FALSE(list.getAwardVector().at(0) == nullptr);
+    ASSERT_FALSE(list.getAwardVector().at(1) == nullptr);
+    ASSERT_FALSE(list.getAwardVector().at(2) == nullptr);
+    ASSERT_FALSE(list.getAwardVector().at(3) == nullptr);
+
+    bool firstAwardBool = false;
+    bool secondAwardBool = false;
+    bool thirdAwardBool = false;
+    bool fourthAwardBool = false;
+    if (list.getAwardVector().at(0)->award_name == "Award 1" && list.getAwardVector().at(0)->cost == 10 && list.getAwardVector().at(0)->user_count == 3){
+        firstAwardBool = true;
+    }
+
+    if (list.getAwardVector().at(1)->award_name == "Award 2" && list.getAwardVector().at(1)->cost == 35 && list.getAwardVector().at(1)->user_count == 0){
+        secondAwardBool = true;
+    }
+    if (list.getAwardVector().at(2)->award_name == "Award 3" && list.getAwardVector().at(2)->cost == 240 && list.getAwardVector().at(2)->user_count == 12){
+        thirdAwardBool = true;
+    }
+    if (list.getAwardVector().at(3)->award_name == "Award 4" && list.getAwardVector().at(3)->cost == 23 && list.getAwardVector().at(3)->user_count == 4){
+        fourthAwardBool = true;
+    }
+    EXPECT_EQ(firstAwardBool, true);
+    EXPECT_EQ(secondAwardBool, true);
+    EXPECT_EQ(thirdAwardBool, true);
+    EXPECT_EQ(fourthAwardBool, true);
+ 
+}
+
+TEST(importAwards, oneAwardFile) {
+    AwardList list;
+    list.importAwards("test/AwardListTest2.txt");
+    ASSERT_FALSE(list.getAwardVector().at(0) == nullptr);
+
+    bool firstAwardBool = false;
+    if (list.getAwardVector().at(0)->award_name == "Buy a Brownie" && list.getAwardVector().at(0)->cost == 60 && list.getAwardVector().at(0)->user_count == 4){
+        firstAwardBool = true;
+    }
+    EXPECT_EQ(firstAwardBool, true);
+ 
+}
+
+TEST(importAwards, emptyFile) {
+    AwardList list;
+    list.importAwards("test/AwardListTest3.txt");
+    ASSERT_TRUE(list.getAwardVector().size() == 0);
+ 
+}
+
+TEST(exportAwards, multipleAwardsVector) {
+    AwardList list;
+    list.createAward("test award 1", 50);
+    list.createAward("test award 2", 32);
+    list.createAward("test award 3", 120);
+    list.createAward("test award 4", 0);
+    list.exportAwards("test/AwardListTest3.txt");
+    ifstream input;
+    input.open("test/AwardListTest3.txt");
+    if (!input.is_open()) {
+        cout << "Failed to open TaskListTest3.txt" << endl;
+        return;
+    }
+
+    string line1;
+    string line2;
+    string line3;
+    string line4;
+    getline(input, line1);
+    getline(input, line2);
+    getline(input, line3);
+    getline(input, line4);
+    
+    EXPECT_EQ(line1, "test award 1`50`0");
+    EXPECT_EQ(line2, "test award 2`32`0");
+    EXPECT_EQ(line3, "test award 3`120`0");
+    EXPECT_EQ(line4, "test award 4`0`0");
+    input.close();
+}
+
+TEST(exportAwards, oneAwardVector) {
+    AwardList list;
+    list.createAward("test award", 50);
+    list.exportAwards("test/AwardListTest3.txt");
+    ifstream input;
+    input.open("test/AwardListTest3.txt");
+    if (!input.is_open()) {
+        cout << "Failed to open TaskListTest3.txt" << endl;
+        return;
+    }
+
+    string line;
+    getline(input, line);
+    EXPECT_EQ(line, "test award`50`0");
+    input.close();
+}
+
+TEST(exportAwards, emptyVector) {
+    AwardList list;
+    list.exportAwards("test/AwardListTest3.txt");
+    ifstream input;
+    input.open("test/AwardListTest3.txt");
+    if (!input.is_open()) {
+        cout << "Failed to open TaskListTest3.txt" << endl;
+        return;
+    }
+
+    string name;
+    EXPECT_FALSE(getline(input, name, '`'));
+    input.close();
+}
+
+
 TEST(search, noTasks)
 {
     TaskListGUI list;
@@ -226,6 +490,7 @@ TEST(createAwardTest, testAwardSucessfullyCreated) {
     EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award");
 }
 
+
 TEST(createAwardTest, testAwardPushBack) {
     AwardList t1;
     t1.createAward("test award", 50);
@@ -273,6 +538,7 @@ TEST(deleteAwardTest, testCorrectAwardDeleted2) {
     EXPECT_EQ(t1.getAwardVector().at(0)->award_name, "test award 3");
 }
 
+
 TEST(markComplete, pointLog)
 {
     TaskListGUI list;
@@ -280,6 +546,7 @@ TEST(markComplete, pointLog)
     int points = 5;
     list.markTaskCompleted("one",points);
     EXPECT_EQ(points, 10);
+
 }
 
 TEST(buyAwardTest, pointLog)
@@ -552,15 +819,15 @@ TEST(editingATask, setYEar3) {
     EXPECT_EQ(curr->year, 2022);
 } 
 
-TEST(markComplete, pointLog)
-{
-    TaskListGUI list;
-    list.addTask("one", "chore", "first one", 1, 1, 2022);
-    int points = 5;
-    list.markTaskCompleted("one",points);
-    EXPECT_EQ(points, 10);
+// TEST(markComplete, pointLog)
+// {
+//     TaskListGUI list;
+//     list.addTask("one", "chore", "first one", 1, 1, 2022);
+//     int points = 5;
+//     list.markTaskCompleted("one",points);
+//     EXPECT_EQ(points, 10);
 
-}
+// }
 
 TEST(editingATask, editTaskname) {
     TaskList list;
