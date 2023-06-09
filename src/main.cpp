@@ -14,6 +14,8 @@ void startMenu(TaskListGUI& taskList, AwardListGUI& awardList) {
     int option;
     cout << "TIME MANAGMENT" << endl << endl; //print the title 
     cout << "Points: 'CHORE' = 5 | 'ESSAY' =  10 | 'SHORT' = 7 | 'LONG_' = 12 | 'STUDY' = 7 | 'PROJT' = 20 | 'LAB__' = 7 | 'OTHER' = 0" << endl << endl;
+    taskList.printList();
+
     cout 
     << "MAIN PAGE" << endl << endl
 
@@ -27,11 +29,9 @@ void startMenu(TaskListGUI& taskList, AwardListGUI& awardList) {
 
     while (option != 4) {
         if (option == 1) { //task page 
-            taskPageMenu();
+            taskPageMenu(taskList);
         } else if (option == 2) { //award page 
-            awardList.displayAwards();
-            cout << endl;
-            awardShopMenu();
+            awardShopMenu(awardList);
         } else if (option == 3) { //point log 
             awardList.displayPointLog();
         } 
@@ -247,30 +247,83 @@ void taskPageMenu(TaskListGUI& taskList) {
     }
 }
 
-void awardShopMenu() {
+void awardShopMenu(AwardList& awardList) {
     int option;
     cout 
-    << "AWARD SHOP" << endl << endl
-
+    << "AWARD SHOP" << endl << endl;
+    awardList.displayAwards();
+    cout
     << "1 - Add an Award" << endl
     << "2 - Delete an Award" << endl
-    << "4 - Buy an Award" << endl
-    << "5 - Use an Award" << endl
-    << "8 - Back to Main Page" << endl << endl
+    << "3 - Buy an Award" << endl
+    << "4 - Use an Award" << endl
+    << "5 - Back to Main Page" << endl << endl
    
     << "Enter option: " << endl;
     cin >> option;
+
+    while (option != 5) {
+        if (option == 1) { //add
+            string _name;
+            int _cost;
+            cout << "Enter name of new award: " << endl;
+            getline(cin, _name);
+            cin.clear();
+            cout << "Enter price of new award: " << endl;
+            cin >> _cost;
+            awardList.createAward(_name, _cost);
+        } else if (option == 2) { //delete
+            string _name;
+            cout << "Enter name of award you want to delete: " << endl;
+            getline(cin, _name);
+            cin.clear();
+            awardList.deleteAward(_name);
+        } else if (option == 3) { //buy 
+            string _name;
+            int quantity;
+            cout << "Enter name of award you want to buy: " << endl;
+            getline(cin, _name);
+            cin.clear();
+            cout << "How many do you want to buy: " << endl;
+            cin >> quantity;
+            awardList.buyAward(_name, quantity);
+        } else if (option == 4) { //use 
+            string _name;
+            cout << "Enter name of award you want to use: " << endl;
+            getline(cin, _name);
+            cin.clear();
+            awardList.useAward(_name);
+        }
+
+        cout 
+        << "AWARD SHOP" << endl << endl
+
+        << "1 - Add an Award" << endl
+        << "2 - Delete an Award" << endl
+        << "3 - Buy an Award" << endl
+        << "4 - Use an Award" << endl
+        << "5 - Back to Main Page" << endl << endl
+    
+        << "Enter option: " << endl;
+        cin >> option;
+    }
 }
 
 int main() {
     AwardListGUI awardList;
     TaskListGUI taskList;
-    /*Imports total_points*/
+    // set up
     taskList.importTasks();
     awardList.importAwards();
+    awardList.importTotalPoints();
     taskList.markOverdue();
     
-    startMenu();
+    startMenu(taskList, awardList);
+
+    //saving data 
+    taskList.exportTasks();
+    awardList.exportAwards();
+    awardList.exportTotalPoints();
     
     return 0;
 }
