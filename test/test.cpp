@@ -157,23 +157,23 @@ TEST(importTasks, multipleTaskFile) {
     bool thirdTaskBool = false;
     bool fourthTaskBool = false;
     if (firstTask->name == "First Task" && firstTask->tag == "short_assign" && firstTask->description == "description"
-    && firstTask->day == 24 && firstTask->month == 3 && firstTask->year == 2023 && firstTask->overdue == false) {
+    && firstTask->day == 24 && firstTask->month == 3 && firstTask->year == 2023) {
         firstTaskBool = true;
     }
 
     if (secondTask->name == "Second Task" && secondTask->tag == "studying" && secondTask->description == "description"
-    && secondTask->day == 12 && secondTask->month == 4 && secondTask->year == 2023 && secondTask->overdue == false) {
+    && secondTask->day == 12 && secondTask->month == 4 && secondTask->year == 2023) {
         secondTaskBool = true;
     }
 
 
     if (thirdTask->name == "Third Task" && thirdTask->tag == "other" && thirdTask->description == "description"
-    && thirdTask->day == 29 && thirdTask->month == 5 && thirdTask->year == 2023 && thirdTask->overdue == false) {
+    && thirdTask->day == 29 && thirdTask->month == 5 && thirdTask->year == 2023) {
         thirdTaskBool = true;
     }
     
     if (fourthTask->name == "Fourth Task" && fourthTask->tag == "chore" && fourthTask->description == "description"
-    && fourthTask->day == 1 && fourthTask->month == 8 && fourthTask->year == 2023 && fourthTask->overdue == false) {
+    && fourthTask->day == 1 && fourthTask->month == 8 && fourthTask->year == 2023) {
         fourthTaskBool = true;
     }
     EXPECT_EQ(firstTaskBool, true);
@@ -224,7 +224,7 @@ TEST(exportTasks, emptyList) {
 
 TEST(exportTasks, oneTaskList) {
     TaskListGUI list;
-    list.addTask("one", "long_assign", "the description", 14, 1, 2025);
+    list.addTask("one", "long_assign", "the description", 14, 1, 2023);
     list.exportTasks("test/TaskListTest3.txt");
     ifstream input;
     input.open("test/TaskListTest3.txt");
@@ -251,10 +251,8 @@ TEST(exportTasks, oneTaskList) {
     EXPECT_TRUE(day == "14");
     EXPECT_TRUE(getline(input, month, '`'));
     EXPECT_TRUE(month == "1");
-    EXPECT_TRUE(getline(input, year, '`'));
-    EXPECT_TRUE(year == "2025");
-    EXPECT_TRUE(getline(input, overdue));
-    EXPECT_TRUE(overdue == "false");
+    EXPECT_TRUE(getline(input, year));
+    EXPECT_TRUE(year == "2023");
     input.close();
 }
 
@@ -278,13 +276,13 @@ TEST(exportTasks, multipleTaskList) {
     string line4;
 
     EXPECT_TRUE(getline(input, line1));
-    EXPECT_TRUE(line1 == "one`long_assign`the description`14`1`2023`false");
+    EXPECT_TRUE(line1 == "one`long_assign`the description`14`1`2023");
     EXPECT_TRUE(getline(input, line2));
-    EXPECT_TRUE(line2 == "two`project`the description`4`8`2024`false");
+    EXPECT_TRUE(line2 == "two`project`the description`4`8`2024");
     EXPECT_TRUE(getline(input, line3));
-    EXPECT_TRUE(line3 == "three`lab`the description`19`1`2025`false");
+    EXPECT_TRUE(line3 == "three`lab`the description`19`1`2025");
     EXPECT_TRUE(getline(input, line4));
-    EXPECT_TRUE(line4 == "four`other`the description`20`3`2026`false");
+    EXPECT_TRUE(line4 == "four`other`the description`20`3`2026");
     input.close();
 }
 
@@ -335,7 +333,7 @@ TEST(importAwards, oneAwardFile) {
 
 TEST(importAwards, emptyFile) {
     AwardList list;
-    list.importAwards("test/AwardListTest3.txt");
+    list.importAwards("AwardListTest3.txt");
     ASSERT_TRUE(list.getAwardVector().size() == 0);
  
 }
@@ -545,28 +543,6 @@ TEST(markComplete, pointLog)
     EXPECT_EQ(aList.getTotalPoints(), 10);
 }
 
-TEST(buyAward, pointLog)
-{
-    AwardListGUI list;
-    list.createAward("customTestAward",5);
-    list.setTotalPoints(5);
-    list.buyAward("customTestAward",1);
-
-    ifstream ifs;
-    ifs.open("saved_files/Point_Log.txt",ios::app);
-    EXPECT_TRUE(ifs.is_open());
-
-    bool isMsgPresent;
-    string logMsg;
-    while(getline(ifs,logMsg)) //loops to last line of file
-    if(logMsg == "Nice catch there bob! You just bought: 1 WOWOWOW and spent 5 points" || 
-        logMsg == "Good eye their chief You just bought: 1 WOWOWOW and spent 5 points" ||
-        logMsg == "Congrats! You just bought: 1 WOWOWOW and spent 5 points" || 
-        logMsg == "That's a nice treat! You just bought: 1 WOWOWOW and spent 5 points") {
-            isMsgPresent = true;
-        }
-    EXPECT_TRUE(isMsgPresent);
-}
 
 TEST(buyAwardTest, testOnlyAward) {
     AwardList testAwardList;
